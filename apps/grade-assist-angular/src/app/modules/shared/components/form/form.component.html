@@ -1,0 +1,31 @@
+<div
+  [formGroup]="formGroup"
+  style="padding-top: 50px; display: flex; flex-direction: column"
+>
+  <mat-form-field appearance="outline" *ngFor="let input of formConfigs.inputs">
+    <mat-label>{{ input.label }}</mat-label>
+    <input
+      matInput
+      placeholder="{{ input.placeholder }}"
+      [formControlName]="input.key"
+      type="{{ input.type || 'text' }}"
+    />
+    <mat-error *ngIf="formGroup.controls[input.key].hasError('required')">
+      {{ input.label }} is <strong>required</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="
+        !formGroup.controls[input.key].hasError('required') &&
+        formGroup.controls[input.key].errors
+      "
+    >
+      {{ input.label }} entered is invalid.
+    </mat-error>
+  </mat-form-field>
+</div>
+<button mat-raised-button color="accent" (click)="formGroup.reset()">
+  Clear
+</button>
+<button mat-raised-button color="primary" (click)="onFormSubmit()">
+  Submit
+</button>

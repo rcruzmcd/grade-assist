@@ -1,0 +1,85 @@
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- column template -->
+    <ng-container
+      *ngFor="let col of tableStructure; index as i"
+      matColumnDef="{{ col.id }}"
+    >
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        col.label
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row[col.id] }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          color="accent"
+          type="button"
+          title="Update"
+          (click)="onUpdateClicked(row)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          type="button"
+          title="Delete"
+          (click)="onDeleteClicked(row)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="">
+        <div
+          class="example-element-detail"
+          [@detailExpand]="
+            element == expandedElement ? 'expanded' : 'collapsed'
+          "
+        >
+          <div>
+            <div class="container border rounded m-3 p-3">
+              <div class="row">
+                {{ element | json }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container> -->
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === row"
+      (click)="expandedElement = expandedElement === row ? null : row"
+    ></mat-row>
+    <!-- expande row details -->
+    <!-- <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr> -->
+
+    <!-- Row shown when there is no matching data. -->
+    <mat-row *matNoDataRow>
+      <mat-cell class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </mat-cell>
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

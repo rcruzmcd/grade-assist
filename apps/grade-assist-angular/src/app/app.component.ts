@@ -6,5 +6,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'grade-assist-angular';
+  title = 'Grade Assist';
+
+  menu = [
+    {
+      icon: 'home',
+      route: '/',
+      label: 'Home',
+    },
+    {
+      icon: 'admin_panel_settings',
+      route: '/admin',
+      label: 'Admin',
+    },
+    {
+      icon: 'class',
+      route: '/classess',
+      label: 'Classes',
+    },
+    {
+      icon: 'school',
+      route: '/students',
+      label: 'Students',
+    },
+    {
+      icon: 'groups',
+      route: '/teachers',
+      label: 'Teachers',
+    },
+  ];
 }

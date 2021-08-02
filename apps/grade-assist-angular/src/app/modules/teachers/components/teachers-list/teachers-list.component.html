@@ -1,0 +1,16 @@
+<mat-card class="card">
+  <mat-card-title>
+    Teachers
+    <a color="primary" routerLink="../add">
+      <mat-icon>add_circle</mat-icon>
+    </a>
+  </mat-card-title>
+  <mat-card-content>
+    <grade-assist-table
+      [tableStructure]="tableConfig"
+      [tableData]="teacherList$"
+      (onRowDeleted)="onDeleteHandler($event)"
+      (onUpdateRow)="onUpdateHandler($event)"
+    ></grade-assist-table>
+  </mat-card-content>
+</mat-card>

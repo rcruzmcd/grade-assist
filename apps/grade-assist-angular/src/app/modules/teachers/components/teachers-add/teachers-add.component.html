@@ -1,0 +1,10 @@
+<mat-card class="card">
+  <mat-card-title> Add New Teacher </mat-card-title>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <app-form
+      [formConfigs]="formConfig"
+      (onFormSubmitted)="formHandler($event)"
+    ></app-form>
+  </mat-card-content>
+</mat-card>

@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 console.info('...loading routes');
 // app.use()
-app.use(teachersRoutes);
+app.use('/api', teachersRoutes);
 app.use(adminRoutes);
 app.use(studentRoutes);
 

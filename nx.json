@@ -46,6 +46,9 @@
     "grade-assist-react-e2e": {
       "tags": [],
       "implicitDependencies": ["grade-assist-react"]
+    },
+    "mylibrary": {
+      "tags": []
     }
   }
 }
