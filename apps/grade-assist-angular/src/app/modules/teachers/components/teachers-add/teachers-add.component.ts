@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
-import { Teacher, FormConfig } from '@grade-assist/mylibrary';
+import { Teacher, FormConfig } from '@grade-assist/data';
 
 @Component({
   selector: 'grade-assist-teachers-add',

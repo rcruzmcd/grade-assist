@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfirmDialog } from '@grade-assist/mylibrary';
+import { ConfirmDialog } from '@grade-assist/data';
 // import { ConfirmDialog } from 'src/app/models/dialog.model';
 
 @Component({

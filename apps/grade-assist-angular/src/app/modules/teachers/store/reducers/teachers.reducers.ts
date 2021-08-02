@@ -1,5 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { Teacher } from '@grade-assist/mylibrary';
+import { Teacher } from '@grade-assist/data';
 
 import * as fromActions from '../actions';
 

@@ -47,7 +47,7 @@
       "tags": [],
       "implicitDependencies": ["grade-assist-react"]
     },
-    "mylibrary": {
+    "data": {
       "tags": []
     }
   }

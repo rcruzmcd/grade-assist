@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
 import { DialogComponent } from '../dialog/dialog.component';
-import { ColumnConfigs } from '@grade-assist/mylibrary';
+import { ColumnConfigs } from '@grade-assist/data';
 
 @Component({
   selector: 'grade-assist-table',

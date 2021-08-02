@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
-import { Teacher, ColumnConfigs } from '@grade-assist/mylibrary';
+import { Teacher, ColumnConfigs } from '@grade-assist/data';
 
 @Component({
   selector: 'grade-assist-teachers-list',
