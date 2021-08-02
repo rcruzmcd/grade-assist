@@ -1,6 +1,31 @@
 {
   "version": 2,
   "projects": {
+    "data": {
+      "projectType": "library",
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "prefix": "grade-assist",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data"],
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/data/src/**/*.ts",
+              "libs/data/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "grade-assist-angular": {
       "projectType": "application",
       "root": "apps/grade-assist-angular",
@@ -64,7 +89,8 @@
               "browserTarget": "grade-assist-angular:build:production"
             },
             "development": {
-              "browserTarget": "grade-assist-angular:build:development"
+              "browserTarget": "grade-assist-angular:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

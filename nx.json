@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "data": {
+      "tags": []
+    },
     "grade-assist-angular": {
       "tags": []
     },
