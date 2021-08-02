@@ -1,0 +1,48 @@
+{
+  "npmScope": "grade-assist",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "grade-assist-angular": {
+      "tags": []
+    },
+    "grade-assist-angular-e2e": {
+      "tags": [],
+      "implicitDependencies": ["grade-assist-angular"]
+    },
+    "grade-assist-api": {
+      "tags": []
+    },
+    "grade-assist-react": {
+      "tags": []
+    },
+    "grade-assist-react-e2e": {
+      "tags": [],
+      "implicitDependencies": ["grade-assist-react"]
+    }
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "version": 2,
+  "projects": {
+    "grade-assist-angular": {
+      "projectType": "application",
+      "root": "apps/grade-assist-angular",
+      "sourceRoot": "apps/grade-assist-angular/src",
+      "prefix": "grade-assist",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/grade-assist-angular",
+            "index": "apps/grade-assist-angular/src/index.html",
+            "main": "apps/grade-assist-angular/src/main.ts",
+            "polyfills": "apps/grade-assist-angular/src/polyfills.ts",
+            "tsConfig": "apps/grade-assist-angular/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/grade-assist-angular/src/favicon.ico",
+              "apps/grade-assist-angular/src/assets"
+            ],
+            "styles": ["apps/grade-assist-angular/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/grade-assist-angular/src/environments/environment.ts",
+                  "with": "apps/grade-assist-angular/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "grade-assist-angular:build:production"
+            },
+            "development": {
+              "browserTarget": "grade-assist-angular:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "grade-assist-angular:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/grade-assist-angular/src/**/*.ts",
+              "apps/grade-assist-angular/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/grade-assist-angular"],
+          "options": {
+            "jestConfig": "apps/grade-assist-angular/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "grade-assist-angular-e2e": {
+      "root": "apps/grade-assist-angular-e2e",
+      "sourceRoot": "apps/grade-assist-angular-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/grade-assist-angular-e2e/cypress.json",
+            "tsConfig": "apps/grade-assist-angular-e2e/tsconfig.e2e.json",
+            "devServerTarget": "grade-assist-angular:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "grade-assist-angular:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/grade-assist-angular-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "grade-assist-api": {
+      "root": "apps/grade-assist-api",
+      "sourceRoot": "apps/grade-assist-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/grade-assist-api",
+            "main": "apps/grade-assist-api/src/main.ts",
+            "tsConfig": "apps/grade-assist-api/tsconfig.app.json",
+            "assets": ["apps/grade-assist-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/grade-assist-api/src/environments/environment.ts",
+                  "with": "apps/grade-assist-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "grade-assist-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/grade-assist-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/grade-assist-api"],
+          "options": {
+            "jestConfig": "apps/grade-assist-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "grade-assist-react": {
+      "root": "apps/grade-assist-react",
+      "sourceRoot": "apps/grade-assist-react/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/grade-assist-react",
+            "index": "apps/grade-assist-react/src/index.html",
+            "main": "apps/grade-assist-react/src/main.tsx",
+            "polyfills": "apps/grade-assist-react/src/polyfills.ts",
+            "tsConfig": "apps/grade-assist-react/tsconfig.app.json",
+            "assets": [
+              "apps/grade-assist-react/src/favicon.ico",
+              "apps/grade-assist-react/src/assets"
+            ],
+            "styles": ["apps/grade-assist-react/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/grade-assist-react/src/environments/environment.ts",
+                  "with": "apps/grade-assist-react/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "grade-assist-react:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "grade-assist-react:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/grade-assist-react/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/grade-assist-react"],
+          "options": {
+            "jestConfig": "apps/grade-assist-react/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "grade-assist-react-e2e": {
+      "root": "apps/grade-assist-react-e2e",
+      "sourceRoot": "apps/grade-assist-react-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/grade-assist-react-e2e/cypress.json",
+            "tsConfig": "apps/grade-assist-react-e2e/tsconfig.e2e.json",
+            "devServerTarget": "grade-assist-react:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "grade-assist-react:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/grade-assist-react-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "generators": {
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    },
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "grade-assist-angular"
+}
