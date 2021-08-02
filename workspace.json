@@ -46,7 +46,10 @@
               "apps/grade-assist-angular/src/favicon.ico",
               "apps/grade-assist-angular/src/assets"
             ],
-            "styles": ["apps/grade-assist-angular/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/grade-assist-angular/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
