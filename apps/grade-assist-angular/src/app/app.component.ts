@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as fromStore from './store';
 
 @Component({
   selector: 'grade-assist-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Grade Assist';
   isAuthorized = false;
 
@@ -36,4 +39,12 @@ export class AppComponent {
       label: 'Teachers',
     },
   ];
+  constructor(private store: Store<fromStore.State>) {}
+
+  ngOnInit() {
+    this.store.subscribe((state) => {
+      console.log(state);
+      this.isAuthorized = !!state.auth.jwt;
+    });
+  }
 }

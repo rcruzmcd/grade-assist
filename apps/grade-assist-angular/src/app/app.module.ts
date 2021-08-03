@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(fromAuthStore.reducer),
+    StoreModule.forRoot({ auth: fromAuthStore.reducer }),
     EffectsModule.forRoot(fromAuthStore.effects),
     BrowserAnimationsModule,
     MatCardModule,

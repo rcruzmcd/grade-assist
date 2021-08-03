@@ -19,7 +19,10 @@ export const initialState: AuthState = {
 const authReducer = createReducer(
   initialState,
   on(fromActions.login, (state) => ({ ...state })),
-  on(fromActions.loginSuccess, (state) => ({ ...state })),
+  on(fromActions.loginSuccess, (state, action) => ({
+    ...state,
+    jwt: action.payload.token,
+  })),
   on(fromActions.loginFailure, (state) => ({ ...state }))
 );
 
