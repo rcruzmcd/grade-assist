@@ -2,17 +2,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-form',
+  selector: 'grade-assist-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
   @Input() formConfigs: any;
-  @Output() onFormSubmitted = new EventEmitter<any>();
+  @Output() formSubmitted = new EventEmitter<any>();
 
   formGroup!: FormGroup;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.formGroup = this.toFormGroup();
@@ -27,8 +25,9 @@ export class FormComponent implements OnInit {
   }
 
   onFormSubmit() {
+    console.log(this.formGroup.valid);
     if (this.formGroup.valid) {
-      this.onFormSubmitted.emit(this.formGroup.value);
+      this.formSubmitted.emit(this.formGroup.value);
     }
   }
 }

@@ -6,12 +6,12 @@ import { User } from '../models/users.model';
 
 const router = Router();
 
-router.get('/teacher', fromControllers.getAdmins);
+router.get('/admin', fromControllers.getAdmins);
 
-router.post('/teacher', fromControllers.createAdmin);
+router.post('/admin', fromControllers.createAdmin);
 
-router.put('/teacher/:teacherId', fromControllers.updateAdmin);
+router.put('/admin/:adminId', fromControllers.updateAdmin);
 
-router.delete('/teacher/:teacherId', fromControllers.deleteAdmin);
+router.delete('/admin/:adminId', fromControllers.deleteAdmin);
 
 export { router as adminRoutes };

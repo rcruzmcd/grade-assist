@@ -49,7 +49,7 @@ export class TeachersAddComponent implements OnInit {
     console.log('init');
   }
 
-  formHandler(teacher: Teacher) {
+  formHandler(teacher: Event) {
     console.log(teacher);
     this.store.dispatch({
       type: fromStore.TeachersActions.CREATE_TEACHERS,

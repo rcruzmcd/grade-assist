@@ -15,17 +15,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
-import * as fromTeachersStore from './modules/teachers/store';
+import * as fromAuthStore from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(fromAuthStore.reducer),
+    EffectsModule.forRoot(fromAuthStore.effects),
     BrowserAnimationsModule,
     MatCardModule,
     MatSidenavModule,
@@ -33,8 +35,12 @@ import { environment } from '../environments/environment';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    // SharedModules,
+    HttpClientModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    SharedModules,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,30 +1,36 @@
-<header>
-  <mat-toolbar>
-    <button
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-      (click)="drawer.toggle()"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>{{ title }}</span>
-  </mat-toolbar>
-</header>
+<div *ngIf="!isAuthorized">
+  <grade-assist-login></grade-assist-login>
+</div>
 
-<mat-drawer-container class="drawer-container">
-  <mat-drawer #drawer class="drawer" mode="side" opened>
-    <mat-nav-list *ngFor="let navItem of menu">
-      <mat-list-item>
-        <mat-icon>{{ navItem.icon }}</mat-icon>
-        <a matLine routerLink="{{ navItem.route }}"> {{ navItem.label }}</a>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-drawer>
+<div *ngIf="isAuthorized">
+  <header>
+    <mat-toolbar>
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+        (click)="drawer.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{ title }}</span>
+    </mat-toolbar>
+  </header>
 
-  <mat-drawer-content class="content">
-    <div>
-      <router-outlet></router-outlet>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer #drawer class="drawer" mode="side" opened>
+      <mat-nav-list *ngFor="let navItem of menu">
+        <mat-list-item>
+          <mat-icon>{{ navItem.icon }}</mat-icon>
+          <a matLine routerLink="{{ navItem.route }}"> {{ navItem.label }}</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
+
+    <mat-drawer-content class="content">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

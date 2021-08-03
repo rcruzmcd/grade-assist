@@ -26,6 +26,11 @@
 <button mat-raised-button color="accent" (click)="formGroup.reset()">
   Clear
 </button>
-<button mat-raised-button color="primary" (click)="onFormSubmit()">
+<button
+  mat-raised-button
+  color="primary"
+  (click)="onFormSubmit()"
+  [disabled]="!formGroup.valid"
+>
   Submit
 </button>

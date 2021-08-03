@@ -6,12 +6,12 @@ import { User } from '../models/users.model';
 
 const router = Router();
 
-router.get('/teacher', fromControllers.getStudents);
+router.get('/student', fromControllers.getStudents);
 
-router.post('/teacher', fromControllers.createStudent);
+router.post('/student', fromControllers.createStudent);
 
-router.put('/teacher/:teacherId', fromControllers.updateStudent);
+router.put('/student/:studentId', fromControllers.updateStudent);
 
-router.delete('/teacher/:teacherId', fromControllers.deleteStudent);
+router.delete('/student/:studentId', fromControllers.deleteStudent);
 
 export { router as studentRoutes };

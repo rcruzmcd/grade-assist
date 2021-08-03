@@ -35,24 +35,30 @@ export const login = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.info('processing /POST login', req.body);
   const { email, password } = req.body;
   try {
+    console.info('searching for user', email);
     const user = await User.findOne({ email });
+    console.info('results from search', user);
     if (!user) {
       const error = new Error('A user with this email could not be found');
       throw error;
     }
 
+    console.info('comparing passwords');
     const isEqual = compare(password, user.password);
     if (!isEqual) {
       const error = new Error('Wrong password!');
     }
 
+    console.info('signing jwt');
     const token = sign(
       { email: user.email, userId: user._id.toString() },
       'somesupersecretsecret',
       { expiresIn: '1h' }
     );
+    console.info('jwt signed', token);
     res.status(200).json({ token, userId: user._id.toString() });
   } catch (error) {
     next(error);

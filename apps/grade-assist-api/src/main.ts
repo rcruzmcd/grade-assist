@@ -5,6 +5,7 @@ import { connect } from 'mongoose';
 import { teachersRoutes } from './app/routes/teachers';
 import { adminRoutes } from './app/routes/admin';
 import { studentRoutes } from './app/routes/student';
+import { authRoutes } from './app/routes/auth';
 
 console.info('...loading express and dependencies');
 const app = express();
@@ -22,10 +23,10 @@ app.use((req, res, next) => {
 });
 
 console.info('...loading routes');
-// app.use()
+app.use('/api', authRoutes);
 app.use('/api', teachersRoutes);
-app.use(adminRoutes);
-app.use(studentRoutes);
+app.use('/api', adminRoutes);
+app.use('/api', studentRoutes);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   console.error(error);

@@ -12,6 +12,7 @@ export const getTeachers = async (
   console.info('processing GET /teacher request');
   try {
     const list = await User.find();
+    console.info('db call success', list);
     res.status(200).json({ teachersList: list });
   } catch (err) {
     res.status(500);
@@ -31,14 +32,14 @@ export const createTeacher = async (
       // error.statusCode = 422;
       throw error;
     }
-    const { firstName, lastName, email, classes } = req.body;
+    const { firstName, lastName, email, classes, password } = req.body;
     const teacher = User.build({
       firstName,
       lastName,
       email,
       classes,
-      password: '',
-      type: 'admin',
+      password,
+      type: 'teacher',
     });
     console.info('object build');
 
