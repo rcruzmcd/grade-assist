@@ -47,7 +47,7 @@
       "tags": [],
       "implicitDependencies": ["grade-assist-react"]
     },
-    "data": {
+    "shared": {
       "tags": []
     }
   }

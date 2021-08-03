@@ -26,4 +26,6 @@ router.put(
 
 router.post('/login', fromController.login);
 
+//reset password .. set it and send it back in response
+
 export { router as authRoutes };

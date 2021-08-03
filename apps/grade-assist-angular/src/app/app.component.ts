@@ -43,8 +43,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.subscribe((state) => {
-      console.log(state);
       this.isAuthorized = !!state.auth.jwt;
+    });
+  }
+
+  onLogout() {
+    this.store.dispatch({
+      type: fromStore.AuthActions.LOGOUT,
     });
   }
 }

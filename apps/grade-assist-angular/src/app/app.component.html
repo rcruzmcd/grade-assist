@@ -5,15 +5,14 @@
 <div *ngIf="isAuthorized">
   <header>
     <mat-toolbar>
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-        (click)="drawer.toggle()"
-      >
+      <button mat-icon-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span>{{ title }}</span>
+      <span style="flex: 1 1 auto"></span>
+      <button mat-icon-button (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
   </header>
 

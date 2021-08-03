@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@grade-assist/data": ["libs/data/src/index.ts"],
-      "@grade-assist/data": ["libs/data/src/index.ts"]
+      "@grade-assist/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

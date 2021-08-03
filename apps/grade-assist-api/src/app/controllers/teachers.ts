@@ -1,3 +1,4 @@
+import { hash } from 'bcryptjs';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator/check';
 import { teachers_mock_list } from '../mock/teachers.mock';
@@ -33,12 +34,13 @@ export const createTeacher = async (
       throw error;
     }
     const { firstName, lastName, email, classes, password } = req.body;
+    const hashedPw = await hash(password, 12);
     const teacher = User.build({
       firstName,
       lastName,
       email,
       classes,
-      password,
+      password: hashedPw,
       type: 'teacher',
     });
     console.info('object build');

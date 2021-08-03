@@ -4,6 +4,7 @@ import { sign } from 'jsonwebtoken';
 import { validationResult } from 'express-validator/check';
 
 import { User } from '../models/users.model';
+import { ResponseError } from '@grade-assist/data';
 
 export const signup = async (
   req: Request,
@@ -46,10 +47,12 @@ export const login = async (
       throw error;
     }
 
-    console.info('comparing passwords');
-    const isEqual = compare(password, user.password);
+    const isEqual = await compare(password, user.password);
+    console.info('comparing passwords', isEqual);
     if (!isEqual) {
-      const error = new Error('Wrong password!');
+      const error: ResponseError = new Error('Wrong password!');
+      error.statusCode = 401;
+      throw error;
     }
 
     console.info('signing jwt');

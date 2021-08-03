@@ -23,7 +23,12 @@ const authReducer = createReducer(
     ...state,
     jwt: action.payload.token,
   })),
-  on(fromActions.loginFailure, (state) => ({ ...state }))
+  on(fromActions.loginFailure, (state) => ({ ...state })),
+  on(fromActions.logout, (state) => ({ ...state, jwt: '' })),
+  on(fromActions.logoutSuccess, (state) => ({
+    ...state,
+  })),
+  on(fromActions.logoutFailure, (state) => ({ ...state }))
 );
 
 export function reducer(state: AuthState | undefined, action: Action) {

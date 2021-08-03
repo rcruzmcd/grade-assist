@@ -1,5 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -16,15 +21,26 @@ export class AuthEffect {
             type: fromActions.AuthActions.LOGIN_SUCCESS,
             payload: rsp,
           })),
-          catchError(() =>
-            of({
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            console.log(error);
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
               type: fromActions.AuthActions.LOGIN_FAILURE,
               payload: { message: 'error' },
-            })
-          )
+            });
+          })
         )
       )
     )
   );
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private _snackBar: MatSnackBar
+  ) {}
 }

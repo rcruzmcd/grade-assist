@@ -29,7 +29,7 @@ app.use('/api', adminRoutes);
 app.use('/api', studentRoutes);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-  console.error(error);
+  console.error('error catch', error);
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;

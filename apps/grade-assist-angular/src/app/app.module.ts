@@ -14,6 +14,7 @@ import { SharedModules } from './modules/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import * as fromAuthStore from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatIconModule,
     MatListModule,
+    MatSnackBarModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
