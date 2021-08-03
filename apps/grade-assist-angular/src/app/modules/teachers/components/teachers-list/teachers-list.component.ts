@@ -10,34 +10,45 @@ import { Teacher, ColumnConfigs } from '@grade-assist/data';
   styleUrls: ['./teachers-list.component.scss'],
 })
 export class TeachersListComponent implements OnInit {
-  tableConfig: ColumnConfigs[] = [
-    {
-      id: 'firstName',
-      label: 'First Name',
-      display: true,
-    },
-    {
-      id: 'lastName',
-      label: 'Last Name',
-      display: true,
-    },
-    {
-      id: 'email',
-      label: 'Email',
-      display: true,
-    },
-    {
-      id: 'classes',
-      label: 'Classes',
-      display: true,
-    },
-  ];
+  tableConfig: {
+    pagination?: boolean;
+    sort?: boolean;
+    updateRow?: boolean;
+    deleteRow?: boolean;
+    columns: ColumnConfigs[];
+  } = {
+    updateRow: true,
+    deleteRow: true,
+    columns: [
+      {
+        id: 'firstName',
+        label: 'First Name',
+        display: true,
+      },
+      {
+        id: 'lastName',
+        label: 'Last Name',
+        display: true,
+      },
+      {
+        id: 'email',
+        label: 'Email',
+        display: true,
+      },
+      {
+        id: 'classes',
+        label: 'Classes',
+        display: true,
+      },
+    ],
+  };
   teacherList$!: Teacher[];
 
   constructor(private store: Store<fromStore.State>) {}
 
   ngOnInit(): void {
     this.store.subscribe((state) => {
+      // console.log(state);
       this.teacherList$ = state.teachers.teachersList;
     });
     this.store.dispatch({ type: fromStore.TeachersActions.LOAD_ALL_TEACHERS });

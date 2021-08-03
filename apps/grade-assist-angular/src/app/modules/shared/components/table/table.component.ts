@@ -6,6 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,45 +22,52 @@ import { ColumnConfigs } from '@grade-assist/data';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit, OnChanges {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @Input() tableData!: any;
+  @Input() tableData?: any = [];
   @Input() tableStructure!: ColumnConfigs[];
-  @Output() onRowDeleted = new EventEmitter<any>();
-  @Output() onUpdateRow = new EventEmitter<any>();
+  @Output() rowDeleted = new EventEmitter<any>();
+  @Output() updateRow = new EventEmitter<any>();
 
   expandedElement: any | null;
 
+  @Input()
   tableConfig!: {
-    pagination: boolean;
-    sort: boolean;
-    updateRow: boolean;
-    deleteRow: boolean;
+    pagination?: boolean;
+    sort?: boolean;
+    updateRow?: boolean;
+    deleteRow?: boolean;
     columns: ColumnConfigs[];
   };
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.tableData);
-    for (const obj of this.tableStructure) {
+    for (const obj of this.tableConfig.columns) {
       if (obj.display) {
         this.displayedColumns.push(obj.id);
       }
     }
-    if (this.tableConfig?.updateRow || this.tableConfig?.deleteRow || true) {
+    if (this.tableConfig?.updateRow || this.tableConfig?.deleteRow) {
       this.displayedColumns.push('actions');
     }
   }
 
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    if (changes['tableData']) {
+      this.dataSource = new MatTableDataSource(this.tableData);
+    }
   }
+
+  // ngAfterViewInit() {
+  //   // this.dataSource.paginator = this.paginator;
+  //   // this.dataSource.sort = this.sort;
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -71,7 +80,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   onUpdateClicked(row: any) {
     console.log(row);
-    this.onUpdateRow.emit(row);
+    this.updateRow.emit(row);
   }
 
   onDeleteClicked(row: any) {
@@ -88,7 +97,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        this.onRowDeleted.emit(row);
+        this.rowDeleted.emit(row);
       }
     });
   }

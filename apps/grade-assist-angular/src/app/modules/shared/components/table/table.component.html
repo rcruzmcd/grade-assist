@@ -7,7 +7,7 @@
   <mat-table [dataSource]="dataSource" matSort>
     <!-- column template -->
     <ng-container
-      *ngFor="let col of tableStructure; index as i"
+      *ngFor="let col of tableConfig.columns; index as i"
       matColumnDef="{{ col.id }}"
     >
       <mat-header-cell *matHeaderCellDef mat-sort-header>{{

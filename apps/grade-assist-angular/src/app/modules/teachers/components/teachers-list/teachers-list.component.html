@@ -7,10 +7,10 @@
   </mat-card-title>
   <mat-card-content>
     <grade-assist-table
-      [tableStructure]="tableConfig"
+      [tableConfig]="tableConfig"
       [tableData]="teacherList$"
-      (onRowDeleted)="onDeleteHandler($event)"
-      (onUpdateRow)="onUpdateHandler($event)"
+      (rowDeleted)="onDeleteHandler($event)"
+      (updateRow)="onUpdateHandler($event)"
     ></grade-assist-table>
   </mat-card-content>
 </mat-card>

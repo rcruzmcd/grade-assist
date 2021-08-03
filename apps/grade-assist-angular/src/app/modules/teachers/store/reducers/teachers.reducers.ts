@@ -22,7 +22,7 @@ const teachersReducer = createReducer(
   on(fromActions.loadAllTeachers, (state) => ({ ...state })),
   on(fromActions.loadAllTeachersSuccess, (state, action) => ({
     ...state,
-    teachersList: action.payload,
+    teachersList: action.payload.teachersList,
   })),
   on(fromActions.loadAllTeachersFailure, (state) => ({ ...state })),
 
@@ -44,5 +44,6 @@ const teachersReducer = createReducer(
 );
 
 export function reducer(state: TeachersState | undefined, action: Action) {
+  console.log(action);
   return teachersReducer(state, action);
 }
