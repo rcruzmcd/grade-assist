@@ -3,13 +3,14 @@ import { validationResult } from 'express-validator/check';
 import { teachers_mock_list } from '../mock/teachers.mock';
 
 import { User } from '../models/users.model';
+import { logger } from '../middleware/audit-logs';
 
 export const getAdmins = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing GET /admin request');
+  logger.info('processing GET /admin request');
   try {
     const list = await User.find();
     res.status(200).json({ adminList: list });
@@ -23,7 +24,7 @@ export const createAdmin = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing POST /admin request');
+  logger.info('processing POST /admin request');
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -40,7 +41,7 @@ export const createAdmin = async (
       password: '',
       type: 'admin',
     });
-    console.info('object build');
+    logger.info('object build');
 
     await admin.save();
     res.status(201).send(admin);
@@ -54,7 +55,7 @@ export const updateAdmin = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing PUT /admin request');
+  logger.info('processing PUT /admin request');
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -80,7 +81,7 @@ export const deleteAdmin = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing DELETE /admin request');
+  logger.info('processing DELETE /admin request');
   try {
     const params = req.params;
     const tid = params.teacherId;

@@ -4,16 +4,19 @@ import { validationResult } from 'express-validator/check';
 import { teachers_mock_list } from '../mock/teachers.mock';
 
 import { User } from '../models/users.model';
+import { ResponseError } from '@grade-assist/data';
+
+import { logger } from '../middleware/audit-logs';
 
 export const getTeachers = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing GET /teacher request');
+  logger.info('processing GET /teacher request', req);
   try {
     const list = await User.find();
-    console.info('db call success', list);
+    logger.info('db call success', list);
     res.status(200).json({ teachersList: list });
   } catch (err) {
     res.status(500);
@@ -25,12 +28,14 @@ export const createTeacher = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing POST /teacher request');
+  logger.info('processing POST /teacher request', req);
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const error = new Error('Validation failed, entered data is incorrect.');
-      // error.statusCode = 422;
+      const error: ResponseError = new Error(
+        'Validation failed, entered data is incorrect.'
+      );
+      error.statusCode = 422;
       throw error;
     }
     const { firstName, lastName, email, classes, password } = req.body;
@@ -43,7 +48,7 @@ export const createTeacher = async (
       password: hashedPw,
       type: 'teacher',
     });
-    console.info('object build');
+    logger.info('object build');
 
     await teacher.save();
     res.status(201).send(teacher);
@@ -57,12 +62,14 @@ export const updateTeacher = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing PUT /teacher request');
+  logger.info('processing PUT /teacher request');
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const error = new Error('Validation failed, entered data is incorrect.');
-      // error.statusCode = 422;
+      const error: ResponseError = new Error(
+        'Validation failed, entered data is incorrect.'
+      );
+      error.statusCode = 422;
       throw error;
     }
 
@@ -83,7 +90,7 @@ export const deleteTeacher = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing DELETE /teacher request');
+  logger.info('processing DELETE /teacher request');
   try {
     const params = req.params;
     const tid = params.teacherId;

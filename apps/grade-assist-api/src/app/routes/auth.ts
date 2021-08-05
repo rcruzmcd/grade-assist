@@ -24,7 +24,14 @@ router.put(
   fromController.signup
 );
 
-router.post('/login', fromController.login);
+router.post(
+  '/login',
+  [
+    body('email').isEmail().withMessage('Please enter a valid email.'),
+    body('password').trim().notEmpty(),
+  ],
+  fromController.login
+);
 
 //reset password .. set it and send it back in response
 

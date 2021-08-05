@@ -3,13 +3,14 @@ import { validationResult } from 'express-validator/check';
 import { teachers_mock_list } from '../mock/teachers.mock';
 
 import { User } from '../models/users.model';
+import { logger } from '../middleware/audit-logs';
 
 export const getStudents = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing GET /student request');
+  logger.info('processing GET /student request');
   try {
     const list = await User.find();
     res.status(200).json({ studentList: list });
@@ -23,7 +24,7 @@ export const createStudent = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing POST /student request');
+  logger.info('processing POST /student request');
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -40,7 +41,7 @@ export const createStudent = async (
       password: '',
       type: 'student',
     });
-    console.info('object build');
+    logger.info('object build');
 
     await student.save();
     res.status(201).send(student);
@@ -54,7 +55,7 @@ export const updateStudent = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing PUT /student request');
+  logger.info('processing PUT /student request');
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -80,7 +81,7 @@ export const deleteStudent = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.info('processing DELETE /student request');
+  logger.info('processing DELETE /student request');
   try {
     const params = req.params;
     const tid = params.teacherId;
