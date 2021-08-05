@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SharedModules } from './modules/shared/shared.module';
+import { SharedModule } from '@grade-assist/shared';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -42,7 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    SharedModules,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

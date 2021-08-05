@@ -8,13 +8,14 @@ import { TeachersRoutingModule } from './teachers-routing.modules';
 import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { SharedModules } from '../shared/shared.module';
+import { SharedModule } from '@grade-assist/shared';
 import { MatButtonModule } from '@angular/material/button';
 import { TeachersAddComponent } from './components/teachers-add/teachers-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
 
 import * as fromStore from './store/';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     TeachersRoutingModule,
-    SharedModules,
+    SharedModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatDividerModule,
     HttpClientModule,
+    MatTableModule,
     StoreModule.forFeature(fromStore.FeatureKey, fromStore.reducer),
     EffectsModule.forFeature(fromStore.effects),
   ],

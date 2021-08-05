@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from '../../app-routing.module';
 import { HomeRoutingModule } from './home-routing.modules';
 import { HomeComponent } from './components/home/home.component';
+import { MatCardModule } from '@angular/material/card';
 
 // import { effects } from './store';
 // import * as from from './store/reducers';
@@ -20,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
+    MatCardModule,
     // StoreModule.forFeature(from.FeatureKey, from.reducers),
     // EffectsModule.forFeature(effects),
   ],

@@ -1,16 +1,16 @@
-<div *ngIf="!isAuthorized">
+<div *ngIf="!isAuthorized" style="height: 100%; width: 100%">
   <grade-assist-login></grade-assist-login>
 </div>
 
-<div *ngIf="isAuthorized">
+<div *ngIf="isAuthorized" style="height: 100%; width: 100%">
   <header>
-    <mat-toolbar>
+    <mat-toolbar color="primary">
       <button mat-icon-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span>{{ title }}</span>
       <span style="flex: 1 1 auto"></span>
-      <button mat-icon-button (click)="onLogout()">
+      <button color="warn" mat-mini-fab (click)="onLogout()">
         <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
@@ -20,7 +20,7 @@
     <mat-drawer #drawer class="drawer" mode="side" opened>
       <mat-nav-list *ngFor="let navItem of menu">
         <mat-list-item>
-          <mat-icon>{{ navItem.icon }}</mat-icon>
+          <mat-icon color="primary">{{ navItem.icon }}</mat-icon>
           <a matLine routerLink="{{ navItem.route }}"> {{ navItem.label }}</a>
         </mat-list-item>
       </mat-nav-list>
