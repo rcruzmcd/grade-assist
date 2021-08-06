@@ -15,7 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
 import { DialogComponent } from '../dialog/dialog.component';
-import { ColumnConfigs } from '@grade-assist/data';
+import { TableConfig } from '@grade-assist/data';
 
 @Component({
   selector: 'grade-assist-table',
@@ -29,20 +29,14 @@ export class TableComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() tableData?: any = [];
-  @Input() tableStructure!: ColumnConfigs[];
+  // @Input() tableStructure!: ColumnConfigs[];
   @Output() rowDeleted = new EventEmitter<any>();
   @Output() updateRow = new EventEmitter<any>();
 
   expandedElement: any | null;
 
   @Input()
-  tableConfig!: {
-    pagination?: boolean;
-    sort?: boolean;
-    updateRow?: boolean;
-    deleteRow?: boolean;
-    columns: ColumnConfigs[];
-  };
+  tableConfig!: TableConfig;
 
   constructor(public dialog: MatDialog) {}
 

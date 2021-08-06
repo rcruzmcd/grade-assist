@@ -3,3 +3,11 @@ export interface ColumnConfigs {
   label: string;
   display: boolean;
 }
+
+export interface TableConfig {
+  pagination?: boolean;
+  sort?: boolean;
+  updateRow?: boolean;
+  deleteRow?: boolean;
+  columns: ColumnConfigs[];
+}
