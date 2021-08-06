@@ -19,28 +19,15 @@ import { MatTableModule } from '@angular/material/table';
 
 import * as fromStore from './store/';
 import { HttpClientModule } from '@angular/common/http';
-// import * as fromComponents from './components/index';
 
 @NgModule({
-  declarations: [
-    //...fromComponents.components
-
-    TeachersListComponent,
-    TeachersAddComponent,
-  ],
+  declarations: [TeachersListComponent, TeachersAddComponent],
   imports: [
     CommonModule,
     TeachersRoutingModule,
     SharedModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatDividerModule,
     HttpClientModule,
-    MatTableModule,
+    ReactiveFormsModule,
     StoreModule.forFeature(fromStore.FeatureKey, fromStore.reducer),
     EffectsModule.forFeature(fromStore.effects),
   ],
