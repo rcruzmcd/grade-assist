@@ -44,4 +44,16 @@ describe('LoginComponent', () => {
   it('should create component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call form handler once information received from form', () => {
+    jest.spyOn(component, 'formHandler');
+
+    expect(component.formHandler).toHaveBeenCalled();
+  });
+
+  it('should dispatch login action on formhandler called', () => {
+    // spyOn(component, 'formHandler');
+    // expect(component.formHandler).toHaveBeenCalled();
+    // component.formHandler();
+  });
 });

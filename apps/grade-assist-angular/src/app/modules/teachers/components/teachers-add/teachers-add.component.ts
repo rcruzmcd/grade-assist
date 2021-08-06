@@ -50,7 +50,7 @@ export class TeachersAddComponent implements OnInit {
   }
 
   formHandler(teacher: Event) {
-    console.log(teacher);
+    // console.log(teacher);
     this.store.dispatch({
       type: fromStore.TeachersActions.CREATE_TEACHERS,
       payload: teacher,

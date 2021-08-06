@@ -55,7 +55,7 @@ export class TeachersListComponent implements OnInit {
   }
 
   onDeleteHandler(teacher: Event) {
-    console.log(teacher);
+    // console.log(teacher);
     this.store.dispatch({
       type: fromStore.TeachersActions.DELETE_TEACHERS,
       payload: teacher,
@@ -63,7 +63,7 @@ export class TeachersListComponent implements OnInit {
   }
 
   onUpdateHandler(teacher: Event) {
-    console.log(teacher);
+    // console.log(teacher);
     this.store.dispatch({
       type: fromStore.TeachersActions.UPDATE_TEACHERS,
       payload: teacher,

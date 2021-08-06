@@ -1,8 +1,8 @@
-<div *ngIf="!isAuthorized" style="height: 100%; width: 100%">
+<div *ngIf="!isAuthorized" class="full-container" id="login-container">
   <grade-assist-login></grade-assist-login>
 </div>
 
-<div *ngIf="isAuthorized" style="height: 100%; width: 100%">
+<div *ngIf="isAuthorized" class="full-container" id="app-container">
   <header>
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="drawer.toggle()">
@@ -10,7 +10,7 @@
       </button>
       <span>{{ title }}</span>
       <span style="flex: 1 1 auto"></span>
-      <button color="warn" mat-mini-fab (click)="onLogout()">
+      <button color="warn" mat-mini-fab (click)="onLogout()" id="logout-button">
         <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
