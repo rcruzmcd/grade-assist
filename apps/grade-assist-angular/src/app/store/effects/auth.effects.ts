@@ -23,7 +23,6 @@ export class AuthEffect {
           })),
           catchError((error: HttpErrorResponse) => {
             const msg = error.error.message || 'Something went wrong';
-            console.log(error);
             this._snackBar.open(msg, '', {
               horizontalPosition: 'right',
               verticalPosition: 'top',

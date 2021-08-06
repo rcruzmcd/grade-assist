@@ -13,18 +13,31 @@ router.post(
   '/teacher',
   isAuth,
   [
-    body('firstName').trim().not().isEmpty(),
-    body('lastName').trim().not().isEmpty(),
-    body('password').trim().isStrongPassword(),
+    body('firstName')
+      .trim()
+      .not()
+      .isEmpty()
+      .withMessage('Please enter valid first name'),
+    body('lastName')
+      .trim()
+      .not()
+      .isEmpty()
+      .withMessage('Please enter valid last name'),
+    body('password')
+      .trim()
+      .isStrongPassword()
+      .withMessage('Please enter strong password'),
     body('email')
       .isEmail()
       .withMessage('Please enter a valid email.')
       .custom((value, { req }) => {
-        return User.findOne({ email: value }).then((userDoc) => {
-          if (userDoc) {
-            return Promise.reject('E-mail address already existis');
-          }
-        });
+        return User.findOne({ email: value })
+          .select('firstName lastName email type')
+          .then((userDoc) => {
+            if (userDoc) {
+              return Promise.reject('E-mail address already existis');
+            }
+          });
       })
       .normalizeEmail(),
   ],

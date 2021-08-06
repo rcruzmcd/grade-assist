@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
@@ -19,12 +20,18 @@ export class TeachersEffect {
             type: fromActions.TeachersActions.LOAD_ALL_TEACHERS_SUCCESS,
             payload: teachers,
           })),
-          catchError(() =>
-            of({
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
               type: fromActions.TeachersActions.LOAD_ALL_TEACHERS_FAILURE,
               payload: { message: 'error' },
-            })
-          )
+            });
+          })
         )
       )
     )
@@ -33,6 +40,7 @@ export class TeachersEffect {
   constructor(
     private actions$: Actions,
     // private teacherService: TeachersService,
-    private http: HttpClient
+    private http: HttpClient,
+    private _snackBar: MatSnackBar
   ) {}
 }

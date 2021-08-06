@@ -13,9 +13,11 @@ export const getTeachers = async (
   res: Response,
   next: NextFunction
 ) => {
-  logger.info('processing GET /teacher request', req);
+  logger.info('processing GET /teacher request');
   try {
-    const list = await User.find();
+    const list = await User.find().select(
+      'firstName lastName email classes type'
+    );
     logger.info('db call success', list);
     res.status(200).json({ teachersList: list });
   } catch (err) {
@@ -28,7 +30,7 @@ export const createTeacher = async (
   res: Response,
   next: NextFunction
 ) => {
-  logger.info('processing POST /teacher request', req);
+  logger.info('processing POST /teacher request');
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -48,7 +50,7 @@ export const createTeacher = async (
       password: hashedPw,
       type: 'teacher',
     });
-    logger.info('object build');
+    logger.info('new teacher created', teacher);
 
     await teacher.save();
     res.status(201).send(teacher);
@@ -76,8 +78,22 @@ export const updateTeacher = async (
     const params = req.params;
     const tid = params.teacherId;
 
-    const teacher = await User.findById(tid);
-    //update what needs to be updated
+    const classes = req.body.classes;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+
+    const teacher = await User.findById(tid).select(
+      'firstName lastName classes'
+    );
+    teacher.classes = classes;
+    teacher.firstName = firstName;
+    teacher.lastName = lastName;
+    logger.info(
+      'updating user ' + tid + ' with values',
+      classes,
+      firstName,
+      lastName
+    );
     await teacher.save();
     res.status(200).json({ message: 'User updated', teacher: teacher });
   } catch (error) {
@@ -95,7 +111,7 @@ export const deleteTeacher = async (
     const params = req.params;
     const tid = params.teacherId;
     const teacher = await User.findById(tid);
-
+    logger.info('deleting teacher', tid);
     await User.findByIdAndRemove(tid);
     res.status(200).json({ message: 'Deleted teacher' });
   } catch (error) {

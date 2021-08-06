@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import * as fromAuthStore from './store';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -30,7 +31,9 @@ import { LoginComponent } from './components/login/login.component';
     }),
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

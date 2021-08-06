@@ -44,6 +44,5 @@ const teachersReducer = createReducer(
 );
 
 export function reducer(state: TeachersState | undefined, action: Action) {
-  console.log(action);
   return teachersReducer(state, action);
 }

@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction, Errback } from 'express';
 import { json } from 'body-parser';
 import { connect } from 'mongoose';
 
