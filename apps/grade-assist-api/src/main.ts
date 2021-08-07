@@ -6,6 +6,7 @@ import { teachersRoutes } from './app/routes/teachers';
 import { adminRoutes } from './app/routes/admin';
 import { studentRoutes } from './app/routes/student';
 import { authRoutes } from './app/routes/auth';
+import { mongodb } from './app/models/mongoose';
 
 import { logger } from './app/middleware/audit-logs';
 
@@ -49,14 +50,11 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 logger.info('...attempting db connection');
-connect(
-  'mongodb+srv://gradeadmin:mysuperextraadminpassword56!!@cluster0.7iafc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  }
-)
+connect(mongodb, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+})
   .then((result: any) => {
     app.listen(3000);
     logger.log({

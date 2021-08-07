@@ -6,6 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
+import { first, flatMap, mergeMap } from 'rxjs/operators';
 
 import * as fromStore from '../store';
 
@@ -14,9 +15,16 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private store: Store<fromStore.State>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const token = sessionStorage.getItem('token');
-    console.log(token);
-    const authReq = req.clone({ setHeaders: { Authorization: '' } });
-    return next.handle(authReq);
+    console.log('intercept');
+    return this.store.select(fromStore.selectAuthFeatureToken).pipe(
+      first(),
+      mergeMap((token) => {
+        console.log(token);
+        const authReq = !!token
+          ? req.clone({ setHeaders: { Authorization: token } })
+          : req;
+        return next.handle(authReq);
+      })
+    );
   }
 }

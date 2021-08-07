@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.subscribe((state) => {
-      // sessionStorage.setItem('token', state.auth.jwt);
       this.isAuthorized = !!state.auth.jwt;
     });
   }

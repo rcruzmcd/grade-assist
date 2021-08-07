@@ -16,6 +16,22 @@ export class TeachersAddComponent implements OnInit {
     inputs: [
       {
         appearance: 'outline',
+        label: 'Email',
+        placeholder: '',
+        type: 'email',
+        key: 'email',
+        validators: [Validators.required, Validators.email],
+      },
+      {
+        appearance: 'outline',
+        label: 'Password',
+        placeholder: '',
+        type: 'password',
+        key: 'password',
+        validators: [Validators.required, Validators.minLength(5)],
+      },
+      {
+        appearance: 'outline',
         label: 'First Name',
         placeholder: '',
         key: 'firstName',
@@ -25,14 +41,6 @@ export class TeachersAddComponent implements OnInit {
         label: 'Last Name',
         placeholder: '',
         key: 'lastName',
-      },
-      {
-        appearance: 'outline',
-        label: 'Email',
-        placeholder: '',
-        type: 'email',
-        key: 'email',
-        validators: [Validators.required, Validators.email],
       },
       {
         appearance: 'outline',
@@ -55,6 +63,8 @@ export class TeachersAddComponent implements OnInit {
       type: fromStore.TeachersActions.CREATE_TEACHERS,
       payload: teacher,
     });
-    this.router.navigate(['teachers/list']);
+
+    // if update successfull navigate, if not stay
+    // this.router.navigate(['teachers/list']);
   }
 }

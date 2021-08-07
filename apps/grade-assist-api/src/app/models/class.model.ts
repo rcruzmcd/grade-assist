@@ -5,6 +5,7 @@ interface IClass {
   code: string;
   teacher: string;
   students: string[];
+  assignments: string[];
 }
 
 interface ClassModelInterface extends mongoose.Model<any> {
