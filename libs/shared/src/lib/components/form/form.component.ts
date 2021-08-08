@@ -25,7 +25,7 @@ export class FormComponent implements OnInit {
   }
 
   onFormSubmit() {
-    console.log(this.formGroup.valid);
+    // console.log(this.formGroup.valid);
     if (this.formGroup.valid) {
       this.formSubmitted.emit(this.formGroup.value);
       this.formGroup.reset();

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ClassesListComponent } from './components/classes-list/classes-list.component';
 import { ClassesAddComponent } from './components/classes-add/classes-add.component';
+import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'add',
     component: ClassesAddComponent,
+  },
+  {
+    path: 'details',
+    component: ClassesDetailComponent,
   },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];

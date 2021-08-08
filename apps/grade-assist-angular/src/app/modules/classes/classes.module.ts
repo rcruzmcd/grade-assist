@@ -13,9 +13,14 @@ import * as fromStore from './store';
 import { AuthInterceptor } from '../../http-interceptors/auth-interceptor';
 import { ClassesListComponent } from './components/classes-list/classes-list.component';
 import { ClassesAddComponent } from './components/classes-add/classes-add.component';
+import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
 
 @NgModule({
-  declarations: [ClassesListComponent, ClassesAddComponent],
+  declarations: [
+    ClassesListComponent,
+    ClassesAddComponent,
+    ClassesDetailComponent,
+  ],
   imports: [
     CommonModule,
     ClassesRoutingModule,

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
 import { User, ColumnConfigs } from '@grade-assist/data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'grade-assist-classes-list',
@@ -39,7 +40,7 @@ export class ClassesListComponent implements OnInit {
   };
   classList$!: User[];
 
-  constructor(private store: Store<fromStore.State>) {}
+  constructor(private store: Store<fromStore.State>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.subscribe((state) => {
@@ -66,9 +67,11 @@ export class ClassesListComponent implements OnInit {
   }
 
   onViewHandler(classes: Event) {
+    console.log(classes);
     this.store.dispatch({
       type: fromStore.ClassesAction.SELECT_CLASS,
       payload: classes,
     });
+    this.router.navigate(['classes/details']);
   }
 }

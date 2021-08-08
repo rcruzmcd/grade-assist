@@ -1,0 +1,39 @@
+<mat-card class="card">
+  <mat-card-title> {{ title }} </mat-card-title>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <div style="display: flex; justify-content: space-between">
+      <div style="display: flex; flex-direction: column">
+        <label class="mat-title">Name</label>
+        <span class="mat-h4">{{ _class.name }}</span>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label class="mat-title">Code</label>
+        <span class="mat-h4">{{ _class.code }}</span>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label class="mat-title">Teacher</label>
+        <span class="mat-h4">
+          {{ _class.teacher?.firstName }} {{ _class.teacher?.lastName }}
+        </span>
+      </div>
+    </div>
+    <label class="mat-title">Students</label>
+    <mat-action-list>
+      <button mat-list-item *ngFor="let student of _class.students">
+        <mat-icon matListIcon>person</mat-icon>
+
+        {{ student?.firstName }} {{ student?.lastName }}
+      </button>
+    </mat-action-list>
+
+    <label class="mat-title">Assignments</label>
+    <mat-action-list>
+      <button mat-list-item *ngFor="let assign of _class.assignments">
+        <mat-icon matListIcon>assignment</mat-icon>
+
+        {{ assign?.name }}
+      </button>
+    </mat-action-list>
+  </mat-card-content>
+</mat-card>
