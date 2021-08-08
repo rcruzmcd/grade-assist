@@ -11,6 +11,7 @@ import { classRoutes } from './app/routes/classes';
 import { mongodb } from './app/models/mongoose';
 
 import { logger } from './app/middleware/audit-logs';
+import { assignRouter } from './app/routes/assignments';
 
 logger.log({
   level: 'info',
@@ -39,6 +40,7 @@ app.use('/api', teachersRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', studentRoutes);
 app.use('/api', classRoutes);
+app.use('/api', assignRouter);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   logger.log({

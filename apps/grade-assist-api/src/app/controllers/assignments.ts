@@ -2,9 +2,14 @@ import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator/check';
 import { ResponseError } from '@grade-assist/data';
 
-import { Classes } from '../models/classes.model';
+import { Classes, IClasses } from '../models/classes.model';
 import { User } from '../models/users.model';
-import { Assignment, Grade } from '../models/assignment.model';
+import {
+  Assignment,
+  Grade,
+  IAssignment,
+  IGrade,
+} from '../models/assignment.model';
 import { logger } from '../middleware/audit-logs';
 
 export const listAllAssignments = async (
@@ -73,11 +78,11 @@ export const createAssignment = async (
     logger.info('assignment created', assignment._id);
 
     if (!classes.assignments) {
-      classes.assignment = [];
+      classes.assignments = [];
       logger.info('initializing assignments array');
     }
 
-    classes.assignment.push(assignment._id);
+    classes.assignments.push(assignment._id);
     await classes.save();
     logger.info('classes updated with assignment id');
 
@@ -152,7 +157,11 @@ export const deleteAssignment = async (
     const classes = await Classes.findById(classId);
     if (classes) {
       logger.info('class found with assignment in records');
-      // need to remove assignment from class record
+      classes.assignments = classes.assignments.filter(
+        (assign) => assign._id !== assignId
+      );
+      await classes.save();
+      logger.info(`assignment with id ${assignId} removed from class`, classes);
     }
 
     for (const grade of grades) {
@@ -160,13 +169,14 @@ export const deleteAssignment = async (
       if (gradeObject) {
         logger.info('grade found with assignment on record');
         //delete grade
-        const studentId = gradeObject.student;
-        const student = await User.findById(studentId);
-        if (student) {
-          logger.info('student found wiht grade on record');
-          // need to remove grade from student record
-        }
+        // const studentId = gradeObject.student;
+        // const student = await User.findById(studentId);
+        // if (student) {
+        //   logger.info('student found wiht grade on record');
+        //   // need to remove grade from student record
+        // }
         await Grade.findByIdAndDelete(grade);
+        logger.info('deleteing grade', grade);
       }
     }
 
@@ -186,17 +196,29 @@ export const gradeAssignment = async (
   try {
     const params = req.params;
     const assignId = params.assignmentId;
+    logger.info('gettting assign id from params', assignId);
 
     const { grade, studentId } = req.body;
+    logger.info('getting grade and student id from body', grade, studentId);
 
     const assign = await Assignment.findById(assignId);
     if (!assign) {
-      // throw error assignent not found
+      logger.error('assignment not found', assignId);
+      const error: ResponseError = new Error(
+        'assignment not found with id ' + assignId
+      );
+      error.statusCode = 422;
+      throw error;
     }
 
     const student = await User.findById(studentId);
     if (!student) {
-      //throw error student not found
+      logger.error('student not found with id ' + studentId);
+      const error: ResponseError = new Error(
+        'student not found with id ' + studentId
+      );
+      error.statusCode = 422;
+      throw error;
     }
 
     const gradeObject = await new Grade({
@@ -206,15 +228,87 @@ export const gradeAssignment = async (
     });
 
     await gradeObject.save();
+    logger.info('grade created and saved', gradeObject);
 
     if (!assign.grades) {
       assign.grades = [];
+      logger.info('instatiating grades array if needed');
     }
 
     assign.grades.push(gradeObject._id);
     await assign.save();
+    logger.info('assignment updated with grade id', assign, grade);
 
     res.status(200).json({ message: 'Grade saved', grade: gradeObject });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAssignmentGrades = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  logger.info('processing /GET /assignment/assignId/grades ');
+  try {
+    const params = req.params;
+    const assignId = params.assignmentId;
+    logger.info('getting assignment id from params', assignId);
+
+    const assign = await Assignment.findById(assignId)
+      .select('name teacher grades')
+      .populate({
+        path: 'grades',
+        select: 'student grade',
+        options: { path: 'student' },
+      });
+
+    if (!assign) {
+      logger.error('assignment not found with id ' + assignId);
+      const error: ResponseError = new Error(
+        'assignment with id ' + assignId + ' not found'
+      );
+      error.statusCode = 422;
+      throw error;
+    }
+
+    res.status(200).send(assign);
+  } catch (error) {
+    res.status(500);
+  }
+};
+
+export const updateGrade = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  logger.info('processing /put /grade/gradeId updating grade');
+  try {
+    const params = req.params;
+    const gradeId = params.gradeId;
+    logger.info('getting grade id from params', gradeId);
+
+    const newGrade = req.body.grade;
+    logger.info('new grade to be updated', newGrade);
+
+    const grade = await Grade.findById(gradeId).select(
+      'studentId grade assignment'
+    );
+    if (!grade) {
+      logger.error('grade not found with id ' + gradeId);
+      const error: ResponseError = new Error(
+        'grade not found wiht id ' + gradeId
+      );
+      error.statusCode = 422;
+      throw error;
+    }
+
+    grade.grade = newGrade;
+    await grade.save();
+    logger.info('new grade saved', grade);
+    res.status(201).json({ message: 'grade updated', grade });
   } catch (error) {
     next(error);
   }

@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-interface IClasses {
+import { IAssignment } from './assignment.model';
+export interface IClasses {
   name: string;
   code: string;
   teacher: string;
@@ -12,7 +13,7 @@ interface ClassesModelInterface extends mongoose.Model<any> {
   build(attr: IClasses): any;
 }
 
-const classesSchema = new mongoose.Schema({
+const classesSchema = new mongoose.Schema<IClasses>({
   name: {
     type: String,
     required: true,

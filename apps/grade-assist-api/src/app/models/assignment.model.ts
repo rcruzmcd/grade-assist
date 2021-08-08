@@ -1,24 +1,24 @@
 import mongoose from 'mongoose';
 
-interface assignment {
+export interface IAssignment {
   name: string;
-  grades?: grade[];
+  grades?: IGrade[];
   type: string;
   weight?: string;
   class: string;
 }
-interface grade {
+export interface IGrade {
   grade: number;
   student: string;
   assignment: string;
 }
 
 interface AssignmentModelInterface extends mongoose.Model<any> {
-  build(attr: assignment): any;
+  build(attr: IAssignment): any;
 }
 
 interface GradeModelInterface extends mongoose.Model<any> {
-  build(attr: grade): any;
+  build(attr: IGrade): any;
 }
 
 const assignmentSchema = new mongoose.Schema({
@@ -59,11 +59,11 @@ const gradeSchema = new mongoose.Schema({
   },
 });
 
-assignmentSchema.statics.build = (attr: assignment) => {
+assignmentSchema.statics.build = (attr: IAssignment) => {
   return new Assignment(attr);
 };
 
-gradeSchema.statics.build = (attr: grade) => {
+gradeSchema.statics.build = (attr: IGrade) => {
   return new Grade(attr);
 };
 
