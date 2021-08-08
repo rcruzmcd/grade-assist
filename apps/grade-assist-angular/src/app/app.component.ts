@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     },
     {
       icon: 'class',
-      route: '/classess',
+      route: '/classes',
       label: 'Classes',
     },
     {

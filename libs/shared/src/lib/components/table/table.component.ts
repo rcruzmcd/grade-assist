@@ -33,6 +33,7 @@ export class TableComponent implements OnInit, OnChanges {
   // @Input() tableStructure!: ColumnConfigs[];
   @Output() rowDeleted = new EventEmitter<any>();
   @Output() updateRow = new EventEmitter<any>();
+  @Output() viewRowDetails = new EventEmitter<any>();
 
   expandedElement: any | null;
 
@@ -79,12 +80,16 @@ export class TableComponent implements OnInit, OnChanges {
 
   onViewClicked(row: any) {
     console.log(row);
-    const dialogRef = this.dialog.open(ViewDialogComponent, {
-      data: { ...row },
-      hasBackdrop: true,
-      height: '500px',
-      width: '500px',
-    });
+    //type of view: dialog or event emitter
+
+    // const dialogRef = this.dialog.open(ViewDialogComponent, {
+    //   data: { ...row },
+    //   hasBackdrop: true,
+    //   height: '500px',
+    //   width: '500px',
+    // });
+
+    this.viewRowDetails.emit(row);
   }
 
   onDeleteClicked(row: any) {
@@ -104,5 +109,9 @@ export class TableComponent implements OnInit, OnChanges {
         this.rowDeleted.emit(row);
       }
     });
+  }
+
+  onRowClicked(row: any) {
+    console.log(row);
   }
 }

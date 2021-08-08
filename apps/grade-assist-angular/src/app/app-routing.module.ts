@@ -22,6 +22,11 @@ const lazyRoutes: Routes = [
       import('./modules/students/student.module').then((m) => m.StudentModule),
   },
   {
+    path: 'classes',
+    loadChildren: () =>
+      import('./modules/classes/classes.module').then((m) => m.ClassesModule),
+  },
+  {
     path: 'admin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),

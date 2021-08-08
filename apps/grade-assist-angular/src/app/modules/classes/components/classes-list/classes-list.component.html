@@ -1,0 +1,18 @@
+<mat-card class="card">
+  <mat-card-title style="display: flex; justify-content: space-between">
+    Classes
+    <button mat-raised-button color="primary" routerLink="../add">
+      Add New Class
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-title>
+  <mat-card-content>
+    <grade-assist-table
+      [tableConfig]="tableConfig"
+      [tableData]="classList$"
+      (rowDeleted)="onDeleteHandler($event)"
+      (updateRow)="onUpdateHandler($event)"
+      (viewRowDetails)="onViewHandler($event)"
+    ></grade-assist-table>
+  </mat-card-content>
+</mat-card>
