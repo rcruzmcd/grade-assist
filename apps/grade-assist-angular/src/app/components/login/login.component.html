@@ -9,5 +9,11 @@
       [formConfigs]="formConfig"
       (formSubmitted)="formHandler($event)"
     ></grade-assist-form>
+    <button>Login as Admin</button>
+    <button>Login as Student</button>
+    <button>Login as Teacher</button>
+    <!-- based on user type it will have different functionalities
+admin will control privileges
+api will have a middleware to check against the api being call and what access user has -->
   </mat-card-content>
 </mat-card>

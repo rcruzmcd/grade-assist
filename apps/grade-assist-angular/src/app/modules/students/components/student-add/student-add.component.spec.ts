@@ -6,14 +6,14 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { SharedModule } from '@grade-assist/shared';
 
-import { TeachersAddComponent } from './teachers-add.component';
+import { StudentAddComponent } from './student-add.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('TeachersAddComponent', () => {
+describe('StudentAddComponent', () => {
   let store: MockStore;
   const initialState = {};
-  let component: TeachersAddComponent;
-  let fixture: ComponentFixture<TeachersAddComponent>;
+  let component: StudentAddComponent;
+  let fixture: ComponentFixture<StudentAddComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,13 +25,13 @@ describe('TeachersAddComponent', () => {
         MatDividerModule,
       ],
       providers: [provideMockStore({ initialState })],
-      declarations: [TeachersAddComponent],
+      declarations: [StudentAddComponent],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TeachersAddComponent);
+    fixture = TestBed.createComponent(StudentAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

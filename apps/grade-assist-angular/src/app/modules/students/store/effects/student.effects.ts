@@ -8,16 +8,16 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 import * as fromActions from '../actions';
 
 @Injectable()
-export class adminEffect {
-  loadAlladmin$ = createEffect(() =>
+export class StudentEffect {
+  loadAllStudent$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.AdminActions.LOAD_ALL_ADMIN),
+      ofType(fromActions.StudentActions.LOAD_ALL_STUDENT),
       mergeMap(() =>
-        this.http.get('/api/admin').pipe(
-          map((admin) => {
+        this.http.get('/api/student').pipe(
+          map((student) => {
             return {
-              type: fromActions.AdminActions.LOAD_ALL_ADMIN_SUCCESS,
-              payload: admin,
+              type: fromActions.StudentActions.LOAD_ALL_STUDENT_SUCCESS,
+              payload: student,
             };
           }),
           catchError((error: HttpErrorResponse) => {
@@ -28,7 +28,7 @@ export class adminEffect {
               duration: 5000,
             });
             return of({
-              type: fromActions.AdminActions.LOAD_ALL_ADMIN_FAILURE,
+              type: fromActions.StudentActions.LOAD_ALL_STUDENT_FAILURE,
               payload: { message: 'error' },
             });
           })
@@ -37,21 +37,21 @@ export class adminEffect {
     )
   );
 
-  createAdmin$ = createEffect(() =>
+  createStudent$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.AdminActions.CREATE_ADMIN),
+      ofType(fromActions.StudentActions.CREATE_STUDENT),
       mergeMap((action: any) =>
-        this.http.post('/api/admin', action.payload).pipe(
-          map((teacher) => {
+        this.http.post('/api/student', action.payload).pipe(
+          map((student) => {
             // const msg = admin.message;
-            this._snackBar.open('Admin successfully created.', '', {
+            this._snackBar.open('Student successfully created.', '', {
               horizontalPosition: 'right',
               verticalPosition: 'top',
               duration: 5000,
             });
             return {
-              type: fromActions.AdminActions.CREATE_ADMIN_SUCCESS,
-              payload: teacher,
+              type: fromActions.StudentActions.CREATE_STUDENT_SUCCESS,
+              payload: student,
             };
           }),
           catchError((error: HttpErrorResponse) => {
@@ -62,7 +62,7 @@ export class adminEffect {
               duration: 5000,
             });
             return of({
-              type: fromActions.AdminActions.CREATE_ADMIN_FAILURE,
+              type: fromActions.StudentActions.CREATE_STUDENT_FAILURE,
               payload: error,
             });
           })
@@ -71,19 +71,19 @@ export class adminEffect {
     )
   );
 
-  deleteAdmin$ = createEffect(() =>
+  deleteStudent$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.AdminActions.DELETE_ADMIN),
+      ofType(fromActions.StudentActions.DELETE_STUDENT),
       mergeMap((action: any) =>
-        this.http.delete(`api/admin/${action.payload._id}`).pipe(
+        this.http.delete(`api/student/${action.payload._id}`).pipe(
           map((rsp) => {
-            this._snackBar.open('Admin successfully deleted.', '', {
+            this._snackBar.open('Student successfully deleted.', '', {
               horizontalPosition: 'right',
               verticalPosition: 'top',
               duration: 5000,
             });
             return {
-              type: fromActions.AdminActions.DELETE_ADMIN_SUCCESS,
+              type: fromActions.StudentActions.DELETE_STUDENT_SUCCESS,
               payload: { response: rsp, id: action.payload._id },
             };
           }),
@@ -95,7 +95,7 @@ export class adminEffect {
               duration: 5000,
             });
             return of({
-              type: fromActions.AdminActions.DELETE_ADMIN_FAILURE,
+              type: fromActions.StudentActions.DELETE_STUDENT_FAILURE,
               payload: error,
             });
           })

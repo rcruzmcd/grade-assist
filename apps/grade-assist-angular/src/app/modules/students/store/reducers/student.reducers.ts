@@ -3,52 +3,52 @@ import { User } from '@grade-assist/data';
 
 import * as fromActions from '../actions';
 
-export interface AdminState {
+export interface StudentState {
   loaded: boolean;
   loading: boolean;
-  adminsList: User[];
-  selectedAdmin: User | any;
+  studentsList: User[];
+  selectedStudent: User | any;
   _id?: string;
 }
 
-export const initialState: AdminState = {
+export const initialState: StudentState = {
   loaded: false,
   loading: false,
-  adminsList: [],
-  selectedAdmin: {},
+  studentsList: [],
+  selectedStudent: {},
 };
 
-const AdminReducer = createReducer(
+const StudentReducer = createReducer(
   initialState,
-  on(fromActions.loadAllAdmin, (state) => ({ ...state })),
-  on(fromActions.loadAllAdminSuccess, (state, action) => ({
+  on(fromActions.loadAllStudent, (state) => ({ ...state })),
+  on(fromActions.loadAllStudentSuccess, (state, action) => ({
     ...state,
-    adminsList: action.payload.adminList,
+    studentsList: action.payload.studentList,
   })),
-  on(fromActions.loadAllAdminFailure, (state) => ({ ...state })),
+  on(fromActions.loadAllStudentFailure, (state) => ({ ...state })),
 
-  on(fromActions.loadAdminById, (state) => ({ ...state })),
-  on(fromActions.loadAdminByIdSuccess, (state) => ({ ...state })),
-  on(fromActions.loadAdminByIdFailure, (state) => ({ ...state })),
+  on(fromActions.loadStudentById, (state) => ({ ...state })),
+  on(fromActions.loadStudentByIdSuccess, (state) => ({ ...state })),
+  on(fromActions.loadStudentByIdFailure, (state) => ({ ...state })),
 
-  on(fromActions.createAdmin, (state) => ({ ...state })),
-  on(fromActions.createAdminSuccess, (state) => ({ ...state })),
-  on(fromActions.createAdminFailure, (state) => ({ ...state })),
+  on(fromActions.createStudent, (state) => ({ ...state })),
+  on(fromActions.createStudentSuccess, (state) => ({ ...state })),
+  on(fromActions.createStudentFailure, (state) => ({ ...state })),
 
-  on(fromActions.updateAdmin, (state) => ({ ...state })),
-  on(fromActions.updateAdminSuccess, (state) => ({ ...state })),
-  on(fromActions.updateAdminFailure, (state) => ({ ...state })),
+  on(fromActions.updateStudent, (state) => ({ ...state })),
+  on(fromActions.updateStudentSuccess, (state) => ({ ...state })),
+  on(fromActions.updateStudentFailure, (state) => ({ ...state })),
 
-  on(fromActions.deleteAdmin, (state) => ({ ...state })),
-  on(fromActions.deleteAdminSuccess, (state, action) => ({
+  on(fromActions.deleteStudent, (state) => ({ ...state })),
+  on(fromActions.deleteStudentSuccess, (state, action) => ({
     ...state,
-    adminsList: state.adminsList.filter(
-      (admin) => admin._id !== action.payload.id
+    studentsList: state.studentsList.filter(
+      (student) => student._id !== action.payload.id
     ),
   })),
-  on(fromActions.deleteAdminFailure, (state) => ({ ...state }))
+  on(fromActions.deleteStudentFailure, (state) => ({ ...state }))
 );
 
-export function reducer(state: AdminState | undefined, action: Action) {
-  return AdminReducer(state, action);
+export function reducer(state: StudentState | undefined, action: Action) {
+  return StudentReducer(state, action);
 }

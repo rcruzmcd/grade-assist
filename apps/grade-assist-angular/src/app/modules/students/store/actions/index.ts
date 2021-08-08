@@ -1,1 +1,1 @@
-export * from './admin.action';
+export * from './student.action';

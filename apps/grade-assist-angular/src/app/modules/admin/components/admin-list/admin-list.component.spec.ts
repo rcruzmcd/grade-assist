@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { TeachersListComponent } from './teachers-list.component';
+import { AdminListComponent } from './admin-list.component';
 import { SharedModule } from '@grade-assist/shared';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
-describe('TeachersListComponent', () => {
+describe('AdminListComponent', () => {
   let store: MockStore;
   const initialState = {};
 
-  let component: TeachersListComponent;
-  let fixture: ComponentFixture<TeachersListComponent>;
+  let component: AdminListComponent;
+  let fixture: ComponentFixture<AdminListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TeachersListComponent],
+      declarations: [AdminListComponent],
       imports: [
         SharedModule,
         BrowserAnimationsModule,
@@ -29,7 +29,7 @@ describe('TeachersListComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TeachersListComponent);
+    fixture = TestBed.createComponent(AdminListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

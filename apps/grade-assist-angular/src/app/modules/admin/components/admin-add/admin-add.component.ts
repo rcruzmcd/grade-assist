@@ -59,11 +59,11 @@ export class AdminAddComponent implements OnInit {
     console.log('init');
   }
 
-  formHandler(teacher: Event) {
-    // console.log(teacher);
+  formHandler(admin: Event) {
+    // console.log(admin);
     this.store.dispatch({
       type: fromStore.AdminActions.CREATE_ADMIN,
-      payload: teacher,
+      payload: admin,
     });
 
     // if update successfull navigate, if not stay

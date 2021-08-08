@@ -1,5 +1,5 @@
-import { adminEffect } from './admin.effects';
+import { StudentEffect } from './student.effects';
 
-export const effects: any[] = [adminEffect];
+export const effects: any[] = [StudentEffect];
 
-export * from './admin.effects';
+export * from './student.effects';

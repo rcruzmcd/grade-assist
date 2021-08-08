@@ -5,11 +5,11 @@ import * as fromStore from '../../store';
 import { User, ColumnConfigs } from '@grade-assist/data';
 
 @Component({
-  selector: 'grade-assist-admin-list',
-  templateUrl: './admin-list.component.html',
-  styleUrls: ['./admin-list.component.scss'],
+  selector: 'grade-assist-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.scss'],
 })
-export class AdminListComponent implements OnInit {
+export class StudentListComponent implements OnInit {
   tableConfig: {
     pagination?: boolean;
     sort?: boolean;
@@ -42,31 +42,31 @@ export class AdminListComponent implements OnInit {
       },
     ],
   };
-  adminList$!: User[];
+  studentList$!: User[];
 
   constructor(private store: Store<fromStore.State>) {}
 
   ngOnInit(): void {
     this.store.subscribe((state) => {
       // console.log(state);
-      this.adminList$ = state.admin.adminsList;
+      this.studentList$ = state.student.studentsList;
     });
-    this.store.dispatch({ type: fromStore.AdminActions.LOAD_ALL_ADMIN });
+    this.store.dispatch({ type: fromStore.StudentActions.LOAD_ALL_STUDENT });
   }
 
-  onDeleteHandler(teacher: Event) {
-    // console.log(teacher);
+  onDeleteHandler(student: Event) {
+    // console.log(student);
     this.store.dispatch({
-      type: fromStore.AdminActions.DELETE_ADMIN,
-      payload: teacher,
+      type: fromStore.StudentActions.DELETE_STUDENT,
+      payload: student,
     });
   }
 
-  onUpdateHandler(teacher: Event) {
-    // console.log(teacher);
+  onUpdateHandler(student: Event) {
+    // console.log(student);
     this.store.dispatch({
-      type: fromStore.AdminActions.UPDATE_ADMIN,
-      payload: teacher,
+      type: fromStore.StudentActions.UPDATE_STUDENT,
+      payload: student,
     });
   }
 }

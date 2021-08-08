@@ -54,19 +54,19 @@ export class AdminListComponent implements OnInit {
     this.store.dispatch({ type: fromStore.AdminActions.LOAD_ALL_ADMIN });
   }
 
-  onDeleteHandler(teacher: Event) {
-    // console.log(teacher);
+  onDeleteHandler(admin: Event) {
+    // console.log(admin);
     this.store.dispatch({
       type: fromStore.AdminActions.DELETE_ADMIN,
-      payload: teacher,
+      payload: admin,
     });
   }
 
-  onUpdateHandler(teacher: Event) {
-    // console.log(teacher);
+  onUpdateHandler(admin: Event) {
+    // console.log(admin);
     this.store.dispatch({
       type: fromStore.AdminActions.UPDATE_ADMIN,
-      payload: teacher,
+      payload: admin,
     });
   }
 }

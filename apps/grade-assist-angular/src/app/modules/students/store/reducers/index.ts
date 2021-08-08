@@ -1,11 +1,11 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
-import * as fromReducers from './admin.reducers';
+import * as fromReducers from './student.reducers';
 
-export const FeatureKey = 'admin';
+export const FeatureKey = 'student';
 
 export interface State {
-  admin: fromReducers.AdminState;
+  student: fromReducers.StudentState;
 }
 
 export const getState = createFeatureSelector<State>(FeatureKey);
-export * from './admin.reducers';
+export * from './student.reducers';

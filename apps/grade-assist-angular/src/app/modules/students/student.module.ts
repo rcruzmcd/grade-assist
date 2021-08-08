@@ -7,18 +7,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@grade-assist/shared';
 
-import { AdminRoutingModule } from './admin-routing.modules';
-import { AdminListComponent } from './components/admin-list/admin-list.component';
-import { AdminAddComponent } from './components/admin-add/admin-add.component';
+import { StudentRoutingModule } from './student-routing.modules';
 
 import * as fromStore from './store';
 import { AuthInterceptor } from '../../http-interceptors/auth-interceptor';
+import { StudentListComponent } from './components/student-list/student-list.component';
+import { StudentAddComponent } from './components/student-add/student-add.component';
 
 @NgModule({
-  declarations: [AdminListComponent, AdminAddComponent],
+  declarations: [StudentListComponent, StudentAddComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule,
+    StudentRoutingModule,
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -29,4 +29,4 @@ import { AuthInterceptor } from '../../http-interceptors/auth-interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
 })
-export class AdminModule {}
+export class StudentModule {}
