@@ -11,7 +11,6 @@ router.get('/teacher', isAuth, fromControllers.getTeachers);
 
 router.post(
   '/teacher',
-  isAuth,
   [
     body('firstName')
       .trim()

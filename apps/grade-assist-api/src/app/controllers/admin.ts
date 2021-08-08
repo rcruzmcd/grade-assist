@@ -1,6 +1,8 @@
+import { hash } from 'bcryptjs';
+
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator/check';
-import { teachers_mock_list } from '../mock/teachers.mock';
+import { ResponseError } from '@grade-assist/data';
 
 import { User } from '../models/users.model';
 import { logger } from '../middleware/audit-logs';
@@ -12,7 +14,9 @@ export const getAdmins = async (
 ) => {
   logger.info('processing GET /admin request');
   try {
-    const list = await User.find();
+    const list = await User.find({ type: 'admin' }).select(
+      'firstName lastName email classes type'
+    );
     res.status(200).json({ adminList: list });
   } catch (err) {
     res.status(500);
@@ -28,22 +32,25 @@ export const createAdmin = async (
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const error = new Error('Validation failed, entered data is incorrect.');
-      // error.statusCode = 422;
+      logger.error('validation failed', errors);
+      const error: ResponseError = new Error(errors.array()[0].msg);
+      error.statusCode = 422;
       throw error;
     }
-    const { firstName, lastName, email, classes } = req.body;
+    const { firstName, lastName, email, classes, password } = req.body;
+    const hashedPw = await hash(password, 12);
+
     const admin = User.build({
       firstName,
       lastName,
       email,
       classes,
-      password: '',
+      password: hashedPw,
       type: 'admin',
     });
-    logger.info('object build');
 
     await admin.save();
+    logger.info('new admin created', admin);
     res.status(201).send(admin);
   } catch (error) {
     next(error);
@@ -59,17 +66,32 @@ export const updateAdmin = async (
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const error = new Error('Validation failed, entered data is incorrect.');
-      // error.statusCode = 422;
+      logger.error('validation failed', errors);
+
+      const error: ResponseError = new Error(errors.array()[0].msg);
+      error.statusCode = 422;
       throw error;
     }
 
     const params = req.params;
     const tid = params.adminId;
 
-    const admin = await User.findById(tid);
-    //update what needs to be updated
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+
+    const admin = await User.findById(tid).select('firstName lastName classes');
+
+    if (!admin) {
+      const error: ResponseError = new Error(`admin with id ${tid} not found`);
+      error.statusCode = 422;
+      throw error;
+    }
+
+    admin.firstName = firstName;
+    admin.lastName = lastName;
+
     await admin.save();
+    logger.info('updating user ' + tid + ' with values', firstName, lastName);
     res.status(200).json({ message: 'User updated', admin: admin });
   } catch (error) {
     next(error);
@@ -86,6 +108,7 @@ export const deleteAdmin = async (
     const params = req.params;
     const tid = params.teacherId;
     const admin = await User.findById(tid);
+    logger.info('deleting admin', tid);
 
     await User.findByIdAndRemove(tid);
     res.status(200).json({ message: 'Deleted admin' });

@@ -8,6 +8,8 @@ export interface Classes {
 export interface assignment {
   name: string;
   grades: grade[];
+  type: string;
+  weight: string;
 }
 export interface grade {
   grade: number;

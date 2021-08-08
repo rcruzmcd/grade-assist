@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   classes: {
-    type: String,
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Classes',
     required: false,
   },
 });

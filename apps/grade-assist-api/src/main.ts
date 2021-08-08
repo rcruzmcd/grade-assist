@@ -6,6 +6,8 @@ import { teachersRoutes } from './app/routes/teachers';
 import { adminRoutes } from './app/routes/admin';
 import { studentRoutes } from './app/routes/student';
 import { authRoutes } from './app/routes/auth';
+import { classRoutes } from './app/routes/classes';
+
 import { mongodb } from './app/models/mongoose';
 
 import { logger } from './app/middleware/audit-logs';
@@ -36,6 +38,7 @@ app.use('/api', authRoutes);
 app.use('/api', teachersRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', studentRoutes);
+app.use('/api', classRoutes);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   logger.log({
