@@ -1,7 +1,7 @@
-export interface Teacher {
+export interface User {
   firstName: string;
   lastName: string;
-  id?: string;
+  _id?: string;
   classes: string;
   email: string;
   password: string;

@@ -15,12 +15,10 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private store: Store<fromStore.State>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log('intercept');
     return this.store.select(fromStore.selectAuthFeatureToken).pipe(
       first(),
       mergeMap((token) => {
-        console.log(token);
-        const authReq = !!token
+        const authReq = token
           ? req.clone({ setHeaders: { Authorization: token } })
           : req;
         return next.handle(authReq);

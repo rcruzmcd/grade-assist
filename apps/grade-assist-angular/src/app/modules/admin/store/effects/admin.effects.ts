@@ -5,21 +5,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
-import { TeachersService } from '../../teachers.service';
-
 import * as fromActions from '../actions';
 
 @Injectable()
-export class TeachersEffect {
-  loadAllTeachers$ = createEffect(() =>
+export class adminEffect {
+  loadAlladmin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.TeachersActions.LOAD_ALL_TEACHERS),
+      ofType(fromActions.AdminActions.LOAD_ALL_ADMIN),
       mergeMap(() =>
-        this.http.get('/api/teacher').pipe(
-          map((teachers) => {
+        this.http.get('/api/admin').pipe(
+          map((admin) => {
             return {
-              type: fromActions.TeachersActions.LOAD_ALL_TEACHERS_SUCCESS,
-              payload: teachers,
+              type: fromActions.AdminActions.LOAD_ALL_ADMIN_SUCCESS,
+              payload: admin,
             };
           }),
           catchError((error: HttpErrorResponse) => {
@@ -30,7 +28,7 @@ export class TeachersEffect {
               duration: 5000,
             });
             return of({
-              type: fromActions.TeachersActions.LOAD_ALL_TEACHERS_FAILURE,
+              type: fromActions.AdminActions.LOAD_ALL_ADMIN_FAILURE,
               payload: { message: 'error' },
             });
           })
@@ -39,20 +37,20 @@ export class TeachersEffect {
     )
   );
 
-  createTeacher$ = createEffect(() =>
+  createAdmin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.TeachersActions.CREATE_TEACHERS),
+      ofType(fromActions.AdminActions.CREATE_ADMIN),
       mergeMap((action: any) =>
-        this.http.post('/api/teacher', action.payload).pipe(
+        this.http.post('/api/admin', action.payload).pipe(
           map((teacher) => {
-            // const msg = teachers.message;
-            this._snackBar.open('Teacher successfully created.', '', {
+            // const msg = admin.message;
+            this._snackBar.open('Admin successfully created.', '', {
               horizontalPosition: 'right',
               verticalPosition: 'top',
               duration: 5000,
             });
             return {
-              type: fromActions.TeachersActions.CREATE_TEACHERS_SUCCESS,
+              type: fromActions.AdminActions.CREATE_ADMIN_SUCCESS,
               payload: teacher,
             };
           }),
@@ -64,7 +62,7 @@ export class TeachersEffect {
               duration: 5000,
             });
             return of({
-              type: fromActions.TeachersActions.CREATE_TEACHERS_FAILURE,
+              type: fromActions.AdminActions.CREATE_ADMIN_FAILURE,
               payload: error,
             });
           })
@@ -73,19 +71,19 @@ export class TeachersEffect {
     )
   );
 
-  deleteTeacher$ = createEffect(() =>
+  deleteAdmin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.TeachersActions.DELETE_TEACHERS),
+      ofType(fromActions.AdminActions.DELETE_ADMIN),
       mergeMap((action: any) =>
-        this.http.delete(`api/teacher/${action.payload._id}`).pipe(
+        this.http.delete(`api/admin/${action.payload._id}`).pipe(
           map((rsp) => {
-            this._snackBar.open('Teacher successfully deleted.', '', {
+            this._snackBar.open('Admin successfully deleted.', '', {
               horizontalPosition: 'right',
               verticalPosition: 'top',
               duration: 5000,
             });
             return {
-              type: fromActions.TeachersActions.DELETE_TEACHERS_SUCCESS,
+              type: fromActions.AdminActions.DELETE_ADMIN_SUCCESS,
               payload: { response: rsp, id: action.payload._id },
             };
           }),
@@ -97,7 +95,7 @@ export class TeachersEffect {
               duration: 5000,
             });
             return of({
-              type: fromActions.TeachersActions.DELETE_TEACHERS_FAILURE,
+              type: fromActions.AdminActions.DELETE_ADMIN_FAILURE,
               payload: error,
             });
           })
@@ -108,7 +106,7 @@ export class TeachersEffect {
 
   constructor(
     private actions$: Actions,
-    // private teacherService: TeachersService,
+    // private adminervice: adminService,
     private http: HttpClient,
     private _snackBar: MatSnackBar
   ) {}

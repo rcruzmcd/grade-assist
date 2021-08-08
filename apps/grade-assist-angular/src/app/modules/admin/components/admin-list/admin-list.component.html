@@ -1,15 +1,15 @@
 <mat-card class="card">
   <mat-card-title style="display: flex; justify-content: space-between">
-    Teachers
+    Admin
     <button mat-raised-button color="primary" routerLink="../add">
-      Add New Teacher
+      Add New Admin
       <mat-icon>add</mat-icon>
     </button>
   </mat-card-title>
   <mat-card-content>
     <grade-assist-table
       [tableConfig]="tableConfig"
-      [tableData]="teacherList$"
+      [tableData]="adminList$"
       (rowDeleted)="onDeleteHandler($event)"
       (updateRow)="onUpdateHandler($event)"
     ></grade-assist-table>

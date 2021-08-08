@@ -16,6 +16,11 @@ const lazyRoutes: Routes = [
         (m) => m.TeachersModule
       ),
   },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

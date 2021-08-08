@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { DialogComponent } from '../dialog/dialog.component';
 import { TableConfig } from '@grade-assist/data';
+import { ViewDialogComponent } from '../view-dialog/view-dialog.component';
 
 @Component({
   selector: 'grade-assist-table',
@@ -52,7 +53,6 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes['tableData']) {
       this.dataSource = new MatTableDataSource(this.tableData);
     }
@@ -75,6 +75,16 @@ export class TableComponent implements OnInit, OnChanges {
   onUpdateClicked(row: any) {
     console.log(row);
     this.updateRow.emit(row);
+  }
+
+  onViewClicked(row: any) {
+    console.log(row);
+    const dialogRef = this.dialog.open(ViewDialogComponent, {
+      data: { ...row },
+      hasBackdrop: true,
+      height: '500px',
+      width: '500px',
+    });
   }
 
   onDeleteClicked(row: any) {

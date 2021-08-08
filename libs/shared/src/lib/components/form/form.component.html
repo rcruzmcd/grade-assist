@@ -1,4 +1,4 @@
-<div
+<form
   [formGroup]="formGroup"
   style="padding-top: 50px; display: flex; flex-direction: column"
 >
@@ -22,7 +22,7 @@
       {{ input.label }} entered is invalid.
     </mat-error>
   </mat-form-field>
-</div>
+</form>
 <div class="btn-container">
   <button mat-raised-button color="accent" (click)="formGroup.reset()">
     Clear

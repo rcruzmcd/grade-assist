@@ -7,11 +7,12 @@ import * as fromStore from '../../store';
 import { User, FormConfig } from '@grade-assist/data';
 
 @Component({
-  selector: 'grade-assist-teachers-add',
-  templateUrl: './teachers-add.component.html',
-  styleUrls: ['./teachers-add.component.scss'],
+  selector: 'grade-assist-student-add',
+  templateUrl: './student-add.component.html',
+  styleUrls: ['./student-add.component.scss'],
 })
-export class TeachersAddComponent implements OnInit {
+export class StudentAddComponent implements OnInit {
+  title = 'Add New Student';
   formConfig: FormConfig = {
     inputs: [
       {
@@ -58,14 +59,14 @@ export class TeachersAddComponent implements OnInit {
     console.log('init');
   }
 
-  formHandler(teacher: Event) {
-    // console.log(teacher);
+  formHandler(student: Event) {
+    // console.log(student);
     this.store.dispatch({
-      type: fromStore.TeachersActions.CREATE_TEACHERS,
-      payload: teacher,
+      type: fromStore.StudentActions.CREATE_STUDENT,
+      payload: student,
     });
 
     // if update successfull navigate, if not stay
-    // this.router.navigate(['teachers/list']);
+    // this.router.navigate(['admin/list']);
   }
 }

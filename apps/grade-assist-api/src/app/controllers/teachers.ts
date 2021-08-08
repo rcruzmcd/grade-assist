@@ -51,7 +51,9 @@ export const createTeacher = async (
 
     await teacher.save();
     logger.info('new teacher created', teacher);
-    res.status(201).send(teacher);
+    res
+      .status(201)
+      .json({ message: 'Teacher successfully created.', newId: teacher._id });
   } catch (error) {
     next(error);
   }

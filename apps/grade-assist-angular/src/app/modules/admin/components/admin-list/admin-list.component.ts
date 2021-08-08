@@ -5,11 +5,11 @@ import * as fromStore from '../../store';
 import { User, ColumnConfigs } from '@grade-assist/data';
 
 @Component({
-  selector: 'grade-assist-teachers-list',
-  templateUrl: './teachers-list.component.html',
-  styleUrls: ['./teachers-list.component.scss'],
+  selector: 'grade-assist-admin-list',
+  templateUrl: './admin-list.component.html',
+  styleUrls: ['./admin-list.component.scss'],
 })
-export class TeachersListComponent implements OnInit {
+export class AdminListComponent implements OnInit {
   tableConfig: {
     pagination?: boolean;
     sort?: boolean;
@@ -42,22 +42,22 @@ export class TeachersListComponent implements OnInit {
       },
     ],
   };
-  teacherList$!: User[];
+  adminList$!: User[];
 
   constructor(private store: Store<fromStore.State>) {}
 
   ngOnInit(): void {
     this.store.subscribe((state) => {
       // console.log(state);
-      this.teacherList$ = state.teachers.teachersList;
+      this.adminList$ = state.admin.adminsList;
     });
-    this.store.dispatch({ type: fromStore.TeachersActions.LOAD_ALL_TEACHERS });
+    this.store.dispatch({ type: fromStore.AdminActions.LOAD_ALL_ADMIN });
   }
 
   onDeleteHandler(teacher: Event) {
     // console.log(teacher);
     this.store.dispatch({
-      type: fromStore.TeachersActions.DELETE_TEACHERS,
+      type: fromStore.AdminActions.DELETE_ADMIN,
       payload: teacher,
     });
   }
@@ -65,7 +65,7 @@ export class TeachersListComponent implements OnInit {
   onUpdateHandler(teacher: Event) {
     // console.log(teacher);
     this.store.dispatch({
-      type: fromStore.TeachersActions.UPDATE_TEACHERS,
+      type: fromStore.AdminActions.UPDATE_ADMIN,
       payload: teacher,
     });
   }

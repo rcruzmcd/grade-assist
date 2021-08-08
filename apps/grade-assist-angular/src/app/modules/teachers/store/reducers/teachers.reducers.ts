@@ -1,13 +1,13 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { Teacher } from '@grade-assist/data';
+import { User } from '@grade-assist/data';
 
 import * as fromActions from '../actions';
 
 export interface TeachersState {
   loaded: boolean;
   loading: boolean;
-  teachersList: Teacher[];
-  selectedTeacher: Teacher | any;
+  teachersList: User[];
+  selectedTeacher: User | any;
 }
 
 export const initialState: TeachersState = {
@@ -39,7 +39,12 @@ const teachersReducer = createReducer(
   on(fromActions.updateTeachersFailure, (state) => ({ ...state })),
 
   on(fromActions.deleteTeachers, (state) => ({ ...state })),
-  on(fromActions.deleteTeachersSuccess, (state) => ({ ...state })),
+  on(fromActions.deleteTeachersSuccess, (state, action) => ({
+    ...state,
+    teachersList: state.teachersList.filter(
+      (teacher) => teacher._id !== action.payload.id
+    ),
+  })),
   on(fromActions.deleteTeachersFailure, (state) => ({ ...state }))
 );
 

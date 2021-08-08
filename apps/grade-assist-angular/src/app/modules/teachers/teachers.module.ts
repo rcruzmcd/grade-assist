@@ -2,23 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AppRoutingModule } from '../../app-routing.module';
+import { SharedModule } from '@grade-assist/shared';
 import { TeachersRoutingModule } from './teachers-routing.modules';
 import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { SharedModule } from '@grade-assist/shared';
-import { MatButtonModule } from '@angular/material/button';
 import { TeachersAddComponent } from './components/teachers-add/teachers-add.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatTableModule } from '@angular/material/table';
 
 import * as fromStore from './store/';
-import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from '../../http-interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [TeachersListComponent, TeachersAddComponent],
@@ -30,6 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     StoreModule.forFeature(fromStore.FeatureKey, fromStore.reducer),
     EffectsModule.forFeature(fromStore.effects),
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
 })
 export class TeachersModule {}
