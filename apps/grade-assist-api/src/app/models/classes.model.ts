@@ -29,6 +29,10 @@ const classesSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'User',
   },
+  assignments: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Assignment',
+  },
 });
 
 classesSchema.statics.build = (attr: IClasses) => {

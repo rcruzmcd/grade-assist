@@ -7,11 +7,12 @@ export interface Classes {
 }
 export interface assignment {
   name: string;
-  grades: grade[];
+  grades?: grade[];
   type: string;
-  weight: string;
+  weight?: string;
 }
 export interface grade {
   grade: number;
   student: string;
+  assignment: string;
 }
