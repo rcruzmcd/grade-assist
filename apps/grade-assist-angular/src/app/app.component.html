@@ -21,7 +21,7 @@
 
   <mat-drawer-container class="drawer-container">
     <mat-drawer #drawer class="drawer" mode="side" opened>
-      <mat-nav-list *ngFor="let navItem of menu">
+      <mat-nav-list *ngFor="let navItem of priviledgeMenu">
         <mat-list-item>
           <mat-icon color="primary">{{ navItem.icon }}</mat-icon>
           <a matLine routerLink="{{ navItem.route }}"> {{ navItem.label }}</a>

@@ -1,4 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
+import * as jwt_decode from 'jwt-decode';
 
 import * as fromActions from '../actions';
 
@@ -6,7 +7,8 @@ export interface AuthState {
   loaded: boolean;
   loading: boolean;
   jwt: string;
-  userId: string;
+  userId?: string;
+  userType: string;
 }
 
 export const initialState: AuthState = {
@@ -14,6 +16,7 @@ export const initialState: AuthState = {
   loading: false,
   jwt: '',
   userId: '',
+  userType: '',
 };
 
 const authReducer = createReducer(
@@ -22,6 +25,18 @@ const authReducer = createReducer(
   on(fromActions.loginSuccess, (state, action) => ({
     ...state,
     jwt: action.payload.token,
+    userId: jwt_decode.default<{
+      userId: string;
+      userType: string;
+      email: string;
+      exp: string;
+    }>(action.payload?.token).userId,
+    userType: jwt_decode.default<{
+      userId: string;
+      userType: string;
+      email: string;
+      exp: string;
+    }>(action.payload?.token).userType,
   })),
   on(fromActions.loginFailure, (state) => ({ ...state })),
   on(fromActions.logout, (state) => ({ ...state, jwt: '' })),
@@ -32,5 +47,6 @@ const authReducer = createReducer(
 );
 
 export function reducer(state: AuthState | undefined, action: Action) {
+  // console.log(jwt_decode.default(action.payload?.token));
   return authReducer(state, action);
 }

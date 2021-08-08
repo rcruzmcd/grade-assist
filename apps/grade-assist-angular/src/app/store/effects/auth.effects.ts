@@ -22,7 +22,7 @@ export class AuthEffect {
             payload: rsp,
           })),
           catchError((error: HttpErrorResponse) => {
-            const msg = error.error.message || 'Something went wrong';
+            const msg = error.error?.message || 'Something went wrong';
             this._snackBar.open(msg, '', {
               horizontalPosition: 'right',
               verticalPosition: 'top',

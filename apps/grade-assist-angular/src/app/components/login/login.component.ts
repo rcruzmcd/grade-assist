@@ -37,4 +37,8 @@ export class LoginComponent {
       payload: user,
     });
   }
+
+  loginAsAdmin() {}
+  loginAsStudent() {}
+  loginAsTeacher() {}
 }

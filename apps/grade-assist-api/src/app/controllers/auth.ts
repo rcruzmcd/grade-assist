@@ -58,7 +58,7 @@ export const login = async (
 
     logger.info('signing jwt');
     const token = sign(
-      { email: user.email, userId: user._id.toString() },
+      { email: user.email, userId: user._id.toString(), userType: user.type },
       'somesupersecretsecret',
       { expiresIn: '1h' }
     );

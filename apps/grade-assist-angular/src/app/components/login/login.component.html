@@ -3,15 +3,29 @@
   mat-elevation-z24
 >
   <mat-card-title style="text-align: center">Grade Assist</mat-card-title>
-  <mat-card-content>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: column;
+      height: 80%;
+      justify-content: space-between;
+    "
+  >
     <mat-divider></mat-divider>
     <grade-assist-form
       [formConfigs]="formConfig"
       (formSubmitted)="formHandler($event)"
     ></grade-assist-form>
-    <button>Login as Admin</button>
-    <button>Login as Student</button>
-    <button>Login as Teacher</button>
+
+    <div style="display: flex; justify-content: space-between">
+      <button mat-raised-button (click)="loginAsAdmin()">Login as Admin</button>
+      <button mat-raised-button (click)="loginAsStudent()">
+        Login as Student
+      </button>
+      <button mat-raised-button (click)="loginAsTeacher()">
+        Login as Teacher
+      </button>
+    </div>
     <!-- based on user type it will have different functionalities
 admin will control privileges
 api will have a middleware to check against the api being call and what access user has -->
