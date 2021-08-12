@@ -31,6 +31,9 @@
     </mat-action-list>
 
     <label class="mat-title">Assignments</label>
+    <button mat-icon-button color="primary" (click)="onAddAssignmentClicked()">
+      <mat-icon> add </mat-icon>
+    </button>
     <mat-action-list>
       <button mat-list-item *ngFor="let assign of _class.assignments">
         <mat-icon matListIcon>assignment</mat-icon>

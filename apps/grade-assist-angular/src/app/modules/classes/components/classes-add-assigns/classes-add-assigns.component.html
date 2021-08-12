@@ -1,0 +1,15 @@
+<mat-card class="card">
+  <mat-card-title> {{ title }} </mat-card-title>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <grade-assist-form
+      [formConfigs]="formConfig"
+      (formSubmitted)="formHandler($event)"
+    ></grade-assist-form>
+
+    <!-- <button mat-raised- button color="primary" (click)="onAddClicked()">
+      Add
+    </button> -->
+  </mat-card-content>
+</mat-card>

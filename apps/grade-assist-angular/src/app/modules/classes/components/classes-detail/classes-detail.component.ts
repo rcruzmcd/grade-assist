@@ -31,4 +31,8 @@ export class ClassesDetailComponent implements OnInit {
   onAddStudentsClicked() {
     this.router.navigate(['classes/details/addStudents']);
   }
+
+  onAddAssignmentClicked() {
+    this.router.navigate(['classes/details/addAssignments']);
+  }
 }

@@ -64,10 +64,16 @@ const ClassesReducer = createReducer(
   on(fromActions.addStudentsSuccess, (state, action) => ({
     ...state,
     selectedClass: action.payload.class,
+  })),
+  on(fromActions.addAssignSuccess, (state, action) => ({
+    ...state,
+    selectedClass: {
+      ...state.selectedClass,
+      assignments: [...state.selectedClass.assignments, action.payload],
+    },
   }))
 );
 
 export function reducer(state: ClassesState | undefined, action: Action) {
-  console.log(state, action);
   return ClassesReducer(state, action);
 }

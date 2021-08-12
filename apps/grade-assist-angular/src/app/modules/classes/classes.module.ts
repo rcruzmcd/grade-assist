@@ -15,6 +15,7 @@ import { ClassesListComponent } from './components/classes-list/classes-list.com
 import { ClassesAddComponent } from './components/classes-add/classes-add.component';
 import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
 import { ClassesAddStudentsComponent } from './components/classes-add-students/classes-add-students.component';
+import { ClassesAddAssignsComponent } from './components/classes-add-assigns/classes-add-assigns.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ClassesAddStudentsComponent } from './components/classes-add-students/c
     ClassesAddComponent,
     ClassesDetailComponent,
     ClassesAddStudentsComponent,
+    ClassesAddAssignsComponent,
   ],
   imports: [
     CommonModule,

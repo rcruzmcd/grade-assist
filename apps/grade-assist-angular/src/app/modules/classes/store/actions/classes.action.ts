@@ -23,6 +23,9 @@ export enum ClassesAction {
   ADD_STUDENTS = '[Classes] Add Students',
   ADD_STUDENTS_SUCCESS = '[Classes] Add Students Success',
   ADD_STUDENTS_FAILURE = '[Classes] Add Students Failure',
+  ADD_ASSIGN = '[Classes] Add Asssign',
+  ADD_ASSIGN_SUCCESS = '[Classes] Add Asssign Success',
+  ADD_ASSIGN_FAILURE = '[Classes] Add Asssign Failure',
 }
 
 export const selectClass = createAction(
@@ -116,5 +119,14 @@ export const addStudentsSuccess = createAction(
 );
 export const addStudentsFailure = createAction(
   ClassesAction.ADD_STUDENTS_FAILURE,
+  props<any>()
+);
+export const addAssign = createAction(ClassesAction.ADD_ASSIGN, props<any>());
+export const addAssignSuccess = createAction(
+  ClassesAction.ADD_ASSIGN_SUCCESS,
+  props<any>()
+);
+export const addAssignFailure = createAction(
+  ClassesAction.ADD_ASSIGN_FAILURE,
   props<any>()
 );

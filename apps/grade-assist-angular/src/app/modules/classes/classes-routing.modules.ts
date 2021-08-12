@@ -5,6 +5,7 @@ import { ClassesListComponent } from './components/classes-list/classes-list.com
 import { ClassesAddComponent } from './components/classes-add/classes-add.component';
 import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
 import { ClassesAddStudentsComponent } from './components/classes-add-students/classes-add-students.component';
+import { ClassesAddAssignsComponent } from './components/classes-add-assigns/classes-add-assigns.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'details/addStudents',
     component: ClassesAddStudentsComponent,
+  },
+  {
+    path: 'details/addAssignments',
+    component: ClassesAddAssignsComponent,
   },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];

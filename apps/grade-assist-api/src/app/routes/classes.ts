@@ -34,6 +34,13 @@ router.delete('/classes/:classId', isAuth, classController.deleteClass);
 router.post(
   '/classes/:classId/addStudents',
   isAuth,
+  [
+    body('students')
+      .trim()
+      .not()
+      .isEmpty()
+      .withMessage('Please enter at student(s)'),
+  ],
   classController.addStudentToClass
 );
 router.post(
