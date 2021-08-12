@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
-import { User, ColumnConfigs } from '@grade-assist/data';
+import { User, ColumnConfigs, Classes } from '@grade-assist/data';
 import { Router } from '@angular/router';
 
 @Component({
@@ -38,7 +38,7 @@ export class ClassesListComponent implements OnInit {
       },
     ],
   };
-  classList$!: User[];
+  classList$!: Classes[];
 
   constructor(private store: Store<fromStore.State>, private router: Router) {}
 
@@ -67,7 +67,7 @@ export class ClassesListComponent implements OnInit {
   }
 
   onViewHandler(classes: Event) {
-    console.log(classes);
+    // console.log(classes);
     this.store.dispatch({
       type: fromStore.ClassesAction.SELECT_CLASS,
       payload: classes,

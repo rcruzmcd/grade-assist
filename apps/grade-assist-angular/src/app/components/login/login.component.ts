@@ -38,7 +38,31 @@ export class LoginComponent {
     });
   }
 
-  loginAsAdmin() {}
-  loginAsStudent() {}
-  loginAsTeacher() {}
+  loginAsAdmin() {
+    this.store.dispatch({
+      type: fromStore.AuthActions.LOGIN,
+      payload: {
+        email: 'admin@grade-assist.com',
+        password: 'myverystrongSuperString123*',
+      },
+    });
+  }
+  loginAsStudent() {
+    this.store.dispatch({
+      type: fromStore.AuthActions.LOGIN,
+      payload: {
+        email: 'mabel.senior@student.com',
+        password: 'myverystrongSuperString23*',
+      },
+    });
+  }
+  loginAsTeacher() {
+    this.store.dispatch({
+      type: fromStore.AuthActions.LOGIN,
+      payload: {
+        email: 'stacy.jarvis@teacher.com',
+        password: 'myverystrongSuperString123*',
+      },
+    });
+  }
 }

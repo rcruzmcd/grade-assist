@@ -1,0 +1,20 @@
+<mat-card class="card">
+  <mat-card-title> {{ title }} </mat-card-title>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <mat-selection-list
+      #students
+      [(ngModel)]="selectedStudents"
+      style="max-width: 600px"
+    >
+      <mat-list-option *ngFor="let student of studentsList" [value]="student">
+        {{ student.firstName }} {{ student.lastName }}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <button mat-raised- button color="primary" (click)="onAddClicked()">
+      Add
+    </button>
+  </mat-card-content>
+</mat-card>

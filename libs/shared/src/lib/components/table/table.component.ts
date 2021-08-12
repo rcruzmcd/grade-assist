@@ -79,7 +79,7 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   onViewClicked(row: any) {
-    console.log(row);
+    // console.log(row);
     //type of view: dialog or event emitter
 
     // const dialogRef = this.dialog.open(ViewDialogComponent, {

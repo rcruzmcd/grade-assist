@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
-import { User, FormConfig } from '@grade-assist/data';
+import { User, FormConfig, Classes } from '@grade-assist/data';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'grade-assist-classes-detail',
@@ -13,9 +15,9 @@ import { User, FormConfig } from '@grade-assist/data';
 })
 export class ClassesDetailComponent implements OnInit {
   title = 'Class';
-  _class: any;
+  _class!: Classes;
 
-  constructor(private store: Store<fromStore.State>) {}
+  constructor(private store: Store<fromStore.State>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.subscribe((state) => {
@@ -24,5 +26,9 @@ export class ClassesDetailComponent implements OnInit {
         console.error('need to reroute cuz why you here...???');
       }
     });
+  }
+
+  onAddStudentsClicked() {
+    this.router.navigate(['classes/details/addStudents']);
   }
 }

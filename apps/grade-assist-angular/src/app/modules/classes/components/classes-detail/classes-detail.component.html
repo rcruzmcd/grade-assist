@@ -2,7 +2,7 @@
   <mat-card-title> {{ title }} </mat-card-title>
   <mat-card-content>
     <mat-divider></mat-divider>
-    <div style="display: flex; justify-content: space-between">
+    <div style="display: flex; justify-content: space-around">
       <div style="display: flex; flex-direction: column">
         <label class="mat-title">Name</label>
         <span class="mat-h4">{{ _class.name }}</span>
@@ -18,7 +18,10 @@
         </span>
       </div>
     </div>
-    <label class="mat-title">Students</label>
+    <label class="mat-title">Students</label
+    ><button mat-icon-button color="primary" (click)="onAddStudentsClicked()">
+      <mat-icon> add </mat-icon>
+    </button>
     <mat-action-list>
       <button mat-list-item *ngFor="let student of _class.students">
         <mat-icon matListIcon>person</mat-icon>

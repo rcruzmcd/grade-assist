@@ -1,9 +1,12 @@
+import { User } from './teacher.model';
+
 export interface Classes {
-  teacher: string;
-  students: string;
-  classCode: string;
-  className: string;
+  teacher: User;
+  students: User[];
+  code: string;
+  name: string;
   assignments: assignment[];
+  _id?: string;
 }
 export interface assignment {
   name: string;

@@ -161,7 +161,10 @@ export const addStudentToClass = async (
     const params = req.params;
     const classId = params.classId;
 
-    const classes = await Classes.findById(classId);
+    const classes = await Classes.findById(classId)
+      .populate({ path: 'teacher', select: 'firstName lastName email' })
+      .populate({ path: 'students', select: 'firstName lastName email' })
+      .populate({ path: 'assignments', select: 'name type' });
     if (!classes) {
       logger.error('class not found ', classId);
       const error: ResponseError = new Error('class not found');

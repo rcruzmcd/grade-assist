@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ClassesListComponent } from './components/classes-list/classes-list.component';
 import { ClassesAddComponent } from './components/classes-add/classes-add.component';
 import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
+import { ClassesAddStudentsComponent } from './components/classes-add-students/classes-add-students.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'details',
     component: ClassesDetailComponent,
+  },
+  {
+    path: 'details/addStudents',
+    component: ClassesAddStudentsComponent,
   },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];

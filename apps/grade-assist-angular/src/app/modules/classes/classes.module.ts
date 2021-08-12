@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@grade-assist/shared';
 
@@ -14,12 +14,14 @@ import { AuthInterceptor } from '../../http-interceptors/auth-interceptor';
 import { ClassesListComponent } from './components/classes-list/classes-list.component';
 import { ClassesAddComponent } from './components/classes-add/classes-add.component';
 import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
+import { ClassesAddStudentsComponent } from './components/classes-add-students/classes-add-students.component';
 
 @NgModule({
   declarations: [
     ClassesListComponent,
     ClassesAddComponent,
     ClassesDetailComponent,
+    ClassesAddStudentsComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { ClassesDetailComponent } from './components/classes-detail/classes-deta
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     StoreModule.forFeature(fromStore.FeatureKey, fromStore.reducer),
     EffectsModule.forFeature(fromStore.effects),
   ],

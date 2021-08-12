@@ -1,13 +1,14 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { User } from '@grade-assist/data';
+import { Classes, User } from '@grade-assist/data';
 
 import * as fromActions from '../actions';
 
 export interface ClassesState {
   loaded: boolean;
   loading: boolean;
-  classesList: User[];
-  selectedClass: User | any;
+  classesList: Classes[];
+  selectedClass: Classes | any;
+  studentsNotInSelected?: User[];
   _id?: string;
 }
 
@@ -50,9 +51,23 @@ const ClassesReducer = createReducer(
   on(fromActions.selectClass, (state, action) => ({
     ...state,
     selectedClass: action.payload,
+  })),
+  on(fromActions.getStudetnsNotAssigned, (state) => ({
+    ...state,
+  })),
+  on(fromActions.getStudetnsNotAssignedSuccess, (state, action) => ({
+    ...state,
+    studentsNotInSelected: action.payload?.studentList.filter(
+      (student: any) => !state.selectedClass.students.includes(student._id)
+    ),
+  })),
+  on(fromActions.addStudentsSuccess, (state, action) => ({
+    ...state,
+    selectedClass: action.payload.class,
   }))
 );
 
 export function reducer(state: ClassesState | undefined, action: Action) {
+  console.log(state, action);
   return ClassesReducer(state, action);
 }
