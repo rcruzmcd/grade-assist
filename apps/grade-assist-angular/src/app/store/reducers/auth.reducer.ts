@@ -9,6 +9,7 @@ export interface AuthState {
   jwt: string;
   userId?: string;
   userType: string;
+  userEmail: string;
 }
 
 export const initialState: AuthState = {
@@ -17,6 +18,7 @@ export const initialState: AuthState = {
   jwt: '',
   userId: '',
   userType: '',
+  userEmail: '',
 };
 
 const authReducer = createReducer(
@@ -37,6 +39,12 @@ const authReducer = createReducer(
       email: string;
       exp: string;
     }>(action.payload?.token).userType,
+    userEmail: jwt_decode.default<{
+      userId: string;
+      userType: string;
+      email: string;
+      exp: string;
+    }>(action.payload?.token).email,
   })),
   on(fromActions.loginFailure, (state) => ({ ...state })),
   on(fromActions.logout, (state) => ({ ...state, jwt: '' })),

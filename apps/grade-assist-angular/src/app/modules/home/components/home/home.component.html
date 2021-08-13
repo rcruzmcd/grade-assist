@@ -1,29 +1,38 @@
 <mat-card class="card">
-  <mat-card-title> Home </mat-card-title>
+  <mat-card-title> Welcome, {{ loggedInUser.email }} ! </mat-card-title>
   <mat-card-content>
-    <div>
-      <span>Admin</span>
-      <span>view all teachers</span>
-      <span>view all students</span>
-      <span>view all classes</span>
-      <span>update a class teacher</span>
-      <span>add student to class</span>
-    </div>
+    <mat-divider></mat-divider>
 
-    <div>
-      <span>Teacher</span>
-      <span>view my classes</span>
-      <span>view all students</span>
-      <span>view my assignments</span>
+    <div [ngSwitch]="loggedInUser.userType">
+      <div *ngSwitchCase="'admin'">
+        <mat-action-list>
+          <button mat-list-item>View All Teachers</button>
+          <button mat-list-item>View All Students</button>
+          <button mat-list-item>View All Classes</button>
+          <button mat-list-item>View All Assignments</button>
+          <button mat-list-item>Update a class's teacher</button>
+          <button mat-list-item>Add Student to class</button>
+        </mat-action-list>
+      </div>
 
-      <span>grade assignment;</span>
-    </div>
+      <div *ngSwitchCase="'teacher'">
+        <mat-action-list>
+          <button mat-list-item>View My Classes</button>
+          <button mat-list-item>View All Students</button>
+          <button mat-list-item>View My Assignments</button>
+          <button mat-list-item>Grade Assignment</button>
+        </mat-action-list>
+      </div>
 
-    <div>
-      <span>Student</span>
-      <span>view my classes</span>
-      <span>view my assignments</span>
-      <span>view my grades</span>
+      <div *ngSwitchCase="'student'">
+        <mat-action-list>
+          <button mat-list-item>View My Classes</button>
+          <button mat-list-item>View My Grades</button>
+          <button mat-list-item>View My Assignments</button>
+        </mat-action-list>
+      </div>
+
+      <div *ngSwitchDefault>Loading...</div>
     </div>
   </mat-card-content>
 </mat-card>

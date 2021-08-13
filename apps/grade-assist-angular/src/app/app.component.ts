@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
       privilege: ['admin', 'teacher'],
     },
     {
-      icon: 'groups',
+      icon: 'assignment_turned_in',
       route: '/assignments',
       label: 'Assignments',
       privilege: ['admin'],
