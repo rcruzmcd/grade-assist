@@ -1,5 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { Classes, User } from '@grade-assist/data';
+import { assignment, Classes, User } from '@grade-assist/data';
 
 import * as fromActions from '../actions';
 
@@ -9,6 +9,7 @@ export interface ClassesState {
   classesList: Classes[];
   selectedClass: Classes | any;
   studentsNotInSelected?: User[];
+  selectedAssign: assignment;
   _id?: string;
 }
 
@@ -17,6 +18,10 @@ export const initialState: ClassesState = {
   loading: false,
   classesList: [],
   selectedClass: {},
+  selectedAssign: {
+    name: '',
+    type: '',
+  },
 };
 
 const ClassesReducer = createReducer(
@@ -52,6 +57,10 @@ const ClassesReducer = createReducer(
     ...state,
     selectedClass: action.payload,
   })),
+  on(fromActions.selectAssignment, (state, action) => ({
+    ...state,
+    selectedAssign: action.payload,
+  })),
   on(fromActions.getStudetnsNotAssigned, (state) => ({
     ...state,
   })),
@@ -70,6 +79,13 @@ const ClassesReducer = createReducer(
     selectedClass: {
       ...state.selectedClass,
       assignments: [...state.selectedClass.assignments, action.payload],
+    },
+  })),
+  on(fromActions.getAssignGradesSuccess, (state, action) => ({
+    ...state,
+    selectedAssign: {
+      ...state.selectedAssign,
+      grades: action.payload.grades,
     },
   }))
 );

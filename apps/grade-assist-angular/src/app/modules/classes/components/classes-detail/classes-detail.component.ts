@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
 import { User, FormConfig, Classes } from '@grade-assist/data';
-import { Subject } from 'rxjs';
+import { from, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -34,5 +34,13 @@ export class ClassesDetailComponent implements OnInit {
 
   onAddAssignmentClicked() {
     this.router.navigate(['classes/details/addAssignments']);
+  }
+
+  onAssignmentClicked(assign: any) {
+    this.store.dispatch({
+      type: fromStore.ClassesAction.SELECT_ASSIGNMENT,
+      payload: assign,
+    });
+    this.router.navigate(['classes/details/assignment']);
   }
 }

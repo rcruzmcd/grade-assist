@@ -166,7 +166,7 @@ export class ClassesEffect {
 
   addAssign$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.ClassesAction.ADD_ASSIGN),
+      ofType(fromActions.ClassesAction.GET_ASSIGN_GRADES),
       mergeMap((action: any) =>
         this.http
           .post(
@@ -176,7 +176,7 @@ export class ClassesEffect {
           .pipe(
             map((assign) => {
               return {
-                type: fromActions.ClassesAction.ADD_ASSIGN_SUCCESS,
+                type: fromActions.ClassesAction.GET_ASSIGN_GRADES_SUCCESS,
                 payload: assign,
               };
             }),
@@ -188,11 +188,39 @@ export class ClassesEffect {
                 duration: 5000,
               });
               return of({
-                type: fromActions.ClassesAction.ADD_ASSIGN_FAILURE,
+                type: fromActions.ClassesAction.GET_ASSIGN_GRADES_FAILURE,
                 payload: { message: 'error' },
               });
             })
           )
+      )
+    )
+  );
+
+  getGrades$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.ClassesAction.SELECT_ASSIGNMENT),
+      mergeMap((action: any) =>
+        this.http.get(`/api/assignments/${action.payload._id}/grade`).pipe(
+          map((rsp) => {
+            return {
+              type: fromActions.ClassesAction.GET_ASSIGN_GRADES_SUCCESS,
+              payload: rsp,
+            };
+          }),
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
+              type: fromActions.ClassesAction.GET_ASSIGN_GRADES_FAILURE,
+              payload: { message: 'error' },
+            });
+          })
+        )
       )
     )
   );

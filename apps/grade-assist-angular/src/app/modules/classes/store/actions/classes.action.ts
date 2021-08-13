@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 export enum ClassesAction {
+  SELECT_ASSIGNMENT = '[Classes] Select Assignment',
   SELECT_CLASS = '[Classes] Select Class',
   LOAD_ALL_CLASSES = '[Classes] Load all Classes',
   LOAD_ALL_CLASSES_SUCCESS = '[Classes] Load all Classes success',
@@ -26,10 +27,18 @@ export enum ClassesAction {
   ADD_ASSIGN = '[Classes] Add Asssign',
   ADD_ASSIGN_SUCCESS = '[Classes] Add Asssign Success',
   ADD_ASSIGN_FAILURE = '[Classes] Add Asssign Failure',
+  GET_ASSIGN_GRADES = '[Classes] Get Asssign Grades',
+  GET_ASSIGN_GRADES_SUCCESS = '[Classes] Get Asssign Grades Success',
+  GET_ASSIGN_GRADES_FAILURE = '[Classes] Get Asssign Grades Failure',
 }
 
 export const selectClass = createAction(
   ClassesAction.SELECT_CLASS,
+  props<any>()
+);
+
+export const selectAssignment = createAction(
+  ClassesAction.SELECT_ASSIGNMENT,
   props<any>()
 );
 
@@ -128,5 +137,17 @@ export const addAssignSuccess = createAction(
 );
 export const addAssignFailure = createAction(
   ClassesAction.ADD_ASSIGN_FAILURE,
+  props<any>()
+);
+export const getAssignGrades = createAction(
+  ClassesAction.GET_ASSIGN_GRADES,
+  props<any>()
+);
+export const getAssignGradesSuccess = createAction(
+  ClassesAction.GET_ASSIGN_GRADES_SUCCESS,
+  props<any>()
+);
+export const getAssignGradesFailure = createAction(
+  ClassesAction.GET_ASSIGN_GRADES_FAILURE,
   props<any>()
 );

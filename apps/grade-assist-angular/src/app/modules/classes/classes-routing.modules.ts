@@ -6,6 +6,7 @@ import { ClassesAddComponent } from './components/classes-add/classes-add.compon
 import { ClassesDetailComponent } from './components/classes-detail/classes-detail.component';
 import { ClassesAddStudentsComponent } from './components/classes-add-students/classes-add-students.component';
 import { ClassesAddAssignsComponent } from './components/classes-add-assigns/classes-add-assigns.component';
+import { AssignsDetailComponent } from './components/assigns-detail/assign-detail.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'details/addAssignments',
     component: ClassesAddAssignsComponent,
+  },
+  {
+    path: 'details/assignment',
+    component: AssignsDetailComponent,
   },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];

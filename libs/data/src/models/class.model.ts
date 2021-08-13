@@ -13,9 +13,11 @@ export interface assignment {
   grades?: grade[];
   type: string;
   weight?: string;
+  _id?: string;
 }
 export interface grade {
   grade: number;
-  student: string;
+  student: User;
   assignment: string;
+  _id?: string;
 }

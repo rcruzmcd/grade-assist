@@ -1,0 +1,42 @@
+<mat-card class="card">
+  <mat-card-title> {{ title }} </mat-card-title>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <div style="display: flex; justify-content: space-around">
+      <div style="display: flex; flex-direction: column">
+        <label class="mat-title"></label>
+        <span class="mat-h4"></span>
+      </div>
+    </div>
+
+    <!-- {{ assign | json }} -->
+    <h4>Grades</h4>
+    <button mat-icon-button color="primary" (click)="(!showAddGradeForm)">
+      <mat-icon> add </mat-icon>
+    </button>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let grade of assign!.grades">
+        {{ grade.student.firstName ? grade.student.firstName : grade._id }} -
+        <!-- {{ grade.student.firstName }} {{ grade.student.lastName }} - -->
+        {{ grade.grade }}
+      </mat-list-item>
+    </mat-list>
+
+    <!-- need to show only studings in the class in the add form -->
+    <div *ngIf="showAddGradeForm">
+      Add New Grade
+      <!-- <mat-form-field appearance="fill">
+            <mat-label>Students</mat-label>
+            <mat-select [formControl]="students" multiple>
+              <mat-select-trigger>
+                {{toppings.value ? toppings.value[0] : ''}}
+                <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                  (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -35,7 +35,11 @@
       <mat-icon> add </mat-icon>
     </button>
     <mat-action-list>
-      <button mat-list-item *ngFor="let assign of _class.assignments">
+      <button
+        mat-list-item
+        *ngFor="let assign of _class.assignments"
+        (click)="onAssignmentClicked(assign)"
+      >
         <mat-icon matListIcon>assignment</mat-icon>
 
         {{ assign?.name }}

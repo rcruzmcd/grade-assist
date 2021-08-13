@@ -51,6 +51,12 @@ export class AppComponent implements OnInit {
       label: 'Teachers',
       privilege: ['admin', 'teacher'],
     },
+    {
+      icon: 'groups',
+      route: '/assignments',
+      label: 'Assignments',
+      privilege: ['admin'],
+    },
   ];
   constructor(private store: Store<fromStore.State>, private router: Router) {}
 
