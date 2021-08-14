@@ -104,6 +104,39 @@ export class ClassesEffect {
     )
   );
 
+  clearClasses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.ClassesAction.CLEAR_CLASSES),
+      mergeMap((action: any) =>
+        this.http.post(`api/classes/${action.payload.classId}/clear`, {}).pipe(
+          map((rsp) => {
+            this._snackBar.open('classes successfully clear.', '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return {
+              type: fromActions.ClassesAction.CLEAR_CLASSES_SUCCESS,
+              payload: rsp,
+            };
+          }),
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
+              type: fromActions.ClassesAction.CLEAR_CLASSES_FAILURE,
+              payload: error,
+            });
+          })
+        )
+      )
+    )
+  );
+
   getStudents$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.ClassesAction.GET_STUDENTS_NOT_ASSIGNED),

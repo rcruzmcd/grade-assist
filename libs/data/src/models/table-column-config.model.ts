@@ -9,5 +9,6 @@ export interface TableConfig {
   sort?: boolean;
   updateRow?: boolean;
   deleteRow?: boolean;
+  deleteConfirmKey?: string[];
   columns: ColumnConfigs[];
 }

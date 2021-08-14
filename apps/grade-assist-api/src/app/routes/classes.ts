@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { body } from 'express-validator/check';
 
-import * as classController from '../controllers/classes';
+import * as classController from '../controllers/classes/';
 import { isAuth } from '../middleware/is-auth';
 
 import { Classes } from '../models/classes.model';
@@ -51,7 +51,9 @@ router.post(
   classController.addAssignmentToClass
 );
 
-router.get('/classes/:classId/students', isAuth, classController.updateClass);
-router.post('/classes/:classId/students', isAuth, classController.deleteClass);
+router.post('/classes/:classId/clear', isAuth, classController.clearClass);
+
+// router.get('/classes/:classId/students', isAuth, classController.updateClass);
+// router.post('/classes/:classId/students', isAuth, classController.deleteClass);
 
 export { router as classRoutes };

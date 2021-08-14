@@ -18,6 +18,9 @@ export enum ClassesAction {
   DELETE_CLASSES = '[Classes] Delete Classes',
   DELETE_CLASSES_SUCCESS = '[Classes] Delete Classes success',
   DELETE_CLASSES_FAILURE = '[Classes] Delete Classes failure',
+  CLEAR_CLASSES = '[Classes] Clear Classes',
+  CLEAR_CLASSES_SUCCESS = '[Classes] Clear Classes success',
+  CLEAR_CLASSES_FAILURE = '[Classes] Clear Classes failure',
   GET_STUDENTS_NOT_ASSIGNED = '[Classes] Get Student Not Assigned',
   GET_STUDENTS_NOT_ASSIGNED_SUCCESS = '[Classes] Get Student Not Assigned Success',
   GET_STUDENTS_NOT_ASSIGNED_FAILURE = '[Classes] Get Student Not Assigned Failure',
@@ -110,6 +113,18 @@ export const deleteClassesSuccess = createAction(
 );
 export const deleteClassesFailure = createAction(
   ClassesAction.DELETE_CLASSES_FAILURE,
+  props<any>()
+);
+export const clearClasses = createAction(
+  ClassesAction.CLEAR_CLASSES,
+  props<any>()
+);
+export const clearClassesSuccess = createAction(
+  ClassesAction.CLEAR_CLASSES_SUCCESS,
+  props<any>()
+);
+export const clearClassesFailure = createAction(
+  ClassesAction.CLEAR_CLASSES_FAILURE,
   props<any>()
 );
 export const getStudetnsNotAssigned = createAction(

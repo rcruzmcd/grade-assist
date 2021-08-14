@@ -74,7 +74,6 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   onUpdateClicked(row: any) {
-    console.log(row);
     this.updateRow.emit(row);
   }
 
@@ -92,12 +91,23 @@ export class TableComponent implements OnInit, OnChanges {
     this.viewRowDetails.emit(row);
   }
 
+  private getDeleteConfirm(row: any) {
+    let text = '';
+    for (const key in this.tableConfig.deleteConfirmKey) {
+      text += ` ${row[key]}`;
+    }
+    return text;
+  }
+  // row type unknown as it is flexible
   onDeleteClicked(row: any) {
     console.log(row);
+    const deleteConfirm = this.tableConfig.deleteConfirmKey
+      ? this.getDeleteConfirm(row)
+      : row._id;
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         title: 'Confirm Deletion',
-        content: `Are you sure you want to permanently delete ${row.firstName} ${row.lastName}?`,
+        content: `Are you sure you want to permanently delete ${deleteConfirm} ?`,
         confirmLabel: 'Yes',
         cancelLabel: 'No',
       },
@@ -111,10 +121,12 @@ export class TableComponent implements OnInit, OnChanges {
     });
   }
 
+  // row type unknown as it is flexible
   onRowClicked(row: any) {
     console.log(row);
   }
 
+  // row type unknown as it is flexible
   getColumnData(row: any, key: any) {
     if (key.includes('.')) {
       const keySplit = key.split('.');

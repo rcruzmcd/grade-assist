@@ -67,6 +67,15 @@ export class ClassesDetailComponent implements OnInit {
     });
   }
 
+  onClearClicked() {
+    this.store.dispatch({
+      type: fromStore.ClassesAction.CLEAR_CLASSES,
+      payload: {
+        classId: this._class._id,
+      },
+    });
+  }
+
   onAddStudentsClicked() {
     this.router.navigate(['classes/details/addStudents']);
   }
