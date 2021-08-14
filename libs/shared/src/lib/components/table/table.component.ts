@@ -114,4 +114,14 @@ export class TableComponent implements OnInit, OnChanges {
   onRowClicked(row: any) {
     console.log(row);
   }
+
+  getColumnData(row: any, key: any) {
+    if (key.includes('.')) {
+      const keySplit = key.split('.');
+      const lvl1 = row[keySplit[0]];
+      const nxtLevl = lvl1 ? lvl1[keySplit[1]] : '';
+      return nxtLevl;
+    }
+    return row[key];
+  }
 }

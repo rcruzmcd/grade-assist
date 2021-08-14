@@ -34,19 +34,24 @@ router.delete('/classes/:classId', isAuth, classController.deleteClass);
 router.post(
   '/classes/:classId/addStudents',
   isAuth,
-  [
-    body('students')
-      .trim()
-      .not()
-      .isEmpty()
-      .withMessage('Please enter at student(s)'),
-  ],
+  [body('students').not().isEmpty().withMessage('Please enter at student(s)')],
   classController.addStudentToClass
 );
+
+router.post(
+  '/classes/:classId/deleteStudents',
+  isAuth,
+  [body('students').not().isEmpty().withMessage('Please enter at student(s)')],
+  classController.deleteStudentFromClass
+);
+
 router.post(
   'classes/:classId/addAssignment',
   isAuth,
   classController.addAssignmentToClass
 );
+
+router.get('/classes/:classId/students', isAuth, classController.updateClass);
+router.post('/classes/:classId/students', isAuth, classController.deleteClass);
 
 export { router as classRoutes };
