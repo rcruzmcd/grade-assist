@@ -163,7 +163,7 @@ export const addStudentToClass = async (
 
     const classes = await Classes.findById(classId)
       .populate({ path: 'teacher', select: 'firstName lastName email' })
-      // .populate({ path: 'students', select: 'firstName lastName email' })
+      .populate({ path: 'students', select: 'firstName lastName email' })
       .populate({ path: 'assignments', select: 'name type' });
     if (!classes) {
       logger.error('class not found ', classId);
@@ -179,7 +179,7 @@ export const addStudentToClass = async (
       logger.info('preparing to search for ' + id);
       const studentFound = await User.findById(id);
 
-      if (!studentFound || classes.students.includes(id)) {
+      if (!studentFound || isStudentInClass(classes, id)) {
         studentsNotFound.push(id);
       } else {
         if (!classes.students) {
@@ -218,8 +218,9 @@ export const deleteStudentFromClass = async (
 
     const classes = await Classes.findById(classId)
       .populate({ path: 'teacher', select: 'firstName lastName email' })
-      // .populate({ path: 'students', select: 'firstName lastName email' })
+      .populate({ path: 'students', select: 'firstName lastName email' })
       .populate({ path: 'assignments', select: 'name type' });
+
     if (!classes) {
       logger.error('class not found ', classId);
       const error: ResponseError = new Error('class not found');
@@ -235,7 +236,7 @@ export const deleteStudentFromClass = async (
       logger.info('preparing to search for ' + id);
       const studentFound = await User.findById(id);
 
-      if (!studentFound || !classes.students.includes(id)) {
+      if (!studentFound || !isStudentInClass(classes, id)) {
         studentsNotFound.push(id);
       } else {
         if (!classes.students) {
@@ -281,4 +282,12 @@ export const addAssignmentToClass = async (
   next: NextFunction
 ) => {
   next();
+};
+
+const isStudentInClass = (_class: any, studentId: any) => {
+  for (const classStu of _class.students) {
+    console.log(classStu);
+    if (classStu._id == studentId) return true;
+  }
+  return false;
 };

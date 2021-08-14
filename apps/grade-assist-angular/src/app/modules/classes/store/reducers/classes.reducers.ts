@@ -74,6 +74,10 @@ const ClassesReducer = createReducer(
     ...state,
     selectedClass: action.payload.class,
   })),
+  on(fromActions.deleteStudentsSuccess, (state, action) => ({
+    ...state,
+    selectedClass: action.payload.class,
+  })),
   on(fromActions.addAssignSuccess, (state, action) => ({
     ...state,
     selectedClass: {

@@ -24,9 +24,15 @@ export enum ClassesAction {
   ADD_STUDENTS = '[Classes] Add Students',
   ADD_STUDENTS_SUCCESS = '[Classes] Add Students Success',
   ADD_STUDENTS_FAILURE = '[Classes] Add Students Failure',
+  DELETE_STUDENTS = '[Classes] Delete Students',
+  DELETE_STUDENTS_SUCCESS = '[Classes] Delete Students Success',
+  DELETE_STUDENTS_FAILURE = '[Classes] Delete Students Failure',
   ADD_ASSIGN = '[Classes] Add Asssign',
   ADD_ASSIGN_SUCCESS = '[Classes] Add Asssign Success',
   ADD_ASSIGN_FAILURE = '[Classes] Add Asssign Failure',
+  DELETE_ASSIGN = '[Classes] Delete Asssign',
+  DELETE_ASSIGN_SUCCESS = '[Classes] Delete Asssign Success',
+  DELETE_ASSIGN_FAILURE = '[Classes] Delete Asssign Failure',
   GET_ASSIGN_GRADES = '[Classes] Get Asssign Grades',
   GET_ASSIGN_GRADES_SUCCESS = '[Classes] Get Asssign Grades Success',
   GET_ASSIGN_GRADES_FAILURE = '[Classes] Get Asssign Grades Failure',
@@ -130,6 +136,19 @@ export const addStudentsFailure = createAction(
   ClassesAction.ADD_STUDENTS_FAILURE,
   props<any>()
 );
+
+export const deleteStudents = createAction(
+  ClassesAction.DELETE_STUDENTS,
+  props<any>()
+);
+export const deleteStudentsSuccess = createAction(
+  ClassesAction.DELETE_STUDENTS_SUCCESS,
+  props<any>()
+);
+export const deleteStudentsFailure = createAction(
+  ClassesAction.DELETE_STUDENTS_FAILURE,
+  props<any>()
+);
 export const addAssign = createAction(ClassesAction.ADD_ASSIGN, props<any>());
 export const addAssignSuccess = createAction(
   ClassesAction.ADD_ASSIGN_SUCCESS,
@@ -137,6 +156,18 @@ export const addAssignSuccess = createAction(
 );
 export const addAssignFailure = createAction(
   ClassesAction.ADD_ASSIGN_FAILURE,
+  props<any>()
+);
+export const deleteAssign = createAction(
+  ClassesAction.DELETE_ASSIGN,
+  props<any>()
+);
+export const deleteAssignSuccess = createAction(
+  ClassesAction.DELETE_ASSIGN_SUCCESS,
+  props<any>()
+);
+export const deleteAssignFailure = createAction(
+  ClassesAction.DELETE_ASSIGN_FAILURE,
   props<any>()
 );
 export const getAssignGrades = createAction(

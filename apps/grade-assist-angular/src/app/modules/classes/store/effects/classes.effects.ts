@@ -164,9 +164,41 @@ export class ClassesEffect {
     )
   );
 
+  deleteStudents$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.ClassesAction.DELETE_STUDENTS),
+      mergeMap((action: any) =>
+        this.http
+          .post(`/api/classes/${action.payload.classId}/deleteStudents`, {
+            students: action.payload.body,
+          })
+          .pipe(
+            map((_class) => {
+              return {
+                type: fromActions.ClassesAction.DELETE_STUDENTS_SUCCESS,
+                payload: _class,
+              };
+            }),
+            catchError((error: HttpErrorResponse) => {
+              const msg = error.error.message || 'Something went wrong';
+              this._snackBar.open(msg, '', {
+                horizontalPosition: 'right',
+                verticalPosition: 'top',
+                duration: 5000,
+              });
+              return of({
+                type: fromActions.ClassesAction.DELETE_STUDENTS_FAILURE,
+                payload: { message: 'error' },
+              });
+            })
+          )
+      )
+    )
+  );
+
   addAssign$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.ClassesAction.GET_ASSIGN_GRADES),
+      ofType(fromActions.ClassesAction.ADD_ASSIGN),
       mergeMap((action: any) =>
         this.http
           .post(
@@ -176,7 +208,7 @@ export class ClassesEffect {
           .pipe(
             map((assign) => {
               return {
-                type: fromActions.ClassesAction.GET_ASSIGN_GRADES_SUCCESS,
+                type: fromActions.ClassesAction.ADD_ASSIGN_SUCCESS,
                 payload: assign,
               };
             }),
@@ -188,11 +220,39 @@ export class ClassesEffect {
                 duration: 5000,
               });
               return of({
-                type: fromActions.ClassesAction.GET_ASSIGN_GRADES_FAILURE,
+                type: fromActions.ClassesAction.ADD_ASSIGN_FAILURE,
                 payload: { message: 'error' },
               });
             })
           )
+      )
+    )
+  );
+
+  deleteAssign$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.ClassesAction.DELETE_ASSIGN),
+      mergeMap((action: any) =>
+        this.http.delete(`/api/assignments/${action.payload.assignId}`).pipe(
+          map((assign) => {
+            return {
+              type: fromActions.ClassesAction.DELETE_ASSIGN_SUCCESS,
+              payload: assign,
+            };
+          }),
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
+              type: fromActions.ClassesAction.DELETE_ASSIGN_FAILURE,
+              payload: { message: 'error' },
+            });
+          })
+        )
       )
     )
   );

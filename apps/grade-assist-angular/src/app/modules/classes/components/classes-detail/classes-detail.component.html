@@ -22,32 +22,25 @@
     ><button mat-icon-button color="primary" (click)="onAddStudentsClicked()">
       <mat-icon> add </mat-icon>
     </button>
-    <mat-action-list>
-      <button mat-list-item *ngFor="let student of _class.students">
-        <mat-icon matListIcon>person</mat-icon>
 
-        {{ student?.firstName }} {{ student?.lastName }}
-
-        <button mat-icon-button>
-          <mat-icon>minus</mat-icon>
-        </button>
-      </button>
-    </mat-action-list>
+    <grade-assist-table
+      [tableConfig]="studentGridConfig"
+      [tableData]="_class.students"
+      (rowDeleted)="onStudentDelete($event)"
+      (updateRow)="onStudentUpdate($event)"
+    ></grade-assist-table>
 
     <label class="mat-title">Assignments</label>
     <button mat-icon-button color="primary" (click)="onAddAssignmentClicked()">
       <mat-icon> add </mat-icon>
     </button>
-    <mat-action-list>
-      <button
-        mat-list-item
-        *ngFor="let assign of _class.assignments"
-        (click)="onAssignmentClicked(assign)"
-      >
-        <mat-icon matListIcon>assignment</mat-icon>
 
-        {{ assign?.name }}
-      </button>
-    </mat-action-list>
+    <grade-assist-table
+      [tableConfig]="assignGridConfig"
+      [tableData]="_class.assignments"
+      (rowDeleted)="onAssignmentDelete($event)"
+      (updateRow)="onAssignmentUpdate($event)"
+      (viewRowDetails)="onAssignmentClicked($event)"
+    ></grade-assist-table>
   </mat-card-content>
 </mat-card>

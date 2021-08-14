@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
-import { User, ColumnConfigs } from '@grade-assist/data';
+import { User, ColumnConfigs, TableConfig } from '@grade-assist/data';
 
 @Component({
   selector: 'grade-assist-student-list',
@@ -10,13 +10,7 @@ import { User, ColumnConfigs } from '@grade-assist/data';
   styleUrls: ['./student-list.component.scss'],
 })
 export class StudentListComponent implements OnInit {
-  tableConfig: {
-    pagination?: boolean;
-    sort?: boolean;
-    updateRow?: boolean;
-    deleteRow?: boolean;
-    columns: ColumnConfigs[];
-  } = {
+  tableConfig: TableConfig = {
     updateRow: true,
     deleteRow: true,
     columns: [
