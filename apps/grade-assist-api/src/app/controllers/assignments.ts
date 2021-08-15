@@ -227,7 +227,7 @@ export const gradeAssignment = async (
       student: studentId,
     });
 
-    await gradeObject.save();
+    await gradeObject.save().populate({ path: 'student' });
     logger.info('grade created and saved', gradeObject);
 
     if (!assign.grades) {
@@ -256,13 +256,11 @@ export const getAssignmentGrades = async (
     const assignId = params.assignmentId;
     logger.info('getting assignment id from params', assignId);
 
-    const assign = await Assignment.findById(assignId)
-      .select('name teacher grades')
-      .populate({
-        path: 'grades',
-        select: 'student grade',
-        options: { path: 'student' },
-      });
+    const assign = await Assignment.findById(assignId).populate({
+      path: 'grades',
+      select: 'student grade',
+      options: { path: 'student', ref: 'User' },
+    });
 
     if (!assign) {
       logger.error('assignment not found with id ' + assignId);

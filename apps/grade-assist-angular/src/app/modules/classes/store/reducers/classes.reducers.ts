@@ -23,6 +23,7 @@ export const initialState: ClassesState = {
   selectedAssign: {
     name: '',
     type: '',
+    grades: [],
   },
 };
 
@@ -101,6 +102,13 @@ const ClassesReducer = createReducer(
   on(fromActions.loadTeachersSuccess, (state, action) => ({
     ...state,
     teacherList: action.payload.teachersList,
+  })),
+  on(fromActions.addGradeSuccess, (state, action) => ({
+    ...state,
+    selectedAssign: {
+      ...state.selectedAssign,
+      grades: [...state.selectedAssign.grades],
+    },
   }))
 );
 

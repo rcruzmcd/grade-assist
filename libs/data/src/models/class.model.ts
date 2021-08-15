@@ -10,7 +10,7 @@ export interface Classes {
 }
 export interface assignment {
   name: string;
-  grades?: grade[];
+  grades: grade[];
   type: string;
   weight?: string;
   _id?: string;

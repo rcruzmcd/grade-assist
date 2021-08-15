@@ -42,6 +42,9 @@ export enum ClassesAction {
   GET_ASSIGN_GRADES = '[Classes] Get Asssign Grades',
   GET_ASSIGN_GRADES_SUCCESS = '[Classes] Get Asssign Grades Success',
   GET_ASSIGN_GRADES_FAILURE = '[Classes] Get Asssign Grades Failure',
+  ADD_GRADE = '[Classes] Add Grade',
+  ADD_GRADE_SUCCESS = '[Classes] Add Grade Success',
+  ADD_GRADE_FAILURE = '[Classes] Add Grade Failure',
 }
 
 export const selectClass = createAction(
@@ -210,5 +213,14 @@ export const getAssignGradesSuccess = createAction(
 );
 export const getAssignGradesFailure = createAction(
   ClassesAction.GET_ASSIGN_GRADES_FAILURE,
+  props<any>()
+);
+export const addGrade = createAction(ClassesAction.ADD_GRADE, props<any>());
+export const addGradeSuccess = createAction(
+  ClassesAction.ADD_GRADE_SUCCESS,
+  props<any>()
+);
+export const addGradeFailure = createAction(
+  ClassesAction.ADD_GRADE_FAILURE,
   props<any>()
 );
