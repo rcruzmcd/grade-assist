@@ -1,37 +1,8 @@
-<div style="width: 100%; height: 100%; display: flex">
-  <aside id="convo_list" style="flex-grow: 1; overflow: scroll">
-    <mat-action-list>
-      <div *ngFor="let conv of messages">
-        <button mat-list-item (click)="onConvoSelected(conv)">
-          <div mat-subheader></div>
-          <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
-          <div mat-line></div>
-          <div mat-line></div>
-        </button>
-        <mat-divider></mat-divider>
-      </div>
-    </mat-action-list>
+<div class="container">
+  <aside>
+    <grade-assist-message-list id="convo_list"></grade-assist-message-list>
   </aside>
-  <main id="convo_detail">
-    <header>
-      <label mat-title>
-        <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
-      </label>
-    </header>
-    <mat-divider></mat-divider>
-    <div id="message_content">
-      <div
-        *ngFor="let conv of selectedConvo?.messages"
-        [className]="conv.sender === loggedInUser._id ? 'send' : 'receive'"
-      >
-        <small></small>
-        <mat-card class="oneMessage"> </mat-card>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div id="text_input">
-      <textarea matInput [(ngModel)]="userText"></textarea>
-      <button mat-raised-button color="primary" (click)="onSend()">Send</button>
-    </div>
+  <main>
+    <grade-assist-conversation id="convo_detail"></grade-assist-conversation>
   </main>
 </div>

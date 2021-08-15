@@ -1,0 +1,38 @@
+header {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+  font-size: x-large;
+}
+
+#message_content {
+  flex-grow: 18;
+  overflow: scroll;
+
+  .send {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    > .oneMessage {
+      background-color: lavender;
+      width: 45%;
+      margin: 0 0 1em 0;
+    }
+  }
+
+  .receive {
+    display: flex;
+    flex-direction: column;
+    > .oneMessage {
+      background-color: wheat;
+      width: 45%;
+      margin: 0 0 1em 0;
+    }
+  }
+}
+
+#text_input {
+  flex-grow: 2;
+  display: flex;
+}

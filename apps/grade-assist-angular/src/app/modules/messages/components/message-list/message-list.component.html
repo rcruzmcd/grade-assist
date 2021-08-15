@@ -1,0 +1,11 @@
+<mat-action-list>
+  <div *ngFor="let conv of messages">
+    <button mat-list-item (click)="onConvoSelected(conv)">
+      <div mat-subheader></div>
+      <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
+      <div mat-line></div>
+      <div mat-line></div>
+    </button>
+    <mat-divider></mat-divider>
+  </div>
+</mat-action-list>

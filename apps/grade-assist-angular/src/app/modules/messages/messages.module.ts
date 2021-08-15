@@ -10,9 +10,15 @@ import { MessagesHomeComponent } from './components/messages-home/messages-home.
 import { FormsModule } from '@angular/forms';
 
 import * as fromStore from './store';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { ConversationComponent } from './components/conversation/conversation.component';
 
 @NgModule({
-  declarations: [MessagesHomeComponent],
+  declarations: [
+    MessagesHomeComponent,
+    MessageListComponent,
+    ConversationComponent,
+  ],
   imports: [
     CommonModule,
     MessagesRoutingModule,

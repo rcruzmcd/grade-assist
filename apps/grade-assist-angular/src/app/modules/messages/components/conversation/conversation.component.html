@@ -1,0 +1,20 @@
+<header>
+  <label mat-title>
+    <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
+  </label>
+</header>
+<mat-divider></mat-divider>
+<div id="message_content">
+  <div
+    *ngFor="let conv of selectedConvo?.messages"
+    [className]="conv.sender === loggedInUser._id ? 'send' : 'receive'"
+  >
+    <small></small>
+    <mat-card class="oneMessage"> </mat-card>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div id="text_input">
+  <textarea matInput [(ngModel)]="userText"></textarea>
+  <button mat-raised-button color="primary" (click)="onSend()">Send</button>
+</div>
