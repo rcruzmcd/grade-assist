@@ -7,6 +7,7 @@ import { ClassesDetailComponent } from './components/classes-detail/classes-deta
 import { ClassesAddStudentsComponent } from './components/classes-add-students/classes-add-students.component';
 import { ClassesAddAssignsComponent } from './components/classes-add-assigns/classes-add-assigns.component';
 import { AssignsDetailComponent } from './components/assigns-detail/assign-detail.component';
+import { ClassesUpdateComponent } from './components/classes-update/classes-update.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'details/assignment',
     component: AssignsDetailComponent,
+  },
+  {
+    path: 'details/update',
+    component: ClassesUpdateComponent,
   },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];

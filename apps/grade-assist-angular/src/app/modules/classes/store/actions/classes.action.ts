@@ -30,6 +30,9 @@ export enum ClassesAction {
   DELETE_STUDENTS = '[Classes] Delete Students',
   DELETE_STUDENTS_SUCCESS = '[Classes] Delete Students Success',
   DELETE_STUDENTS_FAILURE = '[Classes] Delete Students Failure',
+  LOAD_TEACHERS = '[Classes] Load Teachers',
+  LOAD_TEACHERS_SUCCESS = '[Classes] Load Teachers Success',
+  LOAD_TEACHERS_FAILURE = '[Classes] Load Teachers Failure',
   ADD_ASSIGN = '[Classes] Add Asssign',
   ADD_ASSIGN_SUCCESS = '[Classes] Add Asssign Success',
   ADD_ASSIGN_FAILURE = '[Classes] Add Asssign Failure',
@@ -162,6 +165,18 @@ export const deleteStudentsSuccess = createAction(
 );
 export const deleteStudentsFailure = createAction(
   ClassesAction.DELETE_STUDENTS_FAILURE,
+  props<any>()
+);
+export const loadTeachers = createAction(
+  ClassesAction.LOAD_TEACHERS,
+  props<any>()
+);
+export const loadTeachersSuccess = createAction(
+  ClassesAction.LOAD_TEACHERS_SUCCESS,
+  props<any>()
+);
+export const loadTeachersFailure = createAction(
+  ClassesAction.LOAD_TEACHERS_FAILURE,
   props<any>()
 );
 export const addAssign = createAction(ClassesAction.ADD_ASSIGN, props<any>());

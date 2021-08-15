@@ -2,17 +2,42 @@
   [formGroup]="formGroup"
   style="padding-top: 50px; display: flex; flex-direction: column"
 >
-  <mat-form-field appearance="outline" *ngFor="let input of formConfigs.inputs">
+  <mat-form-field
+    appearance="outline"
+    *ngFor="let input of formConfigs.inputs"
+    [className]="input.hide ? 'hide' : ''"
+  >
     <mat-label>{{ input.label }}</mat-label>
+
+    <!-- SELECT FIELD -->
+    <mat-select
+      *ngIf="input.type === 'select'"
+      [formControlName]="input.key"
+      name="select"
+    >
+      <mat-option
+        *ngFor="let option of input.selectValues | async"
+        [value]="option.value"
+      >
+        {{ option.viewValue }}
+      </mat-option>
+    </mat-select>
+
+    <!-- INPUT BOX -->
     <input
+      *ngIf="input.type !== 'select'"
       matInput
       placeholder="{{ input.placeholder }}"
       [formControlName]="input.key"
       type="{{ input.type || 'text' }}"
     />
+
+    <!-- REQUIRED ERROR -->
     <mat-error *ngIf="formGroup.controls[input.key].hasError('required')">
       {{ input.label }} is <strong>required</strong>
     </mat-error>
+
+    <!-- VALIDATION ERRORS -->
     <mat-error
       *ngIf="
         !formGroup.controls[input.key].hasError('required') &&

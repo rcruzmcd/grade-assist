@@ -9,4 +9,11 @@ export interface InputConfig {
   key: string;
   validators?: any[];
   type?: string;
+  selectValues?: selectValue[] | Promise<selectValue[]>;
+  hide?: boolean;
+}
+
+interface selectValue {
+  viewValue: string;
+  value: string;
 }

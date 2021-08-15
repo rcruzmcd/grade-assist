@@ -1,0 +1,12 @@
+<mat-card class="card">
+  <!-- <grade-assis-back-button></grade-assis-back-button> -->
+  <mat-card-title> {{ title }} </mat-card-title>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <grade-assist-form
+      [formConfigs]="formConfig"
+      [formModel]="_class"
+      (formSubmitted)="formHandler($event)"
+    ></grade-assist-form>
+  </mat-card-content>
+</mat-card>

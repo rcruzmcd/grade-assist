@@ -1,20 +1,59 @@
 <mat-card class="card">
-  <mat-card-title> {{ title }} </mat-card-title>
+  <mat-card-title style="display: flex; justify-content: space-between">
+    {{ title }}
+
+    <button mat-raised-button color="primary" (click)="onAddClicked()">
+      Add
+    </button>
+  </mat-card-title>
   <mat-card-content>
     <mat-divider></mat-divider>
 
-    <mat-selection-list
-      #students
-      [(ngModel)]="selectedStudents"
-      style="max-width: 600px"
-    >
-      <mat-list-option *ngFor="let student of studentsList" [value]="student">
-        {{ student.firstName }} {{ student.lastName }}
-      </mat-list-option>
-    </mat-selection-list>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()"
+          >
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)"
+          >
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
 
-    <button mat-raised- button color="primary" (click)="onAddClicked()">
-      Add
-    </button>
+      <!-- Position Column -->
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.firstName }}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.lastName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.email }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="selection.toggle(row)"
+      ></mat-row>
+    </mat-table>
   </mat-card-content>
 </mat-card>

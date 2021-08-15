@@ -10,6 +10,7 @@ export interface ClassesState {
   selectedClass: Classes | any;
   studentsNotInSelected?: User[];
   selectedAssign: assignment;
+  teacherList: User[];
   _id?: string;
 }
 
@@ -18,6 +19,7 @@ export const initialState: ClassesState = {
   loading: false,
   classesList: [],
   selectedClass: {},
+  teacherList: [],
   selectedAssign: {
     name: '',
     type: '',
@@ -67,7 +69,7 @@ const ClassesReducer = createReducer(
   on(fromActions.getStudetnsNotAssignedSuccess, (state, action) => ({
     ...state,
     studentsNotInSelected: action.payload?.studentList.filter(
-      (student: any) => !state.selectedClass.students.includes(student._id)
+      (student: any) => !isStudentInClass(state.selectedClass, student._id)
     ),
   })),
   on(fromActions.addStudentsSuccess, (state, action) => ({
@@ -95,9 +97,20 @@ const ClassesReducer = createReducer(
       ...state.selectedAssign,
       grades: action.payload.grades,
     },
+  })),
+  on(fromActions.loadTeachersSuccess, (state, action) => ({
+    ...state,
+    teacherList: action.payload.teachersList,
   }))
 );
 
 export function reducer(state: ClassesState | undefined, action: Action) {
   return ClassesReducer(state, action);
 }
+
+const isStudentInClass = (_class: any, studentId: any) => {
+  for (const classStu of _class.students) {
+    if (classStu._id == studentId) return true;
+  }
+  return false;
+};

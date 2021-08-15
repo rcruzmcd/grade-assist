@@ -37,6 +37,34 @@ export class ClassesEffect {
     )
   );
 
+  loadTeachers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.ClassesAction.LOAD_TEACHERS),
+      mergeMap(() =>
+        this.http.get('/api/teacher').pipe(
+          map((teachers) => {
+            return {
+              type: fromActions.ClassesAction.LOAD_TEACHERS_SUCCESS,
+              payload: teachers,
+            };
+          }),
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
+              type: fromActions.ClassesAction.LOAD_TEACHERS_FAILURE,
+              payload: { message: 'error' },
+            });
+          })
+        )
+      )
+    )
+  );
+
   createClasses$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.ClassesAction.CREATE_CLASSES),

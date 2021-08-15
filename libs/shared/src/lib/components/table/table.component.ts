@@ -48,7 +48,11 @@ export class TableComponent implements OnInit, OnChanges {
         this.displayedColumns.push(obj.id);
       }
     }
-    if (this.tableConfig?.updateRow || this.tableConfig?.deleteRow) {
+    if (
+      this.tableConfig?.updateRow ||
+      this.tableConfig?.deleteRow ||
+      this.tableConfig.viewBtn
+    ) {
       this.displayedColumns.push('actions');
     }
   }

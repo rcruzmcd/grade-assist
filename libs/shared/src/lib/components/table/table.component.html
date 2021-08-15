@@ -27,6 +27,7 @@
           type="button"
           title="View"
           (click)="onViewClicked(row)"
+          *ngIf="tableConfig.viewBtn"
         >
           <mat-icon>visibility</mat-icon>
         </button>
@@ -36,6 +37,7 @@
           type="button"
           title="Update"
           (click)="onUpdateClicked(row)"
+          *ngIf="tableConfig.updateRow"
         >
           <mat-icon>edit</mat-icon>
         </button>
@@ -45,6 +47,7 @@
           type="button"
           title="Delete"
           (click)="onDeleteClicked(row)"
+          *ngIf="tableConfig.deleteRow"
         >
           <mat-icon>delete</mat-icon>
         </button>

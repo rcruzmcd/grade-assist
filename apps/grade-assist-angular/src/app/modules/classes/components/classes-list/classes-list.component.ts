@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
-import { User, ColumnConfigs, Classes } from '@grade-assist/data';
+import { User, ColumnConfigs, Classes, TableConfig } from '@grade-assist/data';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,15 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./classes-list.component.scss'],
 })
 export class ClassesListComponent implements OnInit {
-  tableConfig: {
-    pagination?: boolean;
-    sort?: boolean;
-    updateRow?: boolean;
-    deleteRow?: boolean;
-    columns: ColumnConfigs[];
-  } = {
+  tableConfig: TableConfig = {
     updateRow: true,
     deleteRow: true,
+    viewBtn: true,
     columns: [
       {
         id: 'code',

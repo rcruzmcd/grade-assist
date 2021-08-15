@@ -15,6 +15,7 @@ import * as fromAuthStore from './store';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],

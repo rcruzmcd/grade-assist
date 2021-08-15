@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CdkColumnDef } from '@angular/cdk/table';
 
@@ -16,7 +16,7 @@ import { ViewDialogComponent } from './components/view-dialog/view-dialog.compon
     TableComponent,
     ViewDialogComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule, FormsModule],
   providers: [CdkColumnDef],
   exports: [DialogComponent, FormComponent, TableComponent, MaterialModule],
 })

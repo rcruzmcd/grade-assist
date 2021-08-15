@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChange,
+  SimpleChanges,
+} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -6,14 +15,24 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnChanges {
   @Input() formConfigs: any;
+  @Input() formModel?: any;
   @Output() formSubmitted = new EventEmitter<any>();
 
   formGroup!: FormGroup;
 
   ngOnInit(): void {
     this.formGroup = this.toFormGroup();
+    if (this.formModel) this.formGroup.setValue(this.formModel);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['formConfigs']) {
+      console.log('change detected');
+      console.log(changes);
+      // how to load async select
+    }
   }
 
   toFormGroup() {

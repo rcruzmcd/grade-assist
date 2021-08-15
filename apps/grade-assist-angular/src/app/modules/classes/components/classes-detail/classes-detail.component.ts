@@ -14,12 +14,13 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./classes-detail.component.scss'],
 })
 export class ClassesDetailComponent implements OnInit {
-  title = 'Class';
+  title = '';
   _class!: Classes;
 
   studentGridConfig: TableConfig = {
-    updateRow: true,
-    deleteRow: true,
+    updateRow: false,
+    deleteRow: false,
+    viewBtn: true,
     columns: [
       {
         id: 'firstName',
@@ -40,8 +41,9 @@ export class ClassesDetailComponent implements OnInit {
   };
 
   assignGridConfig: TableConfig = {
-    updateRow: true,
-    deleteRow: true,
+    updateRow: false,
+    deleteRow: false,
+    viewBtn: true,
     columns: [
       {
         id: 'name',
@@ -64,6 +66,7 @@ export class ClassesDetailComponent implements OnInit {
       if (!this._class) {
         console.error('need to reroute cuz why you here...???');
       }
+      this.title = `${this._class.code} - ${this._class.name}`;
     });
   }
 
@@ -82,6 +85,10 @@ export class ClassesDetailComponent implements OnInit {
 
   onAddAssignmentClicked() {
     this.router.navigate(['classes/details/addAssignments']);
+  }
+
+  onUpdateClicked() {
+    this.router.navigate(['classes/details/update']);
   }
 
   onAssignmentClicked(assign: Event) {
