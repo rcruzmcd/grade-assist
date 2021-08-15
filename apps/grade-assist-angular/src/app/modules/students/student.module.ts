@@ -13,9 +13,18 @@ import * as fromStore from './store';
 import { AuthInterceptor } from '../../http-interceptors/auth-interceptor';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { StudentAddComponent } from './components/student-add/student-add.component';
+import { StudentGradesComponent } from './components/student-grades/student-grades.component';
+import { StudentClassesComponent } from './components/student-classes/student-classes.component';
+import { StudentAssignmentsComponent } from './components/student-assignments/student-assignment.component';
 
 @NgModule({
-  declarations: [StudentListComponent, StudentAddComponent],
+  declarations: [
+    StudentListComponent,
+    StudentAddComponent,
+    StudentGradesComponent,
+    StudentClassesComponent,
+    StudentAssignmentsComponent,
+  ],
   imports: [
     CommonModule,
     StudentRoutingModule,

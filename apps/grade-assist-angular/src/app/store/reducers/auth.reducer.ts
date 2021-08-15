@@ -1,3 +1,4 @@
+import { User } from '@grade-assist/data';
 import { createReducer, on, Action } from '@ngrx/store';
 import * as jwt_decode from 'jwt-decode';
 
@@ -10,6 +11,7 @@ export interface AuthState {
   userId?: string;
   userType: string;
   userEmail: string;
+  user?: User;
 }
 
 export const initialState: AuthState = {
@@ -21,37 +23,33 @@ export const initialState: AuthState = {
   userEmail: '',
 };
 
+interface IJwt {
+  userId: string;
+  userType: string;
+  email: string;
+  exp: string;
+}
+
 const authReducer = createReducer(
   initialState,
   on(fromActions.login, (state) => ({ ...state })),
   on(fromActions.loginSuccess, (state, action) => ({
     ...state,
     jwt: action.payload.token,
-    userId: jwt_decode.default<{
-      userId: string;
-      userType: string;
-      email: string;
-      exp: string;
-    }>(action.payload?.token).userId,
-    userType: jwt_decode.default<{
-      userId: string;
-      userType: string;
-      email: string;
-      exp: string;
-    }>(action.payload?.token).userType,
-    userEmail: jwt_decode.default<{
-      userId: string;
-      userType: string;
-      email: string;
-      exp: string;
-    }>(action.payload?.token).email,
+    userId: action.payload.userId,
+    userType: jwt_decode.default<IJwt>(action.payload?.token).userType,
+    userEmail: jwt_decode.default<IJwt>(action.payload?.token).email,
   })),
   on(fromActions.loginFailure, (state) => ({ ...state })),
   on(fromActions.logout, (state) => ({ ...state, jwt: '' })),
   on(fromActions.logoutSuccess, (state) => ({
     ...state,
   })),
-  on(fromActions.logoutFailure, (state) => ({ ...state }))
+  on(fromActions.logoutFailure, (state) => ({ ...state })),
+  on(fromActions.getUserSuccess, (state, action) => ({
+    ...state,
+    user: action.payload.user,
+  }))
 );
 
 export function reducer(state: AuthState | undefined, action: Action) {

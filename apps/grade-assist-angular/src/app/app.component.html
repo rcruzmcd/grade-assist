@@ -10,7 +10,12 @@
       </button>
       <span>{{ title }}</span>
       <span style="flex: 1 1 auto"></span>
-      <button color="accent" mat-mini-fab>
+      <button
+        color="accent"
+        mat-mini-fab
+        [routerLink]="['/messages']"
+        (click)="drawer.close()"
+      >
         <mat-icon>inbox</mat-icon>
       </button>
       <button color="warn" mat-mini-fab (click)="onLogout()" id="logout-button">
@@ -30,9 +35,7 @@
     </mat-drawer>
 
     <mat-drawer-content class="content">
-      <div>
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet class="content"></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

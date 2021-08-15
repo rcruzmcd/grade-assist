@@ -7,10 +7,13 @@ import { User } from '../models/users.model';
 
 const router = Router();
 
-router.get('/admin', fromControllers.getAdmins);
+router.get('/user/:userId', isAuth, fromControllers.getUser);
+
+router.get('/admin', isAuth, fromControllers.getAdmins);
 
 router.post(
   '/admin',
+  isAuth,
   [
     body('firstName')
       .trim()

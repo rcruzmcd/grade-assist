@@ -37,6 +37,32 @@ export class AuthEffect {
       )
     )
   );
+
+  getUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.AuthActions.LOGIN_SUCCESS),
+      mergeMap((action: any) =>
+        this.http.get(`/api/user/${action.payload.userId}`).pipe(
+          map((rsp) => ({
+            type: fromActions.AuthActions.GET_USER_SUCCESS,
+            payload: rsp,
+          })),
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error?.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
+              type: fromActions.AuthActions.GET_USER_FAILURE,
+              payload: { message: 'error' },
+            });
+          })
+        )
+      )
+    )
+  );
   constructor(
     private actions$: Actions,
     private http: HttpClient,

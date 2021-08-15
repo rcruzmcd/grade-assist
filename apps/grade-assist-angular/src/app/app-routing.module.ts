@@ -31,6 +31,13 @@ const lazyRoutes: Routes = [
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
+  {
+    path: 'messages',
+    loadChildren: () =>
+      import('./modules/messages/messages.module').then(
+        (m) => m.MessagesModule
+      ),
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
