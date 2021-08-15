@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
     label: string;
     privilege: string[];
   }[] = [];
-
   menu = [
     {
       icon: 'home',
@@ -70,6 +69,7 @@ export class AppComponent implements OnInit {
           item.privilege.includes('*') || item.privilege.includes(this.userType)
       );
     });
+
     this.router.navigate(['/home']);
   }
 

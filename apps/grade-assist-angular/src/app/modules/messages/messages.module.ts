@@ -9,8 +9,7 @@ import { SharedModule } from '@grade-assist/shared';
 import { MessagesHomeComponent } from './components/messages-home/messages-home.component';
 import { FormsModule } from '@angular/forms';
 
-// import { effects } from './store';
-// import * as from from './store/reducers';
+import * as fromStore from './store';
 
 @NgModule({
   declarations: [MessagesHomeComponent],
@@ -19,8 +18,8 @@ import { FormsModule } from '@angular/forms';
     MessagesRoutingModule,
     SharedModule,
     FormsModule,
-    // StoreModule.forFeature(from.FeatureKey, from.reducers),
-    // EffectsModule.forFeature(effects),
+    StoreModule.forFeature('messages', fromStore.reducer),
+    EffectsModule.forFeature(fromStore.effects),
   ],
 })
 export class MessagesModule {}

@@ -3,10 +3,10 @@
     <mat-action-list>
       <div *ngFor="let conv of messages">
         <button mat-list-item (click)="onConvoSelected(conv)">
-          <div mat-subheader>{{ conv.userName }}</div>
+          <div mat-subheader></div>
           <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
-          <div mat-line>{{ conv.lastTextPrev }}</div>
-          <div mat-line>{{ conv.datetime }}</div>
+          <div mat-line></div>
+          <div mat-line></div>
         </button>
         <mat-divider></mat-divider>
       </div>
@@ -16,19 +16,16 @@
     <header>
       <label mat-title>
         <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
-        {{ selectedConvo.userName }}
       </label>
     </header>
     <mat-divider></mat-divider>
     <div id="message_content">
       <div
-        *ngFor="let conv of selectedConvo.conversation"
-        [className]="conv.type === 'send' ? 'send' : 'receive'"
+        *ngFor="let conv of selectedConvo?.messages"
+        [className]="conv.sender === loggedInUser._id ? 'send' : 'receive'"
       >
-        <small>{{ conv.datetime }}</small>
-        <mat-card class="oneMessage">
-          {{ conv.message }}
-        </mat-card>
+        <small></small>
+        <mat-card class="oneMessage"> </mat-card>
       </div>
     </div>
     <mat-divider></mat-divider>
