@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Grade Assist';
   userType = '*';
   isAuthorized = false;
+  user = '';
   priviledgeMenu: {
     icon: string;
     route: string;
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
     this.store.subscribe((state) => {
       this.isAuthorized = !!state?.auth?.jwt;
       this.userType = state.auth.userType;
+      this.user = state.auth.userEmail;
 
       this.priviledgeMenu = this.menu.filter(
         (item) =>

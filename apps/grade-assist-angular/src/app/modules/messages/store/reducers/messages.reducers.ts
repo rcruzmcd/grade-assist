@@ -25,7 +25,12 @@ const messageReducer = createReducer(
   on(fromActions.sendMessagesSuccess, (state, action) => ({
     ...state,
     selectedConversation: action.payload.convo,
+  })),
+  on(fromActions.selectConversation, (state, action) => ({
+    ...state,
+    selectedConversation: action.payload,
   }))
+  // on(fromActions.MessagesActions.)
 );
 
 export function reducer(state: MessagesState | undefined, action: Action) {

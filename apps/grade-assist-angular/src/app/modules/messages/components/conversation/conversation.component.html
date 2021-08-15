@@ -1,16 +1,47 @@
 <header>
-  <label mat-title>
-    <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
-  </label>
+  <!-- <label mat-title> -->
+  <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
+  <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>To</mat-label>
+    <mat-chip-list #chipList aria-label="To selection">
+      <mat-chip
+        *ngFor="let person of to"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(person)"
+      >
+        {{ person }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="New message..."
+        #toInput
+        [formControl]="toCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"
+      />
+    </mat-chip-list>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      <mat-option *ngFor="let person of filteredTo | async" [value]="person">
+        {{ person }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <!-- </label> -->
 </header>
 <mat-divider></mat-divider>
 <div id="message_content">
   <div
     *ngFor="let conv of selectedConvo?.messages"
-    [className]="conv.sender === loggedInUser._id ? 'send' : 'receive'"
+    [className]="conv.sender[0] !== loggedInUser._id ? 'send' : 'receive'"
   >
-    <small></small>
-    <mat-card class="oneMessage"> </mat-card>
+    <small>{{ conv.datetime }}</small>
+    <mat-card class="oneMessage"> {{ conv.message }}</mat-card>
   </div>
 </div>
 <mat-divider></mat-divider>

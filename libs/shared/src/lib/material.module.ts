@@ -15,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   exports: [
@@ -33,6 +35,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ],
 })
 export class MaterialModule {}

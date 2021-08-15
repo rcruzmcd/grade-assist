@@ -1,9 +1,6 @@
 header {
-  flex-grow: 1;
   display: flex;
-  align-items: center;
-  padding-left: 1em;
-  font-size: x-large;
+  flex-direction: column;
 }
 
 #message_content {

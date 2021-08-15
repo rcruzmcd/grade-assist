@@ -5,7 +5,6 @@ import { Conversation, Message } from '../../models/conversation';
 
 import * as io from '../../../socket';
 
-// get's a user conversation
 export const sendMessage = async (
   req: Request,
   res: Response,
@@ -30,6 +29,7 @@ export const sendMessage = async (
     logger.info(`message saved`);
 
     let convo: any;
+    // ALSO CHECK IF CONVERSATION CHECK WITH SENDER AND RECEIVER
     if (convoId) {
       logger.info(`updating existing conversation`);
       logger.info(`searching for convo ${convoId}`);

@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit(): void {
-    this.socket = io('http://localhost:3000');
-
     this.store.subscribe((state) => {
       // console.log(state.auth.);
       this.loggedInUser = {
@@ -24,10 +22,6 @@ export class HomeComponent implements OnInit {
         email: state.auth.userEmail,
         userId: state.auth.userId,
       };
-
-      this.socket.on(`message${this.loggedInUser.userId}`, (message: any) => {
-        console.log(message);
-      });
     });
   }
 }

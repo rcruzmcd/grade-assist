@@ -7,7 +7,7 @@ import { MessagesRoutingModule } from './messages-routing.module';
 
 import { SharedModule } from '@grade-assist/shared';
 import { MessagesHomeComponent } from './components/messages-home/messages-home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import * as fromStore from './store';
 import { MessageListComponent } from './components/message-list/message-list.component';
@@ -23,6 +23,7 @@ import { ConversationComponent } from './components/conversation/conversation.co
     CommonModule,
     MessagesRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     FormsModule,
     StoreModule.forFeature('messages', fromStore.reducer),
     EffectsModule.forFeature(fromStore.effects),
