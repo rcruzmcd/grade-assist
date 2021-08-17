@@ -21,10 +21,10 @@ export const getConversations = async (
       .populate({
         path: 'participants',
         select: 'firstName lastName email type',
-      });
+      })
+      .sort({ updatedAt: 'desc' });
 
     logger.info(`searched finished ${convo}`);
-
     res.status(200).json({ conversations: convo });
   } catch (error) {
     next(error);

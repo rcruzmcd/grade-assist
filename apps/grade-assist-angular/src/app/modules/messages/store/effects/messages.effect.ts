@@ -90,6 +90,34 @@ export class MessageEffect {
       )
     )
   );
+
+  loadAllUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.MessagesActions.GET_MESSAGES),
+      mergeMap(() =>
+        this.http.get('/api/user').pipe(
+          map((user) => {
+            return {
+              type: fromActions.MessagesActions.GET_USERS_SUCCESS,
+              payload: user,
+            };
+          }),
+          catchError((error: HttpErrorResponse) => {
+            const msg = error.error.message || 'Something went wrong';
+            this._snackBar.open(msg, '', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+            return of({
+              type: fromActions.MessagesActions.GET_USERS_FAILURE,
+              payload: { message: 'error' },
+            });
+          })
+        )
+      )
+    )
+  );
   constructor(
     private actions$: Actions,
     private http: HttpClient,

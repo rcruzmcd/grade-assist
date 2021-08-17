@@ -9,6 +9,8 @@ const router = Router();
 
 router.get('/user/:userId', isAuth, fromControllers.getUser);
 
+router.get('/user', isAuth, fromControllers.getUsers);
+
 router.get('/admin', isAuth, fromControllers.getAdmins);
 
 router.post(

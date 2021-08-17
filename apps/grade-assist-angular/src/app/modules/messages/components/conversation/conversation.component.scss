@@ -1,6 +1,9 @@
 header {
   display: flex;
-  flex-direction: column;
+}
+
+.example-chip-list {
+  flex-grow: 18;
 }
 
 #message_content {

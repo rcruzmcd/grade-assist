@@ -2,6 +2,8 @@ export interface IConversation {
   participants: string[];
   messages: IMessage[];
   _id?: string;
+  updatedAt?: Date;
+  createdAt?: Date;
 }
 
 export interface IMessage {

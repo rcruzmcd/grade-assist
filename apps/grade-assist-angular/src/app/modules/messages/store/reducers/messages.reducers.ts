@@ -1,5 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { IConversation } from '@grade-assist/data';
+import { IConversation, User } from '@grade-assist/data';
 
 import * as fromActions from '../actions';
 
@@ -8,6 +8,7 @@ export interface MessagesState {
   loading: boolean;
   conversations: IConversation[];
   selectedConversation?: IConversation;
+  userList?: User[];
 }
 
 export const initialState: MessagesState = {
@@ -29,8 +30,11 @@ const messageReducer = createReducer(
   on(fromActions.selectConversation, (state, action) => ({
     ...state,
     selectedConversation: action.payload,
+  })),
+  on(fromActions.getUsersSuccess, (state, action) => ({
+    ...state,
+    userList: action.payload.userList,
   }))
-  // on(fromActions.MessagesActions.)
 );
 
 export function reducer(state: MessagesState | undefined, action: Action) {

@@ -18,6 +18,11 @@ export const sendMessage = async (
       `retrieving convo info ${messageText} ${sender} ${convoId} ${receivers}`
     );
 
+    // receivers cannot include sender
+    if (receivers.includes(sender)) {
+      throw new Error('sender is part of receivers');
+    }
+
     const message = Message.build({
       datetime: new Date(),
       message: messageText,
@@ -46,14 +51,31 @@ export const sendMessage = async (
       await convo.save();
       logger.info(`convo updated with message ${convo}`);
     } else {
-      logger.info('creating new conversation');
-      convo = Conversation.build({
+      // check for existing convo between participants
+      logger.info(
+        `checking for convo with participants ${receivers}, ${sender}`
+      );
+      const convoCheck = await Conversation.findOne({
         participants: [...receivers, sender],
-        messages: [message._id],
       });
-      logger.info(`convo created ${convo}`);
-      await convo.save();
-      logger.info(`convo saved`);
+      logger.info(`searched finished ${convoCheck}`);
+      if (convoCheck) {
+        logger.info(`convo found based on participants`);
+        convo = convoCheck;
+        convo.messages.push(message._id);
+        await convo.save();
+        logger.info(`convo updated with message ${convo}`);
+      } else if (!convoCheck) {
+        // create new convo
+        logger.info('creating new conversation');
+        convo = Conversation.build({
+          participants: [...receivers, sender],
+          messages: [message._id],
+        });
+        logger.info(`convo created ${convo}`);
+        await convo.save();
+        logger.info(`convo saved`);
+      }
     }
 
     // notify receiver(s)

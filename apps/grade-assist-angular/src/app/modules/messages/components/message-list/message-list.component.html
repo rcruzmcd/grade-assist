@@ -1,7 +1,7 @@
 <mat-action-list>
   <div *ngFor="let conv of messages">
     <button mat-list-item (click)="onConvoSelected(conv)">
-      <div mat-subheader>{{ conv.messages[0].datetime }}</div>
+      <div mat-subheader>{{ conv.updatedAt | date: 'short' }}</div>
       <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
       <div mat-line>{{ getParticipants(conv) }}</div>
       <div mat-line>{{ getPrevText(conv) }}</div>

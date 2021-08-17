@@ -10,11 +10,13 @@ import * as fromStore from '../../store';
 })
 export class SocketService {
   socket = io('http://localhost:3000');
-  loggedInUser: any;
+  loggedInUser: any = {};
 
   public message$: BehaviorSubject<string> = new BehaviorSubject('');
   public getNewMessage = () => {
-    this.socket.on(`message${this.loggedInUser.userId}`, (message: any) => {
+    console.log(`in socket ${this.loggedInUser?.userId}`);
+    this.socket.on(`message${this.loggedInUser?.userId}`, (message: any) => {
+      console.log('getting message', message);
       this.message$.next(message);
     });
 

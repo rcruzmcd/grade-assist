@@ -16,7 +16,6 @@ export class MessageListComponent implements OnInit {
   ngOnInit(): void {
     this.store.subscribe((state) => {
       this.messages = state.messages?.conversations;
-      console.log(this.messages);
     });
 
     this.store.dispatch({

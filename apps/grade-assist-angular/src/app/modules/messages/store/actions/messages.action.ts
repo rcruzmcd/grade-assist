@@ -11,6 +11,9 @@ export enum MessagesActions {
   SOCKET_MESSAGES_SUCCESS = '[Messages] Socket Messages Success',
   SOCKET_MESSAGES_FAILURE = '[Messages] Socket Messages Failure',
   SELECT_CONVERSATION = '[Messages] Select Conversation',
+  GET_USERS = '[Messages] Get Users',
+  GET_USERS_SUCCESS = '[Messages] Get Users Success',
+  GET_USERS_FAILURE = '[Messages] Get Users Failure',
 }
 
 export const selectConversation = createAction(
@@ -60,5 +63,17 @@ export const socketMessagesSuccess = createAction(
 
 export const socketMessagesFailure = createAction(
   MessagesActions.SOCKET_MESSAGES_FAILURE,
+  props<any>()
+);
+
+export const getUsers = createAction(MessagesActions.GET_USERS, props<any>());
+
+export const getUsersSuccess = createAction(
+  MessagesActions.GET_USERS_SUCCESS,
+  props<any>()
+);
+
+export const getUsersFailure = createAction(
+  MessagesActions.GET_USERS_FAILURE,
   props<any>()
 );
