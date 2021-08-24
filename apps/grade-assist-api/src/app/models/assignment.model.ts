@@ -21,43 +21,49 @@ interface GradeModelInterface extends mongoose.Model<any> {
   build(attr: IGrade): any;
 }
 
-const assignmentSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const assignmentSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    weight: {
+      type: Number,
+      required: false,
+    },
+    class: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Classes',
+    },
+    grades: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'Grade',
+    },
   },
-  type: {
-    type: String,
-    required: true,
-  },
-  weight: {
-    type: Number,
-    required: false,
-  },
-  class: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Classes',
-  },
-  grades: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'Grade',
-  },
-});
+  { timestamps: true }
+);
 
-const gradeSchema = new mongoose.Schema({
-  grade: {
-    type: Number,
-    required: true,
+const gradeSchema = new mongoose.Schema(
+  {
+    grade: {
+      type: Number,
+      required: true,
+    },
+    assignment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Assignment',
+    },
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
-  assignment: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Assignment',
-  },
-  student: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
-});
+  { timestamps: true }
+);
 
 assignmentSchema.statics.build = (attr: IAssignment) => {
   return new Assignment(attr);

@@ -10,6 +10,14 @@ export interface IMessage {
   sender: string;
   message: string;
   datetime: Date;
+  status: MessageStatus;
+}
+
+export enum MessageStatus {
+  Delivered,
+  Failed,
+  Read,
+  Sent,
 }
 
 interface ConversationInteface extends mongoose.Model<any> {
@@ -34,20 +42,27 @@ const conversationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const messageSchema = new mongoose.Schema({
-  sender: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'User',
+const messageSchema = new mongoose.Schema(
+  {
+    sender: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'User',
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    datetime: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
   },
-  message: {
-    type: String,
-    required: true,
-  },
-  datetime: {
-    type: Date,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 conversationSchema.statics.build = (attr: IConversation) => {
   return new Conversation(attr);

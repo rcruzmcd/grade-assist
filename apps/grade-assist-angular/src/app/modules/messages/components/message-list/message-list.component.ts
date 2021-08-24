@@ -3,6 +3,11 @@ import { IConversation } from '@grade-assist/data';
 import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
+import * as rootState from '../../../../store/reducers/root-state';
+
+interface idMessage {
+  [id: string]: IConversation;
+}
 
 @Component({
   selector: 'grade-assist-message-list',
@@ -10,24 +15,26 @@ import * as fromStore from '../../store';
   styleUrls: ['./message-list.component.scss'],
 })
 export class MessageListComponent implements OnInit {
-  messages: IConversation[] = [];
+  // messages: IConversation[] = [];
   loggedInUser?: any;
-  constructor(private store: Store<fromStore.State>) {}
+  convos?: idMessage;
+  constructor(private store: Store<rootState.RootState>) {}
   ngOnInit(): void {
     this.store.subscribe((state) => {
-      this.messages = state.messages?.conversations;
+      // this.messages = state.messages?.conversations;
+      this.convos = state.messages.convos;
+      this.loggedInUser = state.auth.user;
     });
 
     this.store.dispatch({
       type: fromStore.MessagesActions.GET_MESSAGES,
       payload: {
-        userId: '611586657489f232af0ec37f',
+        userId: this.loggedInUser._id,
       },
     });
   }
 
   onConvoSelected(conv: any) {
-    console.log(conv);
     this.store.dispatch({
       type: fromStore.MessagesActions.SELECT_CONVERSATION,
       payload: conv,
@@ -36,17 +43,29 @@ export class MessageListComponent implements OnInit {
   }
 
   getParticipants(conv: any) {
-    const participants = conv.participants.filter(
-      (person: any) => person._id == '611586657489f232af0ec37f'
-    );
-    const stringParticipants = participants.map(
-      (person: any) => person.firstName + ' ' + person.lastName
-    );
-    return stringParticipants;
+    if (conv) {
+      const participants = conv.participants.filter(
+        (person: any) => person._id != this.loggedInUser._id
+      );
+      const stringParticipants = participants.map(
+        (person: any) => person.firstName + ' ' + person.lastName
+      );
+      return stringParticipants;
+    } else {
+      return '';
+    }
   }
 
   getPrevText(conv: any) {
-    const prevText = conv.messages[0].message;
-    return `${prevText.slice(0, 10)}...`;
+    if (conv) {
+      const prevText = conv.messages[0].message;
+      return `${prevText.slice(0, 10)}...`;
+    } else {
+      return '';
+    }
+  }
+
+  getUpdateDate(conv: any) {
+    return conv?.updatedAt;
   }
 }

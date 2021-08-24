@@ -1,10 +1,26 @@
 <mat-action-list>
-  <div *ngFor="let conv of messages">
+  <!-- <div *ngFor="let conv of messages">
     <button mat-list-item (click)="onConvoSelected(conv)">
       <div mat-subheader>{{ conv.updatedAt | date: 'short' }}</div>
       <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
       <div mat-line>{{ getParticipants(conv) }}</div>
       <div mat-line>{{ getPrevText(conv) }}</div>
+    </button>
+    <mat-divider></mat-divider>
+  </div> -->
+
+  <!-- this ng if will show new message to reset conversation if something selected
+  if* convo selected exists -->
+  <div *ngIf=""></div>
+
+  <!-- need to add conditional css class to make text bold if Delivered status 0
+  (hasnt been readh ) -->
+  <div *ngFor="let conv of convos | keyvalue">
+    <button mat-list-item (click)="onConvoSelected(conv.value)">
+      <div mat-subheader>{{ getUpdateDate(conv.value) | date: 'short' }}</div>
+      <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
+      <div mat-line>{{ getParticipants(conv.value) }}</div>
+      <div mat-line>{{ getPrevText(conv.value) }}</div>
     </button>
     <mat-divider></mat-divider>
   </div>

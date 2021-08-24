@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { logger } from '../../middleware/audit-logs';
-import { Conversation, Message } from '../../models/conversation';
+import {
+  Conversation,
+  Message,
+  MessageStatus,
+} from '../../models/conversation';
 
 import * as io from '../../../socket';
 
@@ -27,6 +31,7 @@ export const sendMessage = async (
       datetime: new Date(),
       message: messageText,
       sender,
+      status: MessageStatus.Sent,
     });
     logger.info(`message created ${message}`);
 
@@ -34,9 +39,7 @@ export const sendMessage = async (
     logger.info(`message saved`);
 
     let convo: any;
-    // ALSO CHECK IF CONVERSATION CHECK WITH SENDER AND RECEIVER
     if (convoId) {
-      logger.info(`updating existing conversation`);
       logger.info(`searching for convo ${convoId}`);
       convo = await Conversation.findById(convoId)
         .populate({ path: 'messages' })
@@ -51,7 +54,6 @@ export const sendMessage = async (
       await convo.save();
       logger.info(`convo updated with message ${convo}`);
     } else {
-      // check for existing convo between participants
       logger.info(
         `checking for convo with participants ${receivers}, ${sender}`
       );
@@ -83,7 +85,10 @@ export const sendMessage = async (
       io.getIO().emit(`message${receiver}`, {
         action: 'new message',
         message: message,
+        convoId: convo._id,
       });
+      message.status = MessageStatus.Delivered;
+      message.save();
     }
 
     res.status(200).json({ message: 'Message sent!', convo: convo });

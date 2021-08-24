@@ -29,8 +29,7 @@ export class FormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['formConfigs']) {
-      console.log('change detected');
-      console.log(changes);
+      // TODO: any changes
       // how to load async select
     }
   }

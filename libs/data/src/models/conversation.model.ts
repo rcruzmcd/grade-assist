@@ -11,4 +11,6 @@ export interface IMessage {
   message: string;
   datetime: Date;
   _id?: string;
+  updatedAt?: Date;
+  createdAt?: Date;
 }

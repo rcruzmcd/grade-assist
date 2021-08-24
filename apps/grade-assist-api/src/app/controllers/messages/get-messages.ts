@@ -17,7 +17,7 @@ export const getConversations = async (
 
     logger.info(`searching for convo for user ${userId}`);
     const convo = await Conversation.find({ participants: userId })
-      .populate({ path: 'messages' })
+      .populate({ path: 'messages', options: { updatedAt: 'desc' } })
       .populate({
         path: 'participants',
         select: 'firstName lastName email type',

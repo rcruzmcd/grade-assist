@@ -7,6 +7,7 @@ import {
 import * as fromReducers from './messages.reducers';
 
 export * from './messages.reducers';
+
 export interface State {
   messages: fromReducers.MessagesState;
 }

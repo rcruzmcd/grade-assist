@@ -8,6 +8,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as fromStore from '../../store';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, startWith } from 'rxjs/operators';
+import * as rootState from '../../../../store/reducers/root-state';
 
 @Component({
   selector: 'grade-assist-conversation',
@@ -30,7 +31,7 @@ export class ConversationComponent implements OnInit {
   allTo: User[] = [];
   @ViewChild('toInput') toInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private store: Store<fromStore.State>) {
+  constructor(private store: Store<rootState.RootState>) {
     this.filteredTo = this.toCtrl.valueChanges.pipe(
       startWith(null),
       map((to: User | null) => (to ? this._filter(to) : this.allTo.slice()))
@@ -38,9 +39,7 @@ export class ConversationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.store.subscribe((state) => {
-      this.loggedInUser = {
-        userId: '611586797489f232af0ec385',
-      };
+      this.loggedInUser = state.auth.user;
 
       if (state.messages.userList) this.allTo = state.messages.userList;
 
@@ -55,7 +54,7 @@ export class ConversationComponent implements OnInit {
 
         // filter out logged in user from participants
         const _to: any = this.selectedConvo.participants.filter(
-          (person: any) => person._id != this.loggedInUser.userId
+          (person: any) => person._id != this.loggedInUser._id
         );
 
         // copy of partipants
@@ -72,7 +71,7 @@ export class ConversationComponent implements OnInit {
   onSend() {
     const receivers = this.to.map((to) => to._id);
     const message = {
-      sender: this.loggedInUser?.userId,
+      sender: this.loggedInUser?._id,
       receivers: receivers,
       messageText: this.userText,
       convoId: this.selectedConvo?._id,
