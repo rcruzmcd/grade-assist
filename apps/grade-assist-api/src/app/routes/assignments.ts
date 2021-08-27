@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { body } from 'express-validator/check';
 
-import * as assignController from '../controllers/assignments';
+import * as assignController from '../controllers/assignment';
 import { isAuth } from '../middleware/is-auth';
 
 import { Classes } from '../models/classes.model';

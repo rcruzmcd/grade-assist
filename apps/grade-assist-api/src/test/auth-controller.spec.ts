@@ -6,7 +6,7 @@ import { expect } from 'chai';
 
 import { User } from '../app/models/users.model';
 import { mongodb } from '../app/models/mongoose';
-import * as AuthController from '../app/controllers/auth';
+import * as AuthController from '../app/controllers/auth/auth';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const next = () => {};

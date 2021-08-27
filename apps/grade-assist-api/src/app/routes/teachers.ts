@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { body } from 'express-validator';
 
 import { isAuth } from '../middleware/is-auth';
-import * as fromControllers from '../controllers/teachers';
+import * as fromControllers from '../controllers/teacher/teachers';
 import { User } from '../models/users.model';
 
 const router = Router();

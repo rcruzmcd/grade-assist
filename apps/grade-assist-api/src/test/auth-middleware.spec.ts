@@ -1,8 +1,13 @@
+import { Request, Response, NextFunction } from 'express';
+
 import { expect } from 'chai';
 import { Jwt } from 'jsonwebtoken';
 import * as sinon from 'sinon';
 
-import * as authMiddleware from '../app/middleware/is-auth';
+import { isAuth } from '../app/middleware/is-auth';
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const next = () => {};
 
 describe('Auth Middleware', () => {
   it('show throw an error if no authorization header is present', () => {
@@ -11,9 +16,9 @@ describe('Auth Middleware', () => {
         return null;
       },
     };
-    expect(authMiddleware.bind(this, req, {}, () => {})).to.throw(
-      'Not authenticated.'
-    );
+    expect(
+      isAuth.bind(this, req as Request, {} as Response, next as NextFunction)
+    ).to.throw('Not authenticated.');
   });
 
   it('should throw an error if the authorization header is only one string', function () {
@@ -22,7 +27,9 @@ describe('Auth Middleware', () => {
         return 'xyz';
       },
     };
-    expect(authMiddleware.bind(this, req, {}, () => {})).to.throw();
+    expect(
+      isAuth.bind(this, req as Request, {} as Response, next as NextFunction)
+    ).to.throw();
   });
 
   it('should throw an error if the token cannot be verified', function () {
@@ -31,6 +38,8 @@ describe('Auth Middleware', () => {
         return 'Bearer xyz';
       },
     };
-    expect(authMiddleware.bind(this, req, {}, () => {})).to.throw();
+    expect(
+      isAuth.bind(this, req as Request, {} as Response, next as NextFunction)
+    ).to.throw();
   });
 });
