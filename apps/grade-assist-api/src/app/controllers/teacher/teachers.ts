@@ -2,10 +2,10 @@ import { hash } from 'bcryptjs';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator/check';
 
-import { User } from '../models/users.model';
+import { User } from '../../models/users.model';
 import { ResponseError } from '@grade-assist/data';
 
-import { logger } from '../middleware/audit-logs';
+import { logger } from '../../middleware/audit-logs';
 
 export const getTeachers = async (
   req: Request,
