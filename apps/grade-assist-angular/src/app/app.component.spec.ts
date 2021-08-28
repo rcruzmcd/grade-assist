@@ -7,7 +7,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../app/components/login/login.component';
 import { SharedModule } from '@grade-assist/shared';
@@ -31,7 +31,10 @@ describe('AppComponent', () => {
         SharedModule,
       ],
       declarations: [AppComponent, LoginComponent],
-      providers: [provideMockStore({ initialState })],
+      providers: [
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+        provideMockStore({ initialState }),
+      ],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
@@ -50,42 +53,54 @@ describe('AppComponent', () => {
   });
 
   it('should call onLogout on button click', fakeAsync(() => {
-    // jest.spyOn(component, 'onLogout');
-    // component.isAuthorized = true;
-    // fixture.detectChanges();
-    // const buttonDe = fixture.debugElement.query(By.css('#logout-button'));
-    // const button = buttonDe.nativeElement;
-    // button.click();
-    // tick();
-    // expect(component.onLogout).toHaveBeenCalled();
+    jest.spyOn(component, 'onLogout');
+    component.isAuthorized = true;
+    fixture.detectChanges();
+    const buttonDe = fixture.debugElement.query(By.css('#logout-button'));
+    const button = buttonDe.nativeElement;
+    button.click();
+    tick();
+    expect(component.onLogout).toHaveBeenCalled();
   }));
 
-  it('should dispatch logout action on logout function', () => {
-    component.onLogout();
-  });
-
   it('should display login screen on first load with isAuthorize false', () => {
-    const appContainerEl = fixture.debugElement.query(
+    component.isAuthorized = false;
+    const loginContainerEl = fixture.debugElement.query(
       By.css('#login-container')
     );
-    expect(appContainerEl).toBeFalsy();
+    expect(loginContainerEl).toBeTruthy();
   });
 
   it('should display app container if isAuthorized is true', () => {
     component.isAuthorized = true;
     fixture.detectChanges();
-    // const appContainerEl = fixture.debugElement.query(By.css('#app-container'));
-    // expect(appContainerEl).toBeTruthy();
+    const appContainerEl = fixture.debugElement.query(By.css('#app-container'));
+    expect(appContainerEl).toBeTruthy();
   });
 
   it('should load menu items base on menu configuration', () => {
     component.isAuthorized = true;
     fixture.detectChanges();
-    // const drawer = fixture.debugElement.query(By.css('.drawer'));
-    // const listLength = document.getElementsByTagName('mat-nav-list').length;
-    // const menuLength = component.menu.length;
-    // expect(listLength).toEqual(menuLength);
+    const drawer = fixture.debugElement.query(By.css('.drawer'));
+    const listLength = document.getElementsByTagName('mat-nav-list').length;
+    const menuLength = 3; // 3 wildcards
+    // component.menu.length;
+    expect(listLength).toEqual(menuLength);
   });
 
-  // it('should dispatch login action on init', () => {});
+  it('should load ALL menu items for admin', () => {
+    component.userType = 'admin';
+    store.setState({ auth: { jwt: '', userType: 'admin' } });
+    component.isAuthorized = true;
+    fixture.detectChanges();
+
+    const drawer = fixture.debugElement.query(By.css('.drawer'));
+    const listLength = document.getElementsByTagName('mat-nav-list').length;
+    const menuLength = component.menu.length;
+    expect(listLength).toEqual(menuLength);
+  });
+
+  // it('should dispatch logout action on logout function', () => {
+  //   component.onLogout();
+  // });
 });
