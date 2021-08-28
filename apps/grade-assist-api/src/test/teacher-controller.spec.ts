@@ -64,12 +64,12 @@ describe('Teachers Controller', () => {
   // teacherController.updateTeacher success and failure
 
   afterAll(function (done) {
-    User.deleteMany({})
-      .then(() => {
-        return mongoose.disconnect();
-      })
-      .then(() => {
-        done();
-      });
+    // User.deleteMany({})
+    //   .then(() => {
+    //     return mongoose.disconnect();
+    //   })
+    //   .then(() => {
+    //     done();
+    //   });
   });
 });

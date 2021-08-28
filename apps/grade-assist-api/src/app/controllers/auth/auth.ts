@@ -22,7 +22,13 @@ export const signup = async (
     const { email, password } = req.body;
 
     const hashedPw = await hash(password, 12);
-    const user = new User({ email, password: hashedPw });
+    const user = new User({
+      email,
+      password: hashedPw,
+      type: 'admin',
+      firstName: 'admin',
+      lastName: 'admin',
+    });
 
     const result = await user.save();
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   MatSnackBar,
@@ -10,13 +10,15 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 
+import { ApiService } from '@grade-assist/shared';
+
 @Injectable()
 export class AuthEffect {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.AuthActions.LOGIN),
       mergeMap((action: any) =>
-        this.http.post('/api/login', action.payload).pipe(
+        this.api.post('/api/login', action.payload).pipe(
           map((rsp) => ({
             type: fromActions.AuthActions.LOGIN_SUCCESS,
             payload: rsp,
@@ -42,7 +44,7 @@ export class AuthEffect {
     this.actions$.pipe(
       ofType(fromActions.AuthActions.LOGIN_SUCCESS),
       mergeMap((action: any) =>
-        this.http.get(`/api/user/${action.payload.userId}`).pipe(
+        this.api.get(`/api/user/${action.payload.userId}`).pipe(
           map((rsp) => ({
             type: fromActions.AuthActions.GET_USER_SUCCESS,
             payload: rsp,
@@ -65,7 +67,7 @@ export class AuthEffect {
   );
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
+    private api: ApiService,
     private _snackBar: MatSnackBar
   ) {}
 }
