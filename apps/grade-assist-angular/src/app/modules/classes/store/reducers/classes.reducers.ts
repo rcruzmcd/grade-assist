@@ -29,44 +29,25 @@ export const initialState: ClassesState = {
 
 const ClassesReducer = createReducer(
   initialState,
-  on(fromActions.loadAllClasses, (state) => ({ ...state })),
   on(fromActions.loadAllClassesSuccess, (state, action) => ({
     ...state,
+    loaded: true,
     classesList: action.payload.classes,
   })),
-  on(fromActions.loadAllClassesFailure, (state) => ({ ...state })),
 
-  on(fromActions.loadClassesById, (state) => ({ ...state })),
-  on(fromActions.loadClassesByIdSuccess, (state) => ({ ...state })),
-  on(fromActions.loadClassesByIdFailure, (state) => ({ ...state })),
-
-  on(fromActions.createClasses, (state) => ({ ...state })),
-  on(fromActions.createClassesSuccess, (state) => ({ ...state })),
-  on(fromActions.createClassesFailure, (state) => ({ ...state })),
-
-  on(fromActions.updateClasses, (state) => ({ ...state })),
-  on(fromActions.updateClassesSuccess, (state) => ({ ...state })),
-  on(fromActions.updateClassesFailure, (state) => ({ ...state })),
-
-  on(fromActions.deleteClasses, (state) => ({ ...state })),
   on(fromActions.deleteClassesSuccess, (state, action) => ({
     ...state,
+    loaded: true,
     classesList: state.classesList.filter(
       (classes) => classes._id !== action.payload.id
     ),
   })),
-  on(fromActions.deleteClassesFailure, (state) => ({ ...state })),
+
   on(fromActions.selectClass, (state, action) => ({
     ...state,
     selectedClass: action.payload,
   })),
-  on(fromActions.selectAssignment, (state, action) => ({
-    ...state,
-    selectedAssign: action.payload,
-  })),
-  on(fromActions.getStudetnsNotAssigned, (state) => ({
-    ...state,
-  })),
+
   on(fromActions.getStudetnsNotAssignedSuccess, (state, action) => ({
     ...state,
     studentsNotInSelected: action.payload?.studentList.filter(
@@ -109,7 +90,29 @@ const ClassesReducer = createReducer(
       ...state.selectedAssign,
       grades: [...state.selectedAssign.grades],
     },
+  })),
+
+  on(fromActions.selectAssignment, (state, action) => ({
+    ...state,
+    selectedAssign: action.payload,
   }))
+
+  // on(fromActions.loadAllClasses, (state) => ({ ...state })),
+  // on(fromActions.loadAllClassesFailure, (state) => ({ ...state })),
+  // on(fromActions.loadClassesById, (state) => ({ ...state })),
+  // on(fromActions.loadClassesByIdSuccess, (state) => ({ ...state })),
+  // on(fromActions.loadClassesByIdFailure, (state) => ({ ...state })),
+  // on(fromActions.createClasses, (state) => ({ ...state })),
+  // on(fromActions.createClassesSuccess, (state) => ({ ...state })),
+  // on(fromActions.createClassesFailure, (state) => ({ ...state })),
+  // on(fromActions.updateClasses, (state) => ({ ...state })),
+  // on(fromActions.updateClassesSuccess, (state) => ({ ...state })),
+  // on(fromActions.updateClassesFailure, (state) => ({ ...state })),
+  // on(fromActions.deleteClasses, (state) => ({ ...state })),
+  // on(fromActions.deleteClassesFailure, (state) => ({ ...state })),
+  // on(fromActions.getStudetnsNotAssigned, (state) => ({
+  //   ...state,
+  // })),
 );
 
 export function reducer(state: ClassesState | undefined, action: Action) {
