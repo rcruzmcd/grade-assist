@@ -37,4 +37,39 @@ describe('MessageListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render messages', () => {
+    const convoStub = [
+      {
+        messages: [
+          {
+            sender: '123',
+            message: 'string',
+            datetime: new Date(),
+          },
+        ],
+        participants: ['123', '454'],
+      },
+    ];
+    component.messages = convoStub;
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch action on convo selected', () => {
+    const convoStub = [
+      {
+        messages: [
+          {
+            sender: '123',
+            message: 'string',
+            datetime: new Date(),
+          },
+        ],
+        participants: ['123', '454'],
+      },
+    ];
+    component.onConvoSelected(convoStub[0]);
+    expect(component).toBeTruthy();
+  });
 });

@@ -39,4 +39,19 @@ describe('ClassesListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should dispatch view action onViewHandler', () => {
+    component.onViewHandler({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch delete action onDeleteHandler', () => {
+    component.onDeleteHandler({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch update action onUpdateHandler', () => {
+    component.onUpdateHandler({} as Event);
+    expect(component).toBeTruthy();
+  });
 });
