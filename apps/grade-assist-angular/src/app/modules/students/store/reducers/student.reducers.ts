@@ -20,33 +20,29 @@ export const initialState: StudentState = {
 
 const StudentReducer = createReducer(
   initialState,
-  on(fromActions.loadAllStudent, (state) => ({ ...state })),
-  on(fromActions.loadAllStudentSuccess, (state, action) => ({
-    ...state,
-    studentsList: action.payload.studentList,
-  })),
-  on(fromActions.loadAllStudentFailure, (state) => ({ ...state })),
-
-  on(fromActions.loadStudentById, (state) => ({ ...state })),
-  on(fromActions.loadStudentByIdSuccess, (state) => ({ ...state })),
-  on(fromActions.loadStudentByIdFailure, (state) => ({ ...state })),
-
-  on(fromActions.createStudent, (state) => ({ ...state })),
-  on(fromActions.createStudentSuccess, (state) => ({ ...state })),
-  on(fromActions.createStudentFailure, (state) => ({ ...state })),
-
-  on(fromActions.updateStudent, (state) => ({ ...state })),
-  on(fromActions.updateStudentSuccess, (state) => ({ ...state })),
-  on(fromActions.updateStudentFailure, (state) => ({ ...state })),
-
-  on(fromActions.deleteStudent, (state) => ({ ...state })),
   on(fromActions.deleteStudentSuccess, (state, action) => ({
     ...state,
     studentsList: state.studentsList.filter(
       (student) => student._id !== action.payload.id
     ),
   })),
-  on(fromActions.deleteStudentFailure, (state) => ({ ...state }))
+  on(fromActions.loadAllStudentSuccess, (state, action) => ({
+    ...state,
+    studentsList: action.payload.studentList,
+  }))
+  // on(fromActions.loadAllStudent, (state) => ({ ...state })),
+  // on(fromActions.loadAllStudentFailure, (state) => ({ ...state })),
+  // on(fromActions.loadStudentById, (state) => ({ ...state })),
+  // on(fromActions.loadStudentByIdSuccess, (state) => ({ ...state })),
+  // on(fromActions.loadStudentByIdFailure, (state) => ({ ...state })),
+  // on(fromActions.createStudent, (state) => ({ ...state })),
+  // on(fromActions.createStudentSuccess, (state) => ({ ...state })),
+  // on(fromActions.createStudentFailure, (state) => ({ ...state })),
+  // on(fromActions.updateStudent, (state) => ({ ...state })),
+  // on(fromActions.updateStudentSuccess, (state) => ({ ...state })),
+  // on(fromActions.updateStudentFailure, (state) => ({ ...state })),
+  // on(fromActions.deleteStudent, (state) => ({ ...state })),
+  // on(fromActions.deleteStudentFailure, (state) => ({ ...state }))
 );
 
 export function reducer(state: StudentState | undefined, action: Action) {

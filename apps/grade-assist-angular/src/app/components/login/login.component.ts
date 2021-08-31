@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
 
+// sign up tab to handle new user... request needs to be approved by admin before sending
 @Component({
   selector: 'grade-assist-login',
   templateUrl: './login.component.html',
@@ -42,7 +43,7 @@ export class LoginComponent {
     this.store.dispatch({
       type: fromStore.AuthActions.LOGIN,
       payload: {
-        email: 'admin@grade-assist.com',
+        email: 'admin@admin.com',
         password: 'myverystrongSuperString123*',
       },
     });

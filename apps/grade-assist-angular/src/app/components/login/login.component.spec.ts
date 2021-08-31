@@ -47,13 +47,25 @@ describe('LoginComponent', () => {
 
   it('should call form handler once information received from form', () => {
     jest.spyOn(component, 'formHandler');
-
+    component.formHandler({} as Event);
     expect(component.formHandler).toHaveBeenCalled();
   });
 
-  it('should dispatch login action on formhandler called', () => {
-    // spyOn(component, 'formHandler');
-    // expect(component.formHandler).toHaveBeenCalled();
-    // component.formHandler();
+  it('should dispatch action loginAsAdmin', () => {
+    jest.spyOn(component, 'loginAsAdmin');
+    component.loginAsAdmin();
+    expect(component.loginAsAdmin).toHaveBeenCalled();
+  });
+
+  it('should dispatch action loginAsStudent', () => {
+    jest.spyOn(component, 'loginAsStudent');
+    component.loginAsStudent();
+    expect(component.loginAsStudent).toHaveBeenCalled();
+  });
+
+  it('should dispatch action loginAsTeacher', () => {
+    jest.spyOn(component, 'loginAsTeacher');
+    component.loginAsTeacher();
+    expect(component.loginAsTeacher).toHaveBeenCalled();
   });
 });

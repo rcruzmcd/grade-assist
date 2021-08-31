@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { body } from 'express-validator/check';
 
 import { User } from '../models/users.model';
-import * as fromController from '../controllers/auth';
+import * as fromController from '../controllers/auth/auth';
 
 const router = Router();
 

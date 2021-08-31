@@ -1,25 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { StudentListComponent } from './student-list.component';
+import { ClassesListComponent } from './classes-list.component';
 import { SharedModule } from '@grade-assist/shared';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('StudentListComponent', () => {
+describe('ClassesListComponent', () => {
   let store: MockStore;
   const initialState = {};
 
-  let component: StudentListComponent;
-  let fixture: ComponentFixture<StudentListComponent>;
+  let component: ClassesListComponent;
+  let fixture: ComponentFixture<ClassesListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StudentListComponent],
+      declarations: [ClassesListComponent],
       imports: [
         SharedModule,
         BrowserAnimationsModule,
+        RouterTestingModule,
         MatCardModule,
         MatIconModule,
       ],
@@ -29,12 +31,27 @@ describe('StudentListComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StudentListComponent);
+    fixture = TestBed.createComponent(ClassesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch view action onViewHandler', () => {
+    component.onViewHandler({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch delete action onDeleteHandler', () => {
+    component.onDeleteHandler({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch update action onUpdateHandler', () => {
+    component.onUpdateHandler({} as Event);
     expect(component).toBeTruthy();
   });
 });
