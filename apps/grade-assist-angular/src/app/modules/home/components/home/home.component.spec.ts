@@ -3,6 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from '@grade-assist/shared';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -21,6 +22,7 @@ describe('HomeComponent', () => {
         MatDividerModule,
         MatListModule,
         RouterTestingModule,
+        SharedModule,
       ],
       declarations: [HomeComponent],
       providers: [provideMockStore({ initialState })],

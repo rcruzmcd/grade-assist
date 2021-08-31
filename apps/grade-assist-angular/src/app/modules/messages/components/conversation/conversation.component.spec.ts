@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConversationRecipientComponent } from '../conversation-recipient/conversation-recipient.component';
 
 describe('ConversationComponent', () => {
   let store: MockStore;
@@ -17,7 +18,7 @@ describe('ConversationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConversationComponent],
+      declarations: [ConversationComponent, ConversationRecipientComponent],
       imports: [
         SharedModule,
         BrowserAnimationsModule,

@@ -1,3 +1,4 @@
+import { IConversation } from '@grade-assist/data';
 import * as fromActions from '../actions';
 import * as fromReducer from './messages.reducers';
 
@@ -17,10 +18,11 @@ describe('MessagesReducer', () => {
 
   describe('getMessagesSuccess', () => {
     it('should save conversation from payload', () => {
-      const convoStub = [
+      const convoStub: IConversation[] = [
         {
           messages: [],
           participants: [],
+          _id: '123',
         },
       ];
 
@@ -35,6 +37,9 @@ describe('MessagesReducer', () => {
       const expectedState: fromReducer.MessagesState = {
         ...initialState,
         conversations: convoStub,
+        convos: {
+          '123': convoStub[0],
+        },
       };
 
       const action = fromActions.getMessagesSuccess({ payload });
@@ -87,13 +92,15 @@ describe('MessagesReducer', () => {
       const convoStub = [
         {
           messages: [],
-          participants: [],
+          participants: ['1234', '4566'],
+          _id: '123',
         },
       ];
 
       const selectedStub = {
         messages: [],
         participants: ['1234', '4566'],
+        _id: '123',
       };
 
       const localState: fromReducer.MessagesState = {
@@ -107,8 +114,11 @@ describe('MessagesReducer', () => {
 
       const expectedState: fromReducer.MessagesState = {
         ...initialState,
-        conversations: convoStub,
+        conversations: [...convoStub, selectedStub],
         selectedConversation: selectedStub,
+        convos: {
+          '123': selectedStub,
+        },
       };
 
       const action = fromActions.sendMessagesSuccess({ payload });

@@ -9,10 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MessageListComponent } from '../message-list/message-list.component';
 import { ConversationComponent } from '../conversation/conversation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConversationRecipientComponent } from '../conversation-recipient/conversation-recipient.component';
 
 describe('MessagesHomeComponent', () => {
   let store: MockStore;
-  const initialState = {};
+  const initialState = { messages: {}, auth: { user: {} } };
 
   let component: MessagesHomeComponent;
   let fixture: ComponentFixture<MessagesHomeComponent>;
@@ -23,6 +24,7 @@ describe('MessagesHomeComponent', () => {
         MessagesHomeComponent,
         MessageListComponent,
         ConversationComponent,
+        ConversationRecipientComponent,
       ],
       imports: [
         SharedModule,
