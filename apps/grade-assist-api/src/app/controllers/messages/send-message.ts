@@ -50,7 +50,7 @@ export const sendMessage = async (
 
       logger.info(`searched finished ${convo}`);
 
-      convo.messages.push(message._id);
+      convo.messages.push(message);
       await convo.save();
       logger.info(`convo updated with message ${convo}`);
     } else {

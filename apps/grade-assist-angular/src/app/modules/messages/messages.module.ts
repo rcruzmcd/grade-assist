@@ -12,12 +12,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as fromStore from './store';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { ConversationComponent } from './components/conversation/conversation.component';
+import { ConversationRecipientComponent } from './components/conversation-recipient/conversation-recipient.component';
 
 @NgModule({
   declarations: [
     MessagesHomeComponent,
     MessageListComponent,
     ConversationComponent,
+    ConversationRecipientComponent,
   ],
   imports: [
     CommonModule,

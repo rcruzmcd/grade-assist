@@ -11,7 +11,12 @@
 
   <!-- this ng if will show new message to reset conversation if something selected
   if* convo selected exists -->
-  <div *ngIf=""></div>
+  <button mat-list-item (click)="onNewConvo()">
+    <div mat-subheader></div>
+    <mat-icon mat-list-icon color="accent">add_circle</mat-icon>
+    <div mat-line>New Message</div>
+  </button>
+  <mat-divider></mat-divider>
 
   <!-- need to add conditional css class to make text bold if Delivered status 0
   (hasnt been readh ) -->
@@ -22,6 +27,5 @@
       <div mat-line>{{ getParticipants(conv.value) }}</div>
       <div mat-line>{{ getPrevText(conv.value) }}</div>
     </button>
-    <mat-divider></mat-divider>
   </div>
 </mat-action-list>

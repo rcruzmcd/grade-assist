@@ -24,6 +24,11 @@ export class MessageListComponent implements OnInit {
       // this.messages = state.messages?.conversations;
       this.convos = state.messages.convos;
       this.loggedInUser = state.auth.user;
+
+      // bad bad memory leak happens here
+      // if (this.convos) {
+      //   this.onConvoSelected(this.convos[0]);
+      // }
     });
 
     this.store.dispatch({
@@ -31,6 +36,13 @@ export class MessageListComponent implements OnInit {
       payload: {
         userId: this.loggedInUser._id,
       },
+    });
+  }
+
+  onNewConvo() {
+    this.store.dispatch({
+      type: fromStore.MessagesActions.SELECT_CONVERSATION,
+      payload: {},
     });
   }
 

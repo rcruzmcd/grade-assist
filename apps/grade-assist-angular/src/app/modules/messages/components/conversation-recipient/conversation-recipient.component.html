@@ -1,0 +1,44 @@
+<div class="container">
+  <mat-icon mat-list-icon color="primary" class="icon">account_circle</mat-icon>
+  <mat-form-field class="chip-list" appearance="standard">
+    <mat-label>To</mat-label>
+    <mat-chip-list #chipList aria-label="To selection">
+      <mat-chip
+        *ngFor="let person of to"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(person)"
+      >
+        {{ person.firstName }} {{ person.lastName }}
+        <mat-icon matChipRemove *ngIf="isEditingTo && removable"
+          >cancel</mat-icon
+        >
+      </mat-chip>
+      <input
+        #toInput
+        [disabled]="!isEditingTo"
+        [formControl]="toCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"
+      />
+    </mat-chip-list>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      <mat-option *ngFor="let person of filteredTo | async" [value]="person">
+        {{ person.firstName }} {{ person.lastName }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button
+    mat-icon-button
+    color="primary"
+    class="edit-button"
+    (click)="onEditClicked()"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>

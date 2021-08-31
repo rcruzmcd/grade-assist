@@ -8,11 +8,11 @@ import * as fromStore from '../../store';
   templateUrl: './messages-home.component.html',
   styleUrls: ['./messages-home.component.scss'],
 })
-export class MessagesHomeComponent implements OnInit {
-  constructor(private store: Store<fromStore.State>) {}
-  ngOnInit(): void {
-    this.store.subscribe((state) => {
-      console.log(state);
-    });
-  }
+export class MessagesHomeComponent {
+  // constructor(private store: Store<fromStore.State>) {}
+  // ngOnInit(): void {
+  //   this.store.subscribe((state) => {
+  //     console.log(state);
+  //   });
+  // }
 }

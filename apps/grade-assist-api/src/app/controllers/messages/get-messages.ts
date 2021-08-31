@@ -17,12 +17,12 @@ export const getConversations = async (
 
     logger.info(`searching for convo for user ${userId}`);
     const convo = await Conversation.find({ participants: userId })
-      .populate({ path: 'messages', options: { updatedAt: 'desc' } })
+      .populate({ path: 'messages', options: { updatedAt: 'asc' } })
       .populate({
         path: 'participants',
         select: 'firstName lastName email type',
       })
-      .sort({ updatedAt: 'desc' });
+      .sort({ updatedAt: 'asc' });
 
     logger.info(`searched finished ${convo}`);
     res.status(200).json({ conversations: convo });

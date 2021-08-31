@@ -26,68 +26,34 @@ export const initialState: MessagesState = {
 const messageReducer = createReducer(
   initialState,
   on(fromActions.getMessagesSuccess, (state, action) => {
-    const sortedConvos = [...action.payload.conversations];
+    const modifiedConvos = action.payload.conversations.reduce(
+      (map: any, convo: any) => {
+        map[convo._id] = convo;
+        return map;
+      },
+      {}
+    );
 
-    sortedConvos.sort((a: any, b: any) => {
-      if (a.updatedAt > b.updatedAt) {
-        return a;
-      }
-      if (a.updatedAt < b.updatedAt) {
-        return b;
-      }
-      return a;
-    });
-
-    // for (const convo of sortedConvos) {
-    //   const sortedMessages = [...convo.messages];
-    //   sortedMessages.sort((a: any, b: any) => {
-    //     if (a.updatedAt > b.updatedAt) {
-    //       return a;
-    //     }
-    //     if (a.updatedAt < b.updatedAt) {
-    //       return b;
-    //     }
-    //     return a;
-    //   });
-    //   console.log(convo, sortedMessages);
-    //   convo.messages = [...convo.messages, ...sortedMessages];
-    // }
-
-    const modifiedConvos = sortedConvos.reduce((map: any, convo: any) => {
-      map[convo._id] = convo;
-      return map;
-    }, {});
     console.log(modifiedConvos);
-
-    // for (const convoId in modifiedConvos) {
-    //   console.log(convoId);
-    //   const sortedMessages = [...modifiedConvos[convoId].messages];
-    //   sortedMessages.sort((a: any, b: any) => {
-    //     if (a.updatedAt > b.updatedAt) {
-    //       return a;
-    //     }
-    //     if (a.updatedAt < b.updatedAt) {
-    //       return b;
-    //     }
-    //     return a;
-    //   });
-    //   console.log(modifiedConvos[convoId], sortedMessages);
-    //   modifiedConvos[convoId].messages = [
-    //     ...modifiedConvos[convoId].messages,
-    //     ...sortedMessages,
-    //   ];
-    // }
 
     return {
       ...state,
       conversations: action.payload.conversations,
       convos: modifiedConvos,
+      selectedConversation: modifiedConvos[0],
     };
   }),
-  on(fromActions.sendMessagesSuccess, (state, action) => ({
-    ...state,
-    selectedConversation: action.payload.convo,
-  })),
+  on(fromActions.sendMessagesSuccess, (state, action) => {
+    return {
+      ...state,
+      selectedConversation: action.payload.convo,
+      conversations: [...state.conversations, action.payload.convo],
+      convos: {
+        ...state.convos,
+        [action.payload.convo._id]: action.payload.convo,
+      },
+    };
+  }),
   on(fromActions.selectConversation, (state, action) => ({
     ...state,
     selectedConversation: action.payload,
@@ -99,13 +65,25 @@ const messageReducer = createReducer(
   on(fromActions.socketMessagesSuccess, (state, action) => {
     if (action.payload.convoId) {
       const convoIdUpdated = action.payload.convoId;
-      const newMessage = action.payload.message;
+      const newMessage = {
+        ...action.payload.message,
+        sender: action.payload.message.sender[0],
+      };
       const oldMessages = state.convos
         ? state.convos[convoIdUpdated].messages
         : [];
       const allMessages = [...oldMessages, newMessage];
 
       console.log(convoIdUpdated, allMessages);
+
+      // const updatedSelected: IConversation =
+      //   state.selectedConversation &&
+      //   convoIdUpdated !== state.selectedConversation._id
+      //     ? state.selectedConversation
+      //     : {
+      //         ...state.selectedConversation,
+      //         messages: allMessages,
+      //       };
 
       return {
         ...state,
@@ -116,6 +94,7 @@ const messageReducer = createReducer(
             messages: allMessages,
           },
         },
+        // selectedConversation: updatedSelected
       };
     } else {
       return {

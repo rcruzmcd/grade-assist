@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+
+  .icon {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .chip-list {
+    flex-grow: 18;
+  }
+
+  .edit-button {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row-reverse;
+  }
+}
