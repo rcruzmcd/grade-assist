@@ -1,7 +1,6 @@
 <mat-card class="card" mat-elevation-z24>
-  <div *ngIf="loading" id="overlay">
-    <mat-spinner></mat-spinner>
-  </div>
+  <grade-assist-spinner *ngIf="loading"></grade-assist-spinner>
+
   <mat-card-title style="text-align: center">Grade Assist</mat-card-title>
   <mat-card-content class="cardContent">
     <mat-divider></mat-divider>

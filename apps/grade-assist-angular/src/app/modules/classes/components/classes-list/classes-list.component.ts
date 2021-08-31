@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./classes-list.component.scss'],
 })
 export class ClassesListComponent implements OnInit {
+  isLoading = false;
   tableConfig: TableConfig = {
     updateRow: true,
     deleteRow: true,
@@ -41,6 +42,7 @@ export class ClassesListComponent implements OnInit {
     this.store.subscribe((state) => {
       // console.log(state);
       this.classList$ = state.classes.classesList;
+      this.isLoading = state.classes.loading;
     });
     this.store.dispatch({ type: fromStore.ClassesAction.LOAD_ALL_CLASSES });
   }

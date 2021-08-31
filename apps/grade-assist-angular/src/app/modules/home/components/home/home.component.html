@@ -3,50 +3,60 @@
   <mat-card-content>
     <mat-divider></mat-divider>
 
-    <div [ngSwitch]="loggedInUser.userType" style="width: 70%; margin: 0 auto">
-      <h3>Quick Links</h3>
-      <div *ngSwitchCase="'admin'">
-        <mat-action-list>
-          <!-- /teacher -->
-          <button mat-list-item>View All Teachers</button>
-          <!-- /student -->
-          <button mat-list-item>View All Students</button>
-          <!-- /classes -->
-          <button mat-list-item>View All Classes</button>
-          <!-- /assignment -->
-          <button mat-list-item>View All Assignments</button>
-          <button mat-list-item>Update a class's teacher</button>
-          <button mat-list-item>Add Student to class</button>
-        </mat-action-list>
+    <div id="container">
+      <div id="userInfo">
+        <mat-icon style="font-size: 8em">account_circle</mat-icon>
       </div>
+      <div id="quickLinks">
+        <div
+          [ngSwitch]="loggedInUser.userType"
+          style="width: 70%; margin: 0 auto"
+        >
+          <h2>Quick Links</h2>
+          <div *ngSwitchCase="'admin'">
+            <mat-action-list>
+              <!-- /teacher -->
+              <button mat-list-item>View All Teachers</button>
+              <!-- /student -->
+              <button mat-list-item>View All Students</button>
+              <!-- /classes -->
+              <button mat-list-item>View All Classes</button>
+              <!-- /assignment -->
+              <button mat-list-item>View All Assignments</button>
+              <button mat-list-item>Update a class's teacher</button>
+              <button mat-list-item>Add Student to class</button>
+            </mat-action-list>
+          </div>
 
-      <div *ngSwitchCase="'teacher'">
-        <mat-action-list>
-          <button mat-list-item>View My Classes</button>
-          <button mat-list-item>View All Students</button>
-          <button mat-list-item>View My Assignments</button>
-          <button mat-list-item>Grade Assignment</button>
-        </mat-action-list>
+          <div *ngSwitchCase="'teacher'">
+            <mat-action-list>
+              <button mat-list-item>View My Classes</button>
+              <button mat-list-item>View All Students</button>
+              <button mat-list-item>View My Assignments</button>
+              <button mat-list-item>Grade Assignment</button>
+            </mat-action-list>
+          </div>
+
+          <div *ngSwitchCase="'student'">
+            <mat-nav-list>
+              <a mat-list-item [routerLink]="['/students/myclasses']">
+                View My Classes
+              </a>
+              <a mat-list-item [routerLink]="['/students/mygrades']">
+                View My Grades
+              </a>
+              <a mat-list-item [routerLink]="['/students/myassignments']">
+                View My Assignments
+              </a>
+            </mat-nav-list>
+          </div>
+
+          <!-- student can reques to join a class
+          teacher/admin can approve/reject  -->
+
+          <div *ngSwitchDefault>Loading...</div>
+        </div>
       </div>
-
-      <div *ngSwitchCase="'student'">
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="['/students/myclasses']">
-            View My Classes
-          </a>
-          <a mat-list-item [routerLink]="['/students/mygrades']">
-            View My Grades
-          </a>
-          <a mat-list-item [routerLink]="['/students/myassignments']">
-            View My Assignments
-          </a>
-        </mat-nav-list>
-      </div>
-
-      <!-- student can reques to join a class
-      teacher/admin can approve/reject  -->
-
-      <div *ngSwitchDefault>Loading...</div>
     </div>
   </mat-card-content>
 </mat-card>

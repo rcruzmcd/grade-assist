@@ -93,6 +93,49 @@ describe('ClassesReducer', () => {
     });
   });
 
+  describe('loadAllTeachersFailure', () => {
+    it('should save adminsList from payload', () => {
+      const localState: fromReducer.ClassesState = {
+        ...initialState,
+      };
+
+      const payload = {};
+
+      const expectedState: fromReducer.ClassesState = {
+        ...initialState,
+        classesList: [],
+        loading: false,
+      };
+
+      const action = fromActions.loadAllClassesFailure({ payload });
+      const state = fromReducer.reducer(localState, action);
+
+      expect(state).toEqual(expectedState);
+      expect(state).not.toBe(localState);
+    });
+  });
+
+  describe('loadAllClasses', () => {
+    it('should be put in loading state', () => {
+      const localState: fromReducer.ClassesState = {
+        ...initialState,
+      };
+
+      const payload = {};
+
+      const expectedState: fromReducer.ClassesState = {
+        ...initialState,
+        loading: true,
+      };
+
+      const action = fromActions.loadAllClasses({ payload });
+      const state = fromReducer.reducer(localState, action);
+
+      expect(state).toEqual(expectedState);
+      expect(state).not.toBe(localState);
+    });
+  });
+
   describe('deleteClassesSuccess action', () => {
     it('should remove delete class from state', () => {
       const rsp = {

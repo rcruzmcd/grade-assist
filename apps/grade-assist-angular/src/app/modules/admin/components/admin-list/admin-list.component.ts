@@ -10,6 +10,7 @@ import { User, ColumnConfigs } from '@grade-assist/data';
   styleUrls: ['./admin-list.component.scss'],
 })
 export class AdminListComponent implements OnInit {
+  isLoading = false;
   tableConfig: {
     pagination?: boolean;
     sort?: boolean;
@@ -50,6 +51,7 @@ export class AdminListComponent implements OnInit {
     this.store.subscribe((state) => {
       // console.log(state);
       this.adminList$ = state.admin.adminsList;
+      this.isLoading = state.admin.loading;
     });
     this.store.dispatch({ type: fromStore.AdminActions.LOAD_ALL_ADMIN });
   }

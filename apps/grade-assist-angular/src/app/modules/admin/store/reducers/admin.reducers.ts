@@ -20,9 +20,18 @@ export const initialState: AdminState = {
 
 const AdminReducer = createReducer(
   initialState,
+
+  on(fromActions.loadAllAdmin, (state) => ({ ...state, loading: true })),
+  on(fromActions.loadAllAdminFailure, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+  })),
   on(fromActions.loadAllAdminSuccess, (state, action) => ({
     ...state,
     adminsList: action.payload.adminList,
+    loading: false,
+    loaded: true,
   })),
   on(fromActions.deleteAdminSuccess, (state, action) => ({
     ...state,
@@ -31,8 +40,6 @@ const AdminReducer = createReducer(
     ),
   }))
 
-  // on(fromActions.loadAllAdmin, (state) => ({ ...state })),
-  // on(fromActions.loadAllAdminFailure, (state) => ({ ...state })),
   // on(fromActions.loadAdminById, (state) => ({ ...state })),
   // on(fromActions.loadAdminByIdSuccess, (state) => ({ ...state })),
   // on(fromActions.loadAdminByIdFailure, (state) => ({ ...state })),

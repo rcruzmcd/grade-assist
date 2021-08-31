@@ -29,10 +29,16 @@ export const initialState: ClassesState = {
 
 const ClassesReducer = createReducer(
   initialState,
+  on(fromActions.loadAllClasses, (state) => ({ ...state, loading: true })),
+  on(fromActions.loadAllClassesFailure, (state) => ({
+    ...state,
+    loading: false,
+  })),
   on(fromActions.loadAllClassesSuccess, (state, action) => ({
     ...state,
     loaded: true,
     classesList: action.payload.classes,
+    loading: false,
   })),
 
   on(fromActions.deleteClassesSuccess, (state, action) => ({
@@ -97,8 +103,6 @@ const ClassesReducer = createReducer(
     selectedAssign: action.payload,
   }))
 
-  // on(fromActions.loadAllClasses, (state) => ({ ...state })),
-  // on(fromActions.loadAllClassesFailure, (state) => ({ ...state })),
   // on(fromActions.loadClassesById, (state) => ({ ...state })),
   // on(fromActions.loadClassesByIdSuccess, (state) => ({ ...state })),
   // on(fromActions.loadClassesByIdFailure, (state) => ({ ...state })),
