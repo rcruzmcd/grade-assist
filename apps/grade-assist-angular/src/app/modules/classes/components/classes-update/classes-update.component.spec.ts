@@ -10,7 +10,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ClassesUpdateComponent', () => {
   let store: MockStore;
-  const initialState = {};
+  const initialState = {
+    // classes: {
+    //   selectedClass: {
+    //     code: 'abc',
+    //     name: 'test',
+    //   },
+    // },
+  };
 
   let component: ClassesUpdateComponent;
   let fixture: ComponentFixture<ClassesUpdateComponent>;
@@ -37,6 +44,26 @@ describe('ClassesUpdateComponent', () => {
   });
 
   it('should create', () => {
+    // (component.teacherList = [
+    //   {
+    //     viewValue: 'test',
+    //     value: '123',
+    //   },
+    // ]),
+    //   fixture.detectChanges();
     expect(component).toBeTruthy();
+  });
+
+  it('should dispatch action on formHandler', () => {
+    // (component.teacherList = [
+    //   {
+    //     viewValue: 'test',
+    //     value: '123',
+    //   },
+    // ]),
+    // //   fixture.detectChanges();
+    // jest.spyOn(component, 'formHandler');
+    // component.formHandler({} as Event);
+    // expect(component.formHandler).toHaveBeenCalled();
   });
 });

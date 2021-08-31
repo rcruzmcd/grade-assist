@@ -9,7 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 
 describe('StudentClassesComponent', () => {
   let store: MockStore;
-  const initialState = {};
+  const initialState = {
+    auth: {
+      user: {
+        _id: '1234',
+      },
+    },
+  };
 
   let component: StudentClassesComponent;
   let fixture: ComponentFixture<StudentClassesComponent>;

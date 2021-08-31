@@ -46,4 +46,16 @@ describe('AssignsDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call onAddClicked when button clicked', () => {
+    jest.spyOn(component, 'onAddClicked');
+    component.onAddClicked();
+    expect(component.onAddClicked).toHaveBeenCalled();
+  });
+
+  it('should dispatch action on add grade', () => {
+    jest.spyOn(component, 'onAddGrade');
+    component.onAddGrade();
+    expect(component.onAddGrade).toHaveBeenCalled();
+  });
 });

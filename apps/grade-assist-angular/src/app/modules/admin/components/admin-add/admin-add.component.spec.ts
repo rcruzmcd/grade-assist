@@ -39,4 +39,10 @@ describe('AdminAddComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should dispatch action on formHandler', () => {
+    jest.spyOn(component, 'formHandler');
+    component.formHandler({} as Event);
+    expect(component.formHandler).toHaveBeenCalled();
+  });
 });

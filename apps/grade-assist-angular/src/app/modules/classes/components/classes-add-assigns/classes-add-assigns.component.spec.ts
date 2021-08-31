@@ -10,7 +10,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ClassesAddAssignsComponent', () => {
   let store: MockStore;
-  const initialState = {};
+  const initialState = {
+    classes: {
+      selectedClass: {
+        code: 'abc',
+        name: 'test',
+      },
+    },
+  };
 
   let component: ClassesAddAssignsComponent;
   let fixture: ComponentFixture<ClassesAddAssignsComponent>;
@@ -38,5 +45,11 @@ describe('ClassesAddAssignsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should dispatch action on formHandler', () => {
+    jest.spyOn(component, 'formHandler');
+    component.formHandler({} as Event);
+    expect(component.formHandler).toHaveBeenCalled();
   });
 });

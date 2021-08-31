@@ -43,4 +43,49 @@ describe('ClassesDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should dispatch action onClearClicked', () => {
+    component.onClearClicked();
+    expect(component).toBeTruthy();
+  });
+
+  it('should navigate to onAddStudentsClicked', () => {
+    component.onAddStudentsClicked();
+    expect(component).toBeTruthy();
+  });
+
+  it('should navigate to onAddAssignmentClicked', () => {
+    component.onAddAssignmentClicked();
+    expect(component).toBeTruthy();
+  });
+
+  it('should navigate to onUpdateClicked', () => {
+    component.onUpdateClicked();
+    expect(component).toBeTruthy();
+  });
+
+  it('should navigate to onAssignmentClicked', () => {
+    component.onAssignmentClicked({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should something onStudetnUpdate', () => {
+    component.onStudentUpdate({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch action onStudentDelete', () => {
+    component.onStudentDelete({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should something onAssignmentUpdate', () => {
+    component.onAssignmentUpdate({} as Event);
+    expect(component).toBeTruthy();
+  });
+
+  it('should dispatch action onAssignmnetDelete', () => {
+    component.onAssignmentDelete({} as Event);
+    expect(component).toBeTruthy();
+  });
 });
