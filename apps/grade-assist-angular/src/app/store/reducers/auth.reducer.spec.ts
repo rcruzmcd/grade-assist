@@ -26,10 +26,15 @@ describe('AuthReducer', () => {
     it('should return received state', () => {
       const { initialState } = fromReducer;
 
+      const expectedState = {
+        ...initialState,
+        loading: true,
+      };
+
       const action = login({});
       const state = fromReducer.reducer(initialState, action);
 
-      expect(state).toEqual(initialState);
+      expect(state).toEqual(expectedState);
       expect(state).not.toBe(initialState);
     });
   });

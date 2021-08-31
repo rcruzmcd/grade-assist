@@ -85,12 +85,12 @@ describe('Auth Controller', () => {
   });
 
   afterAll((done) => {
-    User.deleteMany({})
-      .then(() => {
-        return disconnect();
-      })
-      .then(() => {
-        done();
-      });
+    // User.deleteMany({})
+    //   .then(() => {
+    //     return disconnect();
+    //   })
+    //   .then(() => {
+    //     done();
+    //   });
   });
 });

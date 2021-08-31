@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-
+import { menu } from '../assets/menu';
 import * as fromStore from './store';
 
 @Component({
@@ -10,6 +10,7 @@ import * as fromStore from './store';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  menu = menu;
   title = 'Grade Assist';
   userType = '*';
   isAuthorized = false;
@@ -20,44 +21,7 @@ export class AppComponent implements OnInit {
     label: string;
     privilege: string[];
   }[] = [];
-  menu = [
-    {
-      icon: 'home',
-      route: '/',
-      label: 'Home',
-      privilege: ['*'],
-    },
-    {
-      icon: 'admin_panel_settings',
-      route: '/admin',
-      label: 'Admin',
-      privilege: ['admin'],
-    },
-    {
-      icon: 'class',
-      route: '/classes',
-      label: 'Classes',
-      privilege: ['*'],
-    },
-    {
-      icon: 'school',
-      route: '/students',
-      label: 'Students',
-      privilege: ['*'],
-    },
-    {
-      icon: 'groups',
-      route: '/teachers',
-      label: 'Teachers',
-      privilege: ['admin', 'teacher'],
-    },
-    {
-      icon: 'assignment_turned_in',
-      route: '/assignments',
-      label: 'Assignments',
-      privilege: ['admin'],
-    },
-  ];
+
   constructor(private store: Store<fromStore.State>, private router: Router) {}
 
   ngOnInit() {

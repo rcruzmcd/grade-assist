@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormConfig } from '@grade-assist/data';
 import { Store } from '@ngrx/store';
 
@@ -8,9 +8,10 @@ import * as fromStore from '../../store';
 @Component({
   selector: 'grade-assist-login',
   templateUrl: './login.component.html',
-  styleUrls: [],
+  styleUrls: ['./login.components.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  loading!: boolean;
   formConfig: FormConfig = {
     inputs: [
       {
@@ -31,6 +32,12 @@ export class LoginComponent {
   };
 
   constructor(private store: Store<fromStore.State>) {}
+
+  ngOnInit() {
+    this.store.subscribe((state) => {
+      this.loading = state.auth.loading;
+    });
+  }
 
   formHandler(user: Event) {
     this.store.dispatch({

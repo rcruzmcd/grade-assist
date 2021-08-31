@@ -32,16 +32,17 @@ interface IJwt {
 
 const authReducer = createReducer(
   initialState,
-  on(fromActions.login, (state) => ({ ...state })),
+  on(fromActions.login, (state) => ({ ...state, loading: true })),
   on(fromActions.loginSuccess, (state, action) => ({
     ...state,
     jwt: action.payload.token,
     userId: action.payload.userId,
     loaded: true,
+    loading: false,
     userType: jwt_decode.default<IJwt>(action.payload?.token).userType,
     userEmail: jwt_decode.default<IJwt>(action.payload?.token).email,
   })),
-  on(fromActions.loginFailure, (state) => ({ ...state })),
+  on(fromActions.loginFailure, (state) => ({ ...state, loading: false })),
   on(fromActions.logout, (state) => ({
     ...state,
     jwt: '',
