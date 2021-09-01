@@ -1,0 +1,28 @@
+<mat-card class="card">
+  <mat-card-title style="display: flex; justify-content: space-between">
+    {{ title }}
+    <div>
+      <button mat-raised-button color="accent" (click)="onUpdateClicked()">
+        Update Student Info
+      </button>
+    </div>
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <pre>
+        {{ student | json }}
+    </pre>
+    <div style="display: flex; justify-content: space-around">
+      <div style="display: flex; flex-direction: column">
+        <label class="mat-title">Email</label>
+        <span class="mat-h4"> {{ student.email }} </span>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label class="mat-title"></label>
+        <span class="mat-h4"> </span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

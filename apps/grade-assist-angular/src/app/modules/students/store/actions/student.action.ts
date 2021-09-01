@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 export enum StudentActions {
+  SELECT_STUDENT = '[Student] Select Student',
   LOAD_ALL_STUDENT = '[Student] Load all Student',
   LOAD_ALL_STUDENT_SUCCESS = '[Student] Load all Student success',
   LOAD_ALL_STUDENT_FAILURE = '[Student] Load all Student failure',
@@ -17,6 +18,11 @@ export enum StudentActions {
   DELETE_STUDENT_SUCCESS = '[Student] Delete Student success',
   DELETE_STUDENT_FAILURE = '[Student] Delete Student failure',
 }
+
+export const selectStudent = createAction(
+  StudentActions.SELECT_STUDENT,
+  props<any>()
+);
 
 export const loadAllStudent = createAction(
   StudentActions.LOAD_ALL_STUDENT,

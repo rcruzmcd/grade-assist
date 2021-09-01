@@ -12,6 +12,7 @@
       [tableData]="studentList$"
       (rowDeleted)="onDeleteHandler($event)"
       (updateRow)="onUpdateHandler($event)"
+      (viewRowDetails)="onViewHandler($event)"
     ></grade-assist-table>
   </mat-card-content>
 </mat-card>

@@ -29,6 +29,10 @@ const StudentReducer = createReducer(
   on(fromActions.loadAllStudentSuccess, (state, action) => ({
     ...state,
     studentsList: action.payload.studentList,
+  })),
+  on(fromActions.selectStudent, (state, action) => ({
+    ...state,
+    selectedStudent: action.payload,
   }))
   // on(fromActions.loadAllStudent, (state) => ({ ...state })),
   // on(fromActions.loadAllStudentFailure, (state) => ({ ...state })),

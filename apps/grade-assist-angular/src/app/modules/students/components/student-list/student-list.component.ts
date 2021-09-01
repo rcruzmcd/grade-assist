@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
 import { User, ColumnConfigs, TableConfig } from '@grade-assist/data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'grade-assist-student-list',
@@ -13,6 +14,7 @@ export class StudentListComponent implements OnInit {
   tableConfig: TableConfig = {
     updateRow: true,
     deleteRow: true,
+    viewBtn: true,
     columns: [
       {
         id: 'firstName',
@@ -38,7 +40,7 @@ export class StudentListComponent implements OnInit {
   };
   studentList$!: User[];
 
-  constructor(private store: Store<fromStore.State>) {}
+  constructor(private store: Store<fromStore.State>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.subscribe((state) => {
@@ -62,5 +64,14 @@ export class StudentListComponent implements OnInit {
       type: fromStore.StudentActions.UPDATE_STUDENT,
       payload: student,
     });
+  }
+
+  onViewHandler(student: Event) {
+    // console.log(classes);
+    this.store.dispatch({
+      type: fromStore.StudentActions.SELECT_STUDENT,
+      payload: student,
+    });
+    this.router.navigate(['students/details']);
   }
 }
