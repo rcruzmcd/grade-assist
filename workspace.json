@@ -246,7 +246,8 @@
           "executor": "@nrwl/web:dev-server",
           "options": {
             "buildTarget": "grade-assist-react:build",
-            "hmr": true
+            "hmr": true,
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
